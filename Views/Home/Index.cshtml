@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Welcome to ILearn</h2>
+
+<body style="background: url('@Url.Content("~/images/onlineschool.jpg")');">
+
+</body>
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Welcome Authenticated Person</p>
+    using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+    }
+}
+else
+{
+    <div>
+        <a href="./Identity/Account/Register">Register Now!</a>
+    </div>
+    <a href="./Identity/Account/Login">Login</a>
+}
