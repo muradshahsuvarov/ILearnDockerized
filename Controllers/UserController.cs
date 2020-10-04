@@ -278,7 +278,27 @@ namespace ILearnCoreV19.Controllers
         [Authorize]
         public IActionResult GetTutorSchedule()
         {
-            return View();
+            var user = (from e in _context.Users
+                        where e.Email == User.Identity.Name
+                        select e).Single();
+
+            return View(user);
+        }
+
+        public IActionResult GetEvents()
+        {
+            var events = _context.Events.Select(e => new
+            {
+                id = e.EventId,
+                title = e.text,
+                description = e.description,
+                startDate = e.start_date.ToString("dd/MM/yyyy"),
+                endDate = e.end_date.ToString("dd/MM/yyyy"),
+
+
+            }).ToList();
+
+            return new JsonResult(events);
         }
 
         // Get authenticated user

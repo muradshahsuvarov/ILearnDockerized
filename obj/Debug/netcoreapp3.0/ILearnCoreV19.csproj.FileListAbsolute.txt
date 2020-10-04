@@ -295,3 +295,4 @@ C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCore
 C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCoreV20\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\Contact.cshtml.g.cs
 C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCoreV20\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\myApplications.cshtml.g.cs
 C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCoreV20\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\Services.cshtml.g.cs
+C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCoreV20\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetTutorSchedule.cshtml.g.cs
