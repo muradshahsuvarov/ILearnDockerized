@@ -110,7 +110,7 @@
                             events.push({
                                 eventID: v.id,
                                 title: v.text,
-                                description: v.Description,
+                                description: v.description,
                                 start: moment(v.start_date),
                                 end: v.end_date != null ? moment(v.end_date) : null,
                                 color: v.ThemeColor,
@@ -259,6 +259,8 @@
                     }
                 }
 
+
+
                 var data = {
                     EventId: $('#hdEventID').val(),
                     text: $('#txtSubject').val().trim(),
@@ -273,6 +275,8 @@
             })
 
             function SaveEvent(data) {
+                        alert($('#txtStart').val().trim());
+
                 $.ajax({
                     type: "POST",
                     url: '/User/SaveEvent',

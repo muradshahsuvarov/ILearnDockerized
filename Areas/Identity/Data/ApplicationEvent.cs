@@ -20,12 +20,14 @@ namespace ILearnCoreV19.Areas.Identity.Data
         public string text { get; set; }
 
         [PersonalData]
-        [Column(TypeName = "datetime")]
+        [DataType(DataType.Date)]
+        [Column(TypeName = "DATETIME NOT NULL")]
         public DateTime start_date { get; set; }
 
         [PersonalData]
-        [Column(TypeName = "datetime")]
-        public DateTime end_date { get; set; }
+        [DataType(DataType.Date)]
+        [Column(TypeName = "DATETIME")]
+        public DateTime? end_date { get; set; }
 
         [PersonalData]
         [Column(TypeName = "nvarchar(450)")]
@@ -50,6 +52,7 @@ namespace ILearnCoreV19.Areas.Identity.Data
         [PersonalData]
         [Column(TypeName = "BIT")]
         public Boolean isFullDay { get; set; }
+
 
     }
 }

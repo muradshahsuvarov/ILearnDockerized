@@ -285,21 +285,7 @@ namespace ILearnCoreV19.Controllers
             return View(user);
         }
 
-        public IActionResult GetEvents()
-        {
-            var events = _context.Events.Select(e => new
-            {
-                id = e.EventId,
-                title = e.text,
-                description = e.description,
-                startDate = e.start_date.ToString("dd/MM/yyyy"),
-                endDate = e.end_date.ToString("dd/MM/yyyy"),
 
-
-            }).ToList();
-
-            return new JsonResult(events);
-        }
 
         // Get authenticated user
         ApplicationUser getAuthenticatedUser()
@@ -316,7 +302,71 @@ namespace ILearnCoreV19.Controllers
 
         // --------------IMPLEMENT CALENDAR METHODS AGAIN--------------------------------
         // GetEvents
+        public JsonResult GetEvents()
+        {
+                var events = (from e in _context.Events
+                              where e.userId == getAuthenticatedUser().UserName
+                              select e).ToList();
+
+                // To see the subjects assigned to the teacher
+                foreach (var item in events)
+                {
+                    Debug.WriteLine("LOG: " + item.text);
+                }
+
+                return new JsonResult(events);
+        }
+
         // SaveEvent
+        [HttpPost]
+        public JsonResult SaveEvent(ApplicationEvent e)
+        {
+
+                if (e.EventId > 0)
+                {
+                    //Update the event
+                    var v = _context.Events.Where(a => a.EventId == e.EventId).FirstOrDefault();
+
+                if (v != null)
+                    {
+                        v.text = e.text;
+                        v.start_date = e.start_date;
+                        v.end_date = e.end_date;
+                        v.description = e.description;
+                        v.ThemeColor = e.ThemeColor;
+                        v.isFullDay = e.isFullDay;
+
+
+                        Debug.WriteLine("here 1");
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("here 2");
+
+                    e.userId = getAuthenticatedUser().UserName;
+                    if (e.isFullDay == true)
+                    {
+                        e.end_date = null;
+                    }
+                    e.status = "AVAILABLE";
+
+                    _context.Events.Add(e);
+                }
+
+                Debug.WriteLine($"EventId: {e.EventId}");
+                Debug.WriteLine($"Text: {e.text}");
+                Debug.WriteLine($"Status: {e.status}");
+                Debug.WriteLine($"Start: {e.start_date}");
+                Debug.WriteLine($"End: {e.end_date}");
+                Debug.WriteLine($"ThemeColor: {e.ThemeColor}");
+                Debug.WriteLine($"Description: {e.description}");
+                Debug.WriteLine($"IsFullDay: {e.isFullDay}");
+
+            _context.SaveChanges();
+
+            return new JsonResult("\"STATUS\": INSERTED");
+        }
         // DeleteEvent
         // --------------IMPLEMENT CALENDAR METHODS AGAIN--------------------------------
 
