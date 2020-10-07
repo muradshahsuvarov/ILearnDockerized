@@ -304,7 +304,7 @@ namespace ILearnCoreV19.Controllers
         // GetEvents
         public JsonResult GetEvents()
         {
-                var events = (from e in _context.Events
+                List<ApplicationEvent> events = (from e in _context.Events
                               where e.userId == getAuthenticatedUser().UserName
                               select e).ToList();
 
@@ -368,6 +368,25 @@ namespace ILearnCoreV19.Controllers
             return new JsonResult("\"STATUS\": INSERTED");
         }
         // DeleteEvent
+        [HttpPost]
+        public JsonResult DeleteEvent(int eventID)
+        {
+            var status = false;
+
+            Debug.WriteLine($"eventID: {eventID}");
+
+                var v = _context.Events.Where(a => a.EventId == eventID).FirstOrDefault();
+                if (v != null)
+                {
+                    _context.Events.Remove(v);
+                    _context.SaveChanges();
+                    status = true;
+                }
+
+            Debug.WriteLine($"status: {status}");
+
+            return new JsonResult(status);
+        }
         // --------------IMPLEMENT CALENDAR METHODS AGAIN--------------------------------
 
 

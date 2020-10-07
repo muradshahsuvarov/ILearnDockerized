@@ -107,8 +107,9 @@
                     url: "/User/GetEvents",
                     success: function (data) {
                         $.each(data, function (i, v) {
+
                             events.push({
-                                eventID: v.id,
+                                eventID: v.eventId,
                                 title: v.text,
                                 description: v.description,
                                 start: moment(v.start_date),
@@ -170,7 +171,7 @@
                     editable: true,
                     eventDrop: function (event) {
                         var data = {
-                            EventId: event.eventID,
+                            EventID: event.eventID,
                             text: event.title,
                             start_date: event.start.format('MM/DD/YYYY HH:mm A'),
                             end_date: event.end != null ? event.end.format('DD/MM/YYYY HH:mm:ss A') : null,
@@ -190,6 +191,7 @@
             })
             $('#btnDelete').click(function () {
                 if (selectedEvent != null && confirm('Are you sure?')) {
+                    alert(selectedEvent.eventID);
                     $.ajax({
                         type: "POST",
                         url: '/User/DeleteEvent',
