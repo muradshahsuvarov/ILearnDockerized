@@ -251,27 +251,20 @@ namespace ILearnCoreV19.Controllers
         [Authorize]
         public IActionResult MyProfile()
         {
+            /*
             string emailID = User.Identity.Name;
 
 
             var user = (from e in _context.Users
                         where e.Email == emailID
-                        select e).Single();
+                        select e).Single(); */
 
             // To parse the authenticated user's with his ID
             /* var userWithId = (from e in db.Users
                               where e.UserID == user.UserID
                               select e).Single(); */
 
-            return View(user);
-        }
-
-
-        [HttpGet]
-        [Authorize]
-        public IActionResult GetStudentSchedule()
-        {
-            return View();
+            return View(_context);
         }
 
         [HttpGet]
@@ -283,6 +276,14 @@ namespace ILearnCoreV19.Controllers
                         select e).Single();
 
             return View(user);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult GetStudentSchedule()
+        {
+
+            return View(_context);
         }
 
 

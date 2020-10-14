@@ -1,0 +1,19 @@
+﻿@model ILearnCoreV19.Data.AuthDbContext
+
+@{
+    ViewData["Title"] = "GetStudentSchedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    foreach (var item in Model.Events)
+    {
+        if (item.userId == User.Identity.Name)
+        {
+            <p>@item.text</p>
+            <br>
+        }
+    }
+}
+

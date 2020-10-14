@@ -45,7 +45,7 @@ namespace ILearnCoreV19.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
-                return View(GetUser(User.Identity.Name));
+                return View();
             }
             else
             {

@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@model ILearnCoreV19.Data.AuthDbContext
+
+@{
+    var authUser = (from u in Model.Users
+                    where u.Email == User.Identity.Name
+                    select u).Single();
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -111,6 +120,7 @@
             width: 80%;
             background: #f1f1f1;
         }
+
         .search {
             width: 100%;
             position: relative;
@@ -185,68 +195,69 @@
 
                     @{ if (User.Identity.IsAuthenticated)
                         {
-            <div class="wrapper">
-                <div class="navbar">
-                    <div class="logo">
-                        <a href="#">@Model.FirstName</a>
-                    </div>
-                    <div class="nav_right">
-                        <ul>
-                            <li class="nr_li dd_main">
-                                <img src="~/images/img_avatar.png" alt="Avatar" style="border-radius: 50%;">
-
-                                <div class="dd_menu">
-                                    <div class="dd_left">
-                                        <ul>
-                                            <!--
-                                            <li><i class="fas fa-map-marker-alt"></i></li>
-                                            <li><i class="far fa-star"></i></li>
-                                            <li><i class="far fa-plus-square"></i></li>
-                                            <li><i class="fas fa-cog"></i></li>
-                                            <li><i class="fas fa-download"></i></li>
-                                            <li><i class="fas fa-sign-out-alt"></i></li>
-                                            <li><i class="fas fa-sign-out-alt"></i></li>
-                                            <li><i class="fas fa-sign-out-alt"></i></li> -->
-                                        </ul>
+                            <div class="wrapper">
+                                <div class="navbar">
+                                    <div class="logo">
+                                        <a href="#">@authUser.FirstName</a>
                                     </div>
-                                    <div class="dd_right">
-                                                            <ul>
-                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="MyProfile">Profile</a></li>
-                                                                @if (User.Identity.IsAuthenticated && Model.Role == "Student")
-                                                                {
-                                                                    <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetApplications">Subjects</a></li>
-                                                                    <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSettings">Settings</a></li>
-                                                                    <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="Home" asp-action="Services">Biography</a></li>
-                                                                    <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSchedule">Manage Schedule</a></li>
-                                                                    <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentActivityLog">Activity Log</a></li>
-                                                                    <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentNewsPrefs">News Feed Preferences</a></li>
-                                                                }else if (User.Identity.IsAuthenticated && Model.Role == "Tutor")
-                                                                {
-                                                                    <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetApplications">Subjects</a></li>
-                                                                    <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSettings">Settings</a></li>
-                                                                    <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="Home" asp-action="Services">Biography</a></li>
-                                                                    <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTutorSchedule">Manage Schedule</a></li>
-                                                                    <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTutorActivityLog">Activity Log</a></li>
-                                                                    <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTutorNewsPrefs">News Feed Preferences</a></li>
-                                                                }
+                                    <div class="nav_right">
+                                        <ul>
+                                            <li class="nr_li dd_main">
+                                                <img src="~/images/img_avatar.png" alt="Avatar" style="border-radius: 50%;">
+
+                                                <div class="dd_menu">
+                                                    <div class="dd_left">
+                                                        <ul>
+                                                            <!--
+                                                            <li><i class="fas fa-map-marker-alt"></i></li>
+                                                            <li><i class="far fa-star"></i></li>
+                                                            <li><i class="far fa-plus-square"></i></li>
+                                                            <li><i class="fas fa-cog"></i></li>
+                                                            <li><i class="fas fa-download"></i></li>
+                                                            <li><i class="fas fa-sign-out-alt"></i></li>
+                                                            <li><i class="fas fa-sign-out-alt"></i></li>
+                                                            <li><i class="fas fa-sign-out-alt"></i></li> -->
+                                                        </ul>
+                                                    </div>
+                                                    <div class="dd_right">
+                                                        <ul>
+                                                            <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="MyProfile">Profile</a></li>
+                                                            @if (User.Identity.IsAuthenticated && authUser.Role == "Student")
+                                                            {
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetApplications">Subjects</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSettings">Settings</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="Home" asp-action="Services">Biography</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSchedule">Manage Schedule</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentActivityLog">Activity Log</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentNewsPrefs">News Feed Preferences</a></li>
+                                                            }
+                                                            else if (User.Identity.IsAuthenticated && authUser.Role == "Tutor")
+                                                            {
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetApplications">Subjects</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSettings">Settings</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="Home" asp-action="Services">Biography</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTutorSchedule">Manage Schedule</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTutorActivityLog">Activity Log</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTutorNewsPrefs">News Feed Preferences</a></li>
+                                                            }
                                                             <li>
                                                                 @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
                                                                 {
-                                                                <a style="font-size: 10px; margin-left:15px" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                                                                    <a style="font-size: 10px; margin-left:15px" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
                                                                 }
                                                             </li>
 
-                                                            </ul>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="nr_li">
+                                                <i class="fas fa-envelope-open-text"></i>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="nr_li">
-                                <i class="fas fa-envelope-open-text"></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div> } }
+                            </div> } }
                 </div>
             </nav>
         </header>

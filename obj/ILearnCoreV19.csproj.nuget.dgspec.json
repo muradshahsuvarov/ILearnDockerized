@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Murad\\Desktop\\University\\SeventhSemester\\Subjects\\BSc Thesis\\ILearnCoreV20\\ILearnCore\\ILearnCoreV19.csproj": {}
+    "C:\\Users\\Murad\\Desktop\\University\\SeventhSemester\\Subjects\\BSc Thesis\\ILearnCoreV21 (WORKS)\\ILearnCore\\ILearnCoreV19.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Murad\\Desktop\\University\\SeventhSemester\\Subjects\\BSc Thesis\\ILearnCoreV20\\ILearnCore\\ILearnCoreV19.csproj": {
+    "C:\\Users\\Murad\\Desktop\\University\\SeventhSemester\\Subjects\\BSc Thesis\\ILearnCoreV21 (WORKS)\\ILearnCore\\ILearnCoreV19.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Murad\\Desktop\\University\\SeventhSemester\\Subjects\\BSc Thesis\\ILearnCoreV20\\ILearnCore\\ILearnCoreV19.csproj",
+        "projectUniqueName": "C:\\Users\\Murad\\Desktop\\University\\SeventhSemester\\Subjects\\BSc Thesis\\ILearnCoreV21 (WORKS)\\ILearnCore\\ILearnCoreV19.csproj",
         "projectName": "ILearnCoreV19",
-        "projectPath": "C:\\Users\\Murad\\Desktop\\University\\SeventhSemester\\Subjects\\BSc Thesis\\ILearnCoreV20\\ILearnCore\\ILearnCoreV19.csproj",
+        "projectPath": "C:\\Users\\Murad\\Desktop\\University\\SeventhSemester\\Subjects\\BSc Thesis\\ILearnCoreV21 (WORKS)\\ILearnCore\\ILearnCoreV19.csproj",
         "packagesPath": "C:\\Users\\Murad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Murad\\Desktop\\University\\SeventhSemester\\Subjects\\BSc Thesis\\ILearnCoreV20\\ILearnCore\\obj\\",
+        "outputPath": "C:\\Users\\Murad\\Desktop\\University\\SeventhSemester\\Subjects\\BSc Thesis\\ILearnCoreV21 (WORKS)\\ILearnCore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -52,6 +52,10 @@
               "version": "[3.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[3.0.0, )"
             },
