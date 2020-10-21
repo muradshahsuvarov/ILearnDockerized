@@ -60,7 +60,7 @@ namespace ILearnCoreV19.Controllers
         [Authorize]
         public IActionResult ListOfEvents(string id)
         {
-            var events = _context.Events.Where(r => r.userId == id && r.status == "AVAILABLE");
+            var events = _context.Events.Where(r => r.userId == id && r.status == "AVAILABLE").ToList();
 
             return View(events);
         }
@@ -174,12 +174,8 @@ namespace ILearnCoreV19.Controllers
         [Authorize]
         public IActionResult ListOfTutorEvents()
         {
-            // Finding authenticated user
-            var user = _context.Users.Where(u => u.Email == User.Identity.Name).Single();
-            // Getting UserID
-            string userID = user.Id;
             // Getting events which belong to the user with userId == userID
-            var events = _context.Events.Where(r => r.userId == userID && r.status == "PENDING");
+            var events = _context.Events.Where(r => r.userId == User.Identity.Name && r.status == "PENDING").ToList();
 
             return View(events);
         }
@@ -190,9 +186,9 @@ namespace ILearnCoreV19.Controllers
         public IActionResult Teachers()
         {
 
-            var teachers = from e in _context.Users
+            List<ApplicationUser> teachers = (from e in _context.Users
                            where e.Role == "Tutor"
-                           select e;
+                           select e).ToList();
             return View(teachers);
         }
 
@@ -289,7 +285,7 @@ namespace ILearnCoreV19.Controllers
 
 
         // Get authenticated user
-        ApplicationUser getAuthenticatedUser()
+        public ApplicationUser getAuthenticatedUser()
         {
             string emailID = User.Identity.Name;
 

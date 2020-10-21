@@ -1,11 +1,26 @@
-﻿@model ILearnCoreV19.Data.AuthDbContext
-
-@{
-    var authUser = (from u in Model.Users
-                    where u.Email == User.Identity.Name
-                    select u).Single();
+﻿@{
+    @using Microsoft.AspNetCore.Identity
 }
 
+@inject SignInManager<ILearnCoreV19.Areas.Identity.Data.ApplicationUser> SignInManager
+@inject UserManager<ILearnCoreV19.Areas.Identity.Data.ApplicationUser> UserManager
+
+@{
+    ILearnCoreV19.Areas.Identity.Data.ApplicationUser? user = null;
+    string? firstName = String.Empty;
+    string? lastName = String.Empty;
+
+    if (SignInManager.IsSignedIn(User))
+    {
+        // Get the current logged in user
+        Task<ILearnCoreV19.Areas.Identity.Data.ApplicationUser> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
+
+         user = await GetCurrentUserAsync();
+         firstName = user.FirstName;
+         lastName = user.LastName;
+
+    }
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -198,7 +213,7 @@
                             <div class="wrapper">
                                 <div class="navbar">
                                     <div class="logo">
-                                        <a href="#">@authUser.FirstName</a>
+                                        <a href="#">@firstName</a>
                                     </div>
                                     <div class="nav_right">
                                         <ul>
@@ -222,7 +237,7 @@
                                                     <div class="dd_right">
                                                         <ul>
                                                             <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="MyProfile">Profile</a></li>
-                                                            @if (User.Identity.IsAuthenticated && authUser.Role == "Student")
+                                                            @if (User.Identity.IsAuthenticated && user.Role == "Student")
                                                             {
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetApplications">Subjects</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSettings">Settings</a></li>
@@ -231,11 +246,11 @@
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentActivityLog">Activity Log</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentNewsPrefs">News Feed Preferences</a></li>
                                                             }
-                                                            else if (User.Identity.IsAuthenticated && authUser.Role == "Tutor")
+                                                            else if (User.Identity.IsAuthenticated && user.Role == "Tutor")
                                                             {
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetApplications">Subjects</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSettings">Settings</a></li>
-                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="Home" asp-action="Services">Biography</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="ListOfTutorEvents">Requests</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTutorSchedule">Manage Schedule</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTutorActivityLog">Activity Log</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTutorNewsPrefs">News Feed Preferences</a></li>

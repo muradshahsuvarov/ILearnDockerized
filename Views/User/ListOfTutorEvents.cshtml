@@ -1,0 +1,62 @@
+﻿@model List<ILearnCoreV19.Areas.Identity.Data.ApplicationEvent>
+
+@{
+    ViewData["Title"] = "ListOfTutorEvents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System;
+
+<table class="table">
+    <tr>
+        <th>
+            text
+        </th>
+        <th>
+            start_date
+        </th>
+        <th>
+            end_date
+        </th>
+        <th>
+            subscriberEmail
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.start_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.end_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.subscriberEmail)
+            </td>
+            <td>
+                @using (Html.BeginForm("AcceptSubscription", "User", FormMethod.Post))
+                {
+                    <!-- form goes here -->
+                    @Html.Hidden("eventId", item.EventId)
+                    @Html.Hidden("returnUrl", "/")
+                    <input type="submit" value="Accept" class="btn btn-success" style="width:200px" />
+                }
+                <br>
+                @using (Html.BeginForm("RejectSubscription", "User", FormMethod.Post))
+                {
+                    <!-- form goes here -->
+                    @Html.Hidden("eventId", item.EventId)
+                    @Html.Hidden("returnUrl", $"http://localhost:59000/User/ListOfEvents/{item.userId}")
+                    <input type="submit" value="Reject" class="btn btn-danger" style="width:200px" />
+                }
+            </td>
+        </tr>
+    }
+
+</table>

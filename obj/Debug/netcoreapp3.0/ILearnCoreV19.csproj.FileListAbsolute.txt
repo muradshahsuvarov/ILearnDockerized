@@ -469,3 +469,6 @@ C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCore
 C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCoreV21 (WORKS)\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCoreV21 (WORKS)\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCoreV21 (WORKS)\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetStudentSchedule.cshtml.g.cs
+C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCoreV21 (WORKS)\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\Teachers.cshtml.g.cs
+C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCoreV21 (WORKS)\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\ListOfEvents.cshtml.g.cs
+C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCoreV21 (WORKS)\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\ListOfTutorEvents.cshtml.g.cs
