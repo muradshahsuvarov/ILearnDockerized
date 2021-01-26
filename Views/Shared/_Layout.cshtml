@@ -240,6 +240,7 @@
                                                             @if (User.Identity.IsAuthenticated && user.Role == "Student")
                                                             {
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetApplications">Subjects</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="Teachers">Teachers</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSettings">Settings</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="Home" asp-action="Services">Biography</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSchedule">Manage Schedule</a></li>

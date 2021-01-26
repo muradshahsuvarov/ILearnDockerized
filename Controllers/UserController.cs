@@ -60,7 +60,7 @@ namespace ILearnCoreV19.Controllers
         [Authorize]
         public IActionResult ListOfEvents(string id)
         {
-            var events = _context.Events.Where(r => r.userId == id && r.status == "AVAILABLE").ToList();
+            var events = _context.Events.Where(r => r.userId == id && r.status == "AVAILABLE" && r.start_date >= DateTime.Now).ToList();
 
             return View(events);
         }
@@ -131,7 +131,7 @@ namespace ILearnCoreV19.Controllers
             List<ApplicationEvent> targetEvents = new List<ApplicationEvent>();
 
             targetEvents = (from e in _context.Events
-                            where e.subscriberEmail == User.Identity.Name && e.status == "ACCEPTED"
+                            where e.subscriberEmail == User.Identity.Name && e.status == "ACCEPTED" && e.start_date >= DateTime.Now
                             select e).ToList();
 
             return View(targetEvents);
