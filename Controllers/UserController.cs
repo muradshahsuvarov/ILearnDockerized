@@ -139,6 +139,19 @@ namespace ILearnCoreV19.Controllers
 
         [HttpGet]
         [Authorize]
+        public IActionResult GetSearchedSubjects(string? name)
+        {
+            List<ApplicationEvent> targetEvents = new List<ApplicationEvent>();
+
+            targetEvents = (from e in _context.Events
+                            where ( e.text.Contains(name) || e.description.Contains(name) ) && e.status == "AVAILABLE" && e.start_date >= DateTime.Now
+                            select e).ToList();
+
+            return View(targetEvents);
+        }
+
+        [HttpGet]
+        [Authorize]
         public IActionResult GetTutorClasses()
         {
 

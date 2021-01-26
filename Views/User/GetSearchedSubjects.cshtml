@@ -1,0 +1,92 @@
+﻿@model List<ILearnCoreV19.Areas.Identity.Data.ApplicationEvent>
+
+@{
+    ViewData["Title"] = "ListOfEvents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using Microsoft.AspNetCore.Http;
+
+
+@{
+    @using Microsoft.AspNetCore.Identity
+}
+
+@inject SignInManager<ILearnCoreV19.Areas.Identity.Data.ApplicationUser> SignInManager
+@inject UserManager<ILearnCoreV19.Areas.Identity.Data.ApplicationUser> UserManager
+
+@{
+    ILearnCoreV19.Areas.Identity.Data.ApplicationUser? user = null;
+    string? firstName = String.Empty;
+    string? lastName = String.Empty;
+
+    if (SignInManager.IsSignedIn(User))
+    {
+        // Get the current logged in user
+        Task<ILearnCoreV19.Areas.Identity.Data.ApplicationUser> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
+
+        user = await GetCurrentUserAsync();
+        firstName = user.FirstName;
+        lastName = user.LastName;
+
+    }
+}
+
+<table class="table">
+    <tr>
+        <th>
+            owner
+        </th>
+        <th>
+            text
+        </th>
+        <th>
+            description
+        </th>
+        <th>
+            start_date
+        </th>
+        <th>
+            end_date
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.userId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.start_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.end_date)
+            </td>
+            @{
+                if (user.Role == "Student")
+                {
+                    <td>
+                        @using (Html.BeginForm("Subscribe", "User", FormMethod.Post))
+                        {
+                            <!-- form goes here -->
+                            @Html.Hidden("eventId", item.EventId)
+                            @Html.Hidden("email", User.Identity.Name)
+                            @Html.Hidden("returnUrl", "/")
+                            <input type="submit" value="Subscribe" class="btn btn-success" style="width:200px" />
+                        }
+                    </td>
+                }
+            }
+        </tr>
+    }
+
+</table>

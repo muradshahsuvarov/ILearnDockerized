@@ -199,8 +199,8 @@
                             </li>
                             <div class="wrap">
                                 <div class="search" style="margin-left:-130px">
-                                    <input type="text" class="searchTerm" placeholder="What are you looking for?" style="height:36px">
-                                    <button type="submit" class="searchButton">
+                                    <input id="searchedSubject" type="text" class="searchTerm" placeholder="What are you looking for?" style="height:36px">
+                                    <button id="searchSubjectButton" type="submit" class="searchButton">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
@@ -299,11 +299,18 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <script>
-         var dd_main = document.querySelector(".dd_main");
+        var dd_main = document.querySelector(".dd_main");
 
-    dd_main.addEventListener("click", function(){
-    this.classList.toggle("active");
-    })
+        dd_main.addEventListener("click", function () {
+            this.classList.toggle("active");
+        })
+    </script>
+    <script type="text/javascript">
+        $("#searchSubjectButton").click(function () {
+            var txtVal = $("#searchedSubject").val();
+            window.location = "@Url.Action("GetSearchedSubjects", "User")" +
+                              "?name=" + txtVal;
+        });
     </script>
     @RenderSection("Scripts", required: false)
 </body>

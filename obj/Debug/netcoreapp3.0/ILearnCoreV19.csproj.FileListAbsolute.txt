@@ -647,3 +647,4 @@ C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.dll
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.pdb
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.genruntimeconfig.cache
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetApplications.cshtml.g.cs
+C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetSearchedSubjects.cshtml.g.cs
