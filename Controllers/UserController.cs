@@ -206,6 +206,13 @@ namespace ILearnCoreV19.Controllers
         }
 
 
+        public IActionResult OpenChat()
+        {
+            List<ApplicationUser> users = (from user in _context.Users
+                                           select user).ToList();
+            return View(users);
+        }
+
         public IActionResult Create()
         {
             return View();
