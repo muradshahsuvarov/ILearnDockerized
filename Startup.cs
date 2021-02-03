@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ILearnCoreV19.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,6 +27,9 @@ namespace ILearnCoreV19
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,14 +51,23 @@ namespace ILearnCoreV19
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseSignalR(route => // Added by Murad Shahsuvarov
+            {
+                route.MapHub<ChatHub>("/User/OpenChat"); // Where the connection is going to be
+            });
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=User}/{action=OpenChat}/{id?}");
                 //to be added
                 endpoints.MapRazorPages();
             });
+
+            
+
         }
     }
 }

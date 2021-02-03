@@ -13,20 +13,25 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using ILearnCoreV19.Data;
 using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using ILearnCoreV19.Models;
 
 namespace ILearnCoreV19.Controllers
 {
     public class UserController : Controller
     {
-        private readonly SignInManager<ApplicationUser> _signInManager; // Application's cookie is managed in Sign In Manager
-        private readonly ILogger<LogoutModel> _logger; // Is needed for creating Logs in the Controller
-        private AuthDbContext _context;
+        public readonly SignInManager<ApplicationUser> _signInManager; // Application's cookie is managed in Sign In Manager
+        public readonly ILogger<LogoutModel> _logger; // Is needed for creating Logs in the Controller
+        public readonly AuthDbContext _context;
 
-        public UserController(SignInManager<ApplicationUser> signInManager, ILogger<LogoutModel> logger, AuthDbContext context)
+        public readonly UserManager<ApplicationUser> _userManager; // Needed for SignalR
+
+        public UserController(SignInManager<ApplicationUser> signInManager, ILogger<LogoutModel> logger, AuthDbContext context, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -205,12 +210,44 @@ namespace ILearnCoreV19.Controllers
             return View(teachers);
         }
 
-
-        public IActionResult OpenChat()
+        // Async to get messages asynchronously
+        public async Task<IActionResult> OpenChat()
         {
-            List<ApplicationUser> users = (from user in _context.Users
-                                           select user).ToList();
-            return View(users);
+            var currentUser = await _userManager.GetUserAsync(User); // Added by MS
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.CurrentUserName = User.Identity.Name;
+                Trace.WriteLine($"ViewBag.CurrentUserName: {ViewBag.CurrentUserName}");
+            }
+
+
+            var messages = await _context.Messages.ToListAsync(); // Added by MS
+
+            return View(messages);
+        }
+
+        public async Task<IActionResult> CreateMessage(ApplicationMessage message)
+        {
+            if (ModelState.IsValid)
+            {
+                message.UserName = User.Identity.Name;
+                message.ReceiverName = "muradshahsuvarov@gmail.com";
+                var sender = await _userManager.GetUserAsync(User);
+                message.UserID = sender.Id;
+                await _context.Messages.AddAsync(message);
+                await _context.SaveChangesAsync();
+                Trace.WriteLine("Data is saved into the database");
+                return Ok();
+            }
+
+            Trace.WriteLine("Data is not saved into the database");
+            return Error();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         public IActionResult Create()

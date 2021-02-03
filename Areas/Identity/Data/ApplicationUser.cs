@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using ILearnCoreV19.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace ILearnCoreV19.Areas.Identity.Data
@@ -10,6 +11,10 @@ namespace ILearnCoreV19.Areas.Identity.Data
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            Messages = new HashSet<ApplicationMessage>();
+        }
 
         [PersonalData]
         [Column(TypeName = "nvarchar(100)")]
@@ -26,5 +31,8 @@ namespace ILearnCoreV19.Areas.Identity.Data
         [PersonalData]
         [Column(TypeName = "datetime")]
         public DateTime DateOfBirth { get; set; }
+
+
+        public virtual ICollection<ApplicationMessage> Messages { get; set; }
     }
 }

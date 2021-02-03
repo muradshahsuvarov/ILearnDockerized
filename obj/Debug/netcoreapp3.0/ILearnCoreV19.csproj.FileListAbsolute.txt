@@ -474,6 +474,7 @@ C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCore
 C:\Users\Murad\Desktop\University\SeventhSemester\Subjects\BSc Thesis\ILearnCoreV21 (WORKS)\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\ListOfTutorEvents.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\appsettings.Development.json
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\appsettings.json
+C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\libman.json
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\ILearnCoreV19.StaticWebAssets.xml
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\ILearnCoreV19.exe
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\ILearnCoreV19.deps.json
@@ -648,3 +649,4 @@ C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csproj
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.dll
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.pdb
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.genruntimeconfig.cache
+C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csprojAssemblyReference.cache
