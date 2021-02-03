@@ -38,8 +38,6 @@ function sendMessage() {
 
 function addMessageToChat(message) {
 
-    alert(message.userName) // THROWS UNDEFINED
-
     let isCurrentUserMessage = message.userName === username;
 
     let container = document.createElement('div');
