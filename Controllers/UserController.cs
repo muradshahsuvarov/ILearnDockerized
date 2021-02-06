@@ -206,32 +206,40 @@ namespace ILearnCoreV19.Controllers
 
             List<ApplicationUser> teachers = (from e in _context.Users
                            where e.Role == "Tutor"
-                           select e).ToList();
+                           select e).ToList();  
             return View(teachers);
         }
 
+        // User who you chose to see a message history with.
+
+
         // Async to get messages asynchronously
         public async Task<IActionResult> OpenChat()
-        {
+        {    
             var currentUser = await _userManager.GetUserAsync(User); // Added by MS
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.CurrentUserName = User.Identity.Name;
-                Trace.WriteLine($"ViewBag.CurrentUserName: {ViewBag.CurrentUserName}");
             }
-
-
-            var messages = await _context.Messages.ToListAsync(); // Added by MS
-
+            var messages = await _context.Messages.Where(r => r.UserName == User.Identity.Name || r.ReceiverName == User.Identity.Name).ToListAsync(); // Added by MS    
             return View(messages);
         }
 
-        public async Task<IActionResult> CreateMessage(ApplicationMessage message)
+        [HttpGet]
+        public ActionResult ReloadOpenChat([FromQuery(Name = "selectedUser")] string selectedUser)
+        {
+
+                return Redirect("http://localhost:59000?selectedUser=" + selectedUser);
+        }
+
+        // Is assigned once you clicked on him on the right panel. Get From query param
+
+        public async Task<IActionResult> CreateMessage(ApplicationMessage message, String selectedUser)
         {
             if (ModelState.IsValid)
             {
                 message.UserName = User.Identity.Name;
-                message.ReceiverName = "muradshahsuvarov@gmail.com";
+                message.ReceiverName = selectedUser;
                 var sender = await _userManager.GetUserAsync(User);
                 message.UserID = sender.Id;
                 await _context.Messages.AddAsync(message);
