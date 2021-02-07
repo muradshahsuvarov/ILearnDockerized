@@ -22,7 +22,7 @@
 else
 {
     <div>
-        <a href="./Identity/Account/Register">Register Now!</a>
+        @Html.ActionLink("Register Now!", "GetRegisterForm", "Home", null)
     </div>
-    <a href="./Identity/Account/Login">Login</a>
+        @Html.ActionLink("Login", "GetLoginForm", "Home", null)
 }

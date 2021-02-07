@@ -46,7 +46,8 @@
             <td>
 
                 @Html.ActionLink("Details", "GetDetails", "User", new { id = item.UserName }, null) |
-                @Html.ActionLink("Schedule", "ListOfEvents", "User", new { id = item.UserName }, null)
+                @Html.ActionLink("Schedule", "ListOfEvents", "User", new { id = item.UserName }, null) |
+                @Html.ActionLink("Open Chat", "ReloadOpenChat", "User", new { selectedUser = item.UserName }, null)
             </td>
         </tr>
     }

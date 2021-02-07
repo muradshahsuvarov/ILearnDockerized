@@ -54,6 +54,20 @@ namespace ILearnCoreV19.Controllers
 
         }
 
+        public IActionResult GetLoginForm()
+        {
+            string url = "~/Identity/Account/Login";
+
+            return Redirect(url);
+        }
+
+        public IActionResult GetRegisterForm()
+        {
+            string url = "~/Identity/Account/Register";
+
+            return Redirect(url);
+        }
+
         public IActionResult GetUsers()
         {
             List<ApplicationUser> users = (from e in _context.Users
