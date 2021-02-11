@@ -10,5 +10,5 @@ connection.start()
     });
 
 function sendMessageToHub(message) {
-    connection.invoke('SendMessage', message)
+    connection.invoke('SendMessage', message) // SendMessage is a C# HUB Method in ChatHub.cs
 }

@@ -244,7 +244,7 @@
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSettings">Settings</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="Home" asp-action="Services">Biography</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSchedule">Manage Schedule</a></li>
-                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentActivityLog">Activity Log</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetNotifications">Notifications</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentNewsPrefs">News Feed Preferences</a></li>
                                                             }
                                                             else if (User.Identity.IsAuthenticated && user.Role == "Tutor")
@@ -253,10 +253,10 @@
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSettings">Settings</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="ListOfTutorEvents">Requests</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTutorSchedule">Manage Schedule</a></li>
-                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTutorActivityLog">Activity Log</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetNotifications">Notifications</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTutorNewsPrefs">News Feed Preferences</a></li>
                                                             }
-                                                            <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="OpenChat">Chat</a></li>
+                                                            <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="OpenChat">Open Chat</a></li>
                                                             <li>
                                                                 @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
                                                                 {

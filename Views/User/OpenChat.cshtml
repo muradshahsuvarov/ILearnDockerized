@@ -4,7 +4,7 @@
 @model List<ILearnCoreV19.Areas.Identity.Data.ApplicationMessage>
 
 @{
-    ViewData["Title"] = "Chat";
+    ViewData["Title"] = "Open Chat";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var userName = User.Identity.Name;
@@ -26,7 +26,7 @@
 <body>
     <div class="container">
         <div class="messaging">
-            <div class="inbox_msg">
+            <div class="inbox_msg" style="height: 500px">
                 <div class="inbox_people">
                     <div class="headind_srch">
                         <div class="recent_heading">
@@ -174,7 +174,7 @@
                     </div>
                 </div>
                 <div class="mesgs">
-                    <div class="msg_history" id="chat">
+                    <div class="msg_history" id="chat" style="height: 390px">
                         @{
 
                             var myMessages = Model.Where(
