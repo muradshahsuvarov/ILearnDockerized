@@ -149,7 +149,7 @@ namespace ILearnCoreV19.Controllers
             List<ApplicationEvent> targetEvents = new List<ApplicationEvent>();
 
             targetEvents = (from e in _context.Events
-                            where ( e.text.Contains(name) || e.description.Contains(name) ) && e.status == "AVAILABLE" && e.start_date >= DateTime.Now
+                            where (e.text.Contains(name) || e.description.Contains(name)) && e.status == "AVAILABLE" && e.start_date >= DateTime.Now
                             select e).ToList();
 
             return View(targetEvents);
@@ -205,8 +205,8 @@ namespace ILearnCoreV19.Controllers
         {
 
             List<ApplicationUser> teachers = (from e in _context.Users
-                           where e.Role == "Tutor"
-                           select e).ToList();  
+                                              where e.Role == "Tutor"
+                                              select e).ToList();
             return View(teachers);
         }
 
@@ -218,13 +218,13 @@ namespace ILearnCoreV19.Controllers
             var notifs = (from e in _context.Notif
                           where e.UserName == User.Identity.Name
                           select e).ToList();
-            
+
             return notifs.Count;
         }
 
         // Async to get messages asynchronously
         public async Task<IActionResult> OpenChat()
-        {    
+        {
             var currentUser = await _userManager.GetUserAsync(User); // Added by MS
             if (User.Identity.IsAuthenticated)
             {
@@ -239,7 +239,7 @@ namespace ILearnCoreV19.Controllers
         public ActionResult ReloadOpenChat([FromQuery(Name = "selectedUser")] string selectedUser)
         {
 
-                return Redirect("http://localhost:59000?selectedUser=" + selectedUser);
+            return Redirect("http://localhost:59000?selectedUser=" + selectedUser);
         }
 
         // Is assigned once you clicked on him on the right panel. Get From query param
@@ -324,8 +324,6 @@ namespace ILearnCoreV19.Controllers
         {
             /*
             string emailID = User.Identity.Name;
-
-
             var user = (from e in _context.Users
                         where e.Email == emailID
                         select e).Single(); */
@@ -376,17 +374,17 @@ namespace ILearnCoreV19.Controllers
         // GetEvents
         public JsonResult GetEvents()
         {
-                List<ApplicationEvent> events = (from e in _context.Events
-                              where e.userId == getAuthenticatedUser().UserName
-                              select e).ToList();
+            List<ApplicationEvent> events = (from e in _context.Events
+                                             where e.userId == getAuthenticatedUser().UserName
+                                             select e).ToList();
 
-                // To see the subjects assigned to the teacher
-                foreach (var item in events)
-                {
-                    Debug.WriteLine("LOG: " + item.text);
-                }
+            // To see the subjects assigned to the teacher
+            foreach (var item in events)
+            {
+                Debug.WriteLine("LOG: " + item.text);
+            }
 
-                return new JsonResult(events);
+            return new JsonResult(events);
         }
 
         // SaveEvent
@@ -394,46 +392,46 @@ namespace ILearnCoreV19.Controllers
         public JsonResult SaveEvent(ApplicationEvent e)
         {
 
-                if (e.EventId > 0)
-                {
-                    //Update the event
-                    var v = _context.Events.Where(a => a.EventId == e.EventId).FirstOrDefault();
+            if (e.EventId > 0)
+            {
+                //Update the event
+                var v = _context.Events.Where(a => a.EventId == e.EventId).FirstOrDefault();
 
                 if (v != null)
-                    {
-                        v.text = e.text;
-                        v.start_date = e.start_date;
-                        v.end_date = e.end_date;
-                        v.description = e.description;
-                        v.ThemeColor = e.ThemeColor;
-                        v.isFullDay = e.isFullDay;
-
-
-                        Debug.WriteLine("here 1");
-                    }
-                }
-                else
                 {
-                    Debug.WriteLine("here 2");
+                    v.text = e.text;
+                    v.start_date = e.start_date;
+                    v.end_date = e.end_date;
+                    v.description = e.description;
+                    v.ThemeColor = e.ThemeColor;
+                    v.isFullDay = e.isFullDay;
 
-                    e.userId = getAuthenticatedUser().UserName;
-                    if (e.isFullDay == true)
-                    {
-                        e.end_date = null;
-                    }
-                    e.status = "AVAILABLE";
 
-                    _context.Events.Add(e);
+                    Debug.WriteLine("here 1");
                 }
+            }
+            else
+            {
+                Debug.WriteLine("here 2");
 
-                Debug.WriteLine($"EventId: {e.EventId}");
-                Debug.WriteLine($"Text: {e.text}");
-                Debug.WriteLine($"Status: {e.status}");
-                Debug.WriteLine($"Start: {e.start_date}");
-                Debug.WriteLine($"End: {e.end_date}");
-                Debug.WriteLine($"ThemeColor: {e.ThemeColor}");
-                Debug.WriteLine($"Description: {e.description}");
-                Debug.WriteLine($"IsFullDay: {e.isFullDay}");
+                e.userId = getAuthenticatedUser().UserName;
+                if (e.isFullDay == true)
+                {
+                    e.end_date = null;
+                }
+                e.status = "AVAILABLE";
+
+                _context.Events.Add(e);
+            }
+
+            Debug.WriteLine($"EventId: {e.EventId}");
+            Debug.WriteLine($"Text: {e.text}");
+            Debug.WriteLine($"Status: {e.status}");
+            Debug.WriteLine($"Start: {e.start_date}");
+            Debug.WriteLine($"End: {e.end_date}");
+            Debug.WriteLine($"ThemeColor: {e.ThemeColor}");
+            Debug.WriteLine($"Description: {e.description}");
+            Debug.WriteLine($"IsFullDay: {e.isFullDay}");
 
             _context.SaveChanges();
 
@@ -447,13 +445,13 @@ namespace ILearnCoreV19.Controllers
 
             Debug.WriteLine($"eventID: {eventID}");
 
-                var v = _context.Events.Where(a => a.EventId == eventID).FirstOrDefault();
-                if (v != null)
-                {
-                    _context.Events.Remove(v);
-                    _context.SaveChanges();
-                    status = true;
-                }
+            var v = _context.Events.Where(a => a.EventId == eventID).FirstOrDefault();
+            if (v != null)
+            {
+                _context.Events.Remove(v);
+                _context.SaveChanges();
+                status = true;
+            }
 
             Debug.WriteLine($"status: {status}");
 

@@ -1,6 +1,5 @@
 ﻿var connection = new signalR.HubConnectionBuilder()
     .withUrl('/User/OpenChat')
-    .withUrl('/')
     .build();
 
 connection.on('receiveMessage', addMessageToChat); // Sends empty message to addMessageToChat

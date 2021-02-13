@@ -286,8 +286,11 @@
                                             </li>
                                             <li class="nr_li">
                                                 <div id="noti_Container">
-                                                    <i class="fa fa-globe"></i>
-                                                    <span class="button__badge">@ViewBag.NumberOfNotifs</span>
+                                                    <i class="fa fa-globe"></i >
+                                                    @if (@ViewBag.NumberOfNotifs > 0)
+                                                    {
+                                                        <span class="button__badge">@ViewBag.NumberOfNotifs</span>
+                                                    }
                                                 </div>
                                             </li>
                                         </ul>
