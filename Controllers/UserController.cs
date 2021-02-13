@@ -213,6 +213,15 @@ namespace ILearnCoreV19.Controllers
         // User who you chose to see a message history with.
 
 
+        public int GetTotalNumOfNotifs()
+        {
+            var notifs = (from e in _context.Notif
+                          where e.UserName == User.Identity.Name
+                          select e).ToList();
+            
+            return notifs.Count;
+        }
+
         // Async to get messages asynchronously
         public async Task<IActionResult> OpenChat()
         {    
@@ -220,6 +229,7 @@ namespace ILearnCoreV19.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.CurrentUserName = User.Identity.Name;
+                ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
             }
             var messages = await _context.Messages.Where(r => r.UserName == User.Identity.Name || r.ReceiverName == User.Identity.Name).ToListAsync(); // Added by MS    
             return View(messages);

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ILearnCoreV19.Areas.Identity.Data.ApplicationNotif>
+
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Header)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Body)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsRead)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Header)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Body)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedAt)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsRead)
+    </td>
+    <td>
+        @{
+            /*
+            @Html.ActionLink("Edit", "Edit", new { id = item.UserID })
+            @Html.ActionLink("Details", "GetDetails", "User", new { id = item.UserID }, null)
+            @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+            */
+        }
+    </td>
+</tr>
+    }
+
+</table>
+
+

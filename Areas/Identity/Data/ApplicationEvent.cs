@@ -12,7 +12,7 @@ namespace ILearnCoreV19.Areas.Identity.Data
     {
         [PersonalData]
         [Column(TypeName = "INT")]
-        [Key]
+        [Key] 
         public int EventId { get; set; }
 
         [PersonalData]

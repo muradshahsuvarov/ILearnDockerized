@@ -34,5 +34,6 @@ namespace ILearnCoreV19.Data
         public DbSet<ApplicationUser> Users { get; set; } // Users from the database
         public DbSet<ApplicationEvent> Events { get; set; } // Events from the database
         public DbSet<ApplicationMessage> Messages { get; set; } // Messages from the database
+        public DbSet<ApplicationNotif> Notif { get; set; } // Notif from the database
     }
 }

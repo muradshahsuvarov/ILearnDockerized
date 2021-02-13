@@ -177,6 +177,22 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
+        /*Needed for notification*/
+
+        /* Make the badge float in the top right corner of the button */
+        .button__badge {
+            background-color: #fa3e3e;
+            border-radius: 2px;
+            color: white;
+            padding: 1px 3px;
+            font-size: 10px;
+            position: absolute; /* Position the badge within the relatively positioned button */
+            top: 0;
+            right: 0;
+        }
+
+
     </style>
 </head>
 <body>
@@ -212,7 +228,7 @@
                         {
                             <div class="wrapper">
                                 <div class="navbar">
-                                    <div class="logo">
+                                    <div class="logo" style="margin-top: -10px">
                                         <a href="#">@firstName</a>
                                     </div>
                                     <div class="nav_right">
@@ -269,7 +285,10 @@
                                                 </div>
                                             </li>
                                             <li class="nr_li">
-                                                <i class="fas fa-envelope-open-text"></i>
+                                                <div id="noti_Container">
+                                                    <i class="fa fa-globe"></i>
+                                                    <span class="button__badge">@ViewBag.NumberOfNotifs</span>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>

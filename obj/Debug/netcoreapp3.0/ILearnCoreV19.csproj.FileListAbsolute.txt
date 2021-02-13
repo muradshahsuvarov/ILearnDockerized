@@ -599,6 +599,7 @@ C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\runtimes\win-x86\nat
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csprojAssemblyReference.cache
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.AssemblyInfoInputs.cache
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.AssemblyInfo.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csproj.CoreCompileInputs.cache
@@ -621,6 +622,7 @@ C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Areas\Identity
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\About.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\Contact.cshtml.g.cs
+C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\GetAllNotifs.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\GetUsers.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\myApplications.cshtml.g.cs
@@ -649,4 +651,3 @@ C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csproj
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.dll
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.pdb
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.genruntimeconfig.cache
-C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csprojAssemblyReference.cache
