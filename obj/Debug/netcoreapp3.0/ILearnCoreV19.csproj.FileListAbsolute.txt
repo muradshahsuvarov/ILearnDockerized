@@ -621,7 +621,6 @@ C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Areas\Identity
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\About.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\Contact.cshtml.g.cs
-C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\GetAllNotifs.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\GetUsers.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Home\myApplications.cshtml.g.cs
@@ -632,6 +631,7 @@ C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetAllNotifs.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetApplications.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetSearchedSubjects.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetStudentSchedule.cshtml.g.cs

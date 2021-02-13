@@ -285,13 +285,16 @@
                                                 </div>
                                             </li>
                                             <li class="nr_li">
-                                                <div id="noti_Container">
-                                                    <i class="fa fa-globe"></i >
-                                                    @if (@ViewBag.NumberOfNotifs > 0)
-                                                    {
-                                                        <span class="button__badge">@ViewBag.NumberOfNotifs</span>
-                                                    }
-                                                </div>
+                                                <a href="@Url.Action("GetAllNotifs","User")">
+                                                    <div id="noti_Container">
+                                                        <i class="fa fa-globe"></i>
+                                                        @if (@ViewBag.NumberOfNotifs > 0)
+                                                        {
+                                                            <span class="button__badge">@ViewBag.NumberOfNotifs</span>
+                                                        }
+                                                    </div>
+                                                </a>
+                                                
                                             </li>
                                         </ul>
                                     </div>

@@ -216,7 +216,7 @@ namespace ILearnCoreV19.Controllers
         public int GetTotalNumOfNotifs()
         {
             var notifs = (from e in _context.Notif
-                          where e.UserName == User.Identity.Name
+                          where e.UserName == User.Identity.Name && e.IsRead != true
                           select e).ToList();
 
             return notifs.Count;
@@ -242,6 +242,21 @@ namespace ILearnCoreV19.Controllers
             return Redirect("http://localhost:59000?selectedUser=" + selectedUser);
         }
 
+        public IActionResult GetAllNotifs()
+        {
+            var notifs = (from e in _context.Notif
+                          where e.UserName == User.Identity.Name
+                          select e).ToList();
+
+            foreach (var item in notifs)
+            {
+                item.IsRead = true;
+            }
+
+            _context.SaveChanges();
+
+            return View(notifs);
+        }
         // Is assigned once you clicked on him on the right panel. Get From query param
 
         public async Task<IActionResult> CreateMessage(ApplicationMessage message, String selectedUser)
@@ -252,6 +267,15 @@ namespace ILearnCoreV19.Controllers
                 message.ReceiverName = selectedUser;
                 var sender = await _userManager.GetUserAsync(User);
                 message.UserID = sender.Id;
+
+                ApplicationNotif notif = new ApplicationNotif();
+                notif.UserName = selectedUser;
+                notif.Header = User.Identity.Name + " sent a message";
+                notif.Body = message.Text;
+                notif.CreatedAt = DateTime.Now;
+                notif.IsRead = false;
+
+                await _context.Notif.AddAsync(notif);
                 await _context.Messages.AddAsync(message);
                 await _context.SaveChangesAsync();
                 Trace.WriteLine("Data is saved into the database");
