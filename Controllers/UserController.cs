@@ -36,6 +36,8 @@ namespace ILearnCoreV19.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
+
             return View();
         }
 
@@ -72,8 +74,9 @@ namespace ILearnCoreV19.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Subscribe(int? eventId, string email, string returnUrl) // eventID - id of the event to which user with email wants to subscribe.  // Done by the student
+        public IActionResult Subscribe(string userName, int? eventId, string email, string returnUrl) // eventID - id of the event to which user with email wants to subscribe.  // Done by the student
         {
+            System.Diagnostics.Debug.WriteLine("userName: " + userName);
             System.Diagnostics.Debug.WriteLine("EventId: " + eventId);
             System.Diagnostics.Debug.WriteLine("SubscriberEmail: " + email);
             System.Diagnostics.Debug.WriteLine("ReturnUrl: " + returnUrl);
@@ -84,8 +87,18 @@ namespace ILearnCoreV19.Controllers
                                where e.EventId == eventId
                                select e).Single();
 
+
             targetEvent.status = "PENDING";
             targetEvent.subscriberEmail = email;
+
+            ApplicationNotif notif = new ApplicationNotif();
+            notif.UserName = userName;
+            notif.Header = "New subject request";
+            notif.Body = email + " sent a request for " + targetEvent.text;
+            notif.CreatedAt = DateTime.Now;
+            notif.IsRead = false;
+
+            _context.Notif.Add(notif);
 
             _context.SaveChanges();
             _context.Dispose();
@@ -356,7 +369,7 @@ namespace ILearnCoreV19.Controllers
             /* var userWithId = (from e in db.Users
                               where e.UserID == user.UserID
                               select e).Single(); */
-
+            ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
             return View(_context);
         }
 

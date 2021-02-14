@@ -43,9 +43,10 @@
                 @using (Html.BeginForm("Subscribe", "User", FormMethod.Post))
                 {
                     <!-- form goes here -->
+                    @Html.Hidden("userName", item.userId)
                     @Html.Hidden("eventId", item.EventId)
                     @Html.Hidden("email", User.Identity.Name)
-                    @Html.Hidden("returnUrl", "/")
+                    @Html.Hidden("returnUrl", "/User/ListOfEvents")
                     <input type="submit" value="Subscribe" class="btn btn-success" style="width:200px" />
                 }
             </td>
