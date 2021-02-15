@@ -8,9 +8,11 @@
 
 // userName is declared in razor page.
 const username = userName;
+const receivername = receiverName;
 const textInput = document.getElementById('messageText');
 const whenInput = document.getElementById('when');
 const chat = document.getElementById('chat');
+const notiContainer = document.getElementById('noti_Container');
 const messagesQueue = [];
 
 document.getElementById('submitButton').addEventListener('click', () => {
@@ -22,7 +24,7 @@ document.getElementById('submitButton').addEventListener('click', () => {
         + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
 });
 
-function clearInputField() {
+function clearInputField() { // clears input field in OpenChat.cshtml
     messagesQueue.push(textInput.value);
     textInput.value = "";
 }
@@ -31,11 +33,14 @@ function sendMessage() {
     let text = messagesQueue.shift() || "";
     if (text.trim() === "") return;
 
+
     let when = new Date();
-    let message = new Message(username, text);
+    let message = new Message(username, text, when);
     sendMessageToHub(message);
 }
 
+
+// This part is SignalR
 function addMessageToChat(message) {
 
     let isCurrentUserMessage = message.userName === username;
@@ -61,5 +66,27 @@ function addMessageToChat(message) {
     container.appendChild(sender);
     container.appendChild(text);
     container.appendChild(when);
+
+
+
+
     chat.appendChild(container);
+}
+
+// This part is SignalR
+function checkNotifications(message) {
+
+    alert("RECEIVER NAME: " + receivername);
+    let isCurrentUserMessage = username == receivername;
+    if (isCurrentUserMessage) {
+        let container_notif = document.createElement('span');
+        container_notif.className = "button__badge";
+
+        // create text of the container_notif
+        let container_notif_text = document.createTextNode('!');
+        container_notif.appendChild(container_notif_text);
+
+        notiContainer.appendChild(container_notif);
+    }
+    
 }

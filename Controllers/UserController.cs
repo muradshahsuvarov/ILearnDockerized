@@ -292,6 +292,8 @@ namespace ILearnCoreV19.Controllers
                 await _context.Messages.AddAsync(message);
                 await _context.SaveChangesAsync();
                 Trace.WriteLine("Data is saved into the database");
+
+                Trace.WriteLine($"Sender is {message.UserName}, Receiver is {message.ReceiverName}");
                 return Ok();
             }
 

@@ -2,7 +2,9 @@
     .withUrl('/User/OpenChat')
     .build();
 
-connection.on('receiveMessage', addMessageToChat); // Sends empty message to addMessageToChat
+connection.on('receiveMessage', addMessageToChat); // Sends messages in every frame to addMessageToChat
+connection.on('receiveMessage', checkNotifications); // Sends messages in every frame to addMessageToChat
+
 
 connection.start()
     .catch(error => {

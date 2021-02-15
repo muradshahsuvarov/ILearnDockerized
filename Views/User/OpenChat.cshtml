@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var userName = User.Identity.Name;
-    String selectedUser = String.Empty;
+    String mySender = String.Empty;
 }
 
 
@@ -145,7 +145,7 @@
                                         <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
                                         <div class="chat_ib">
                                             @{ 
-                                                String mySender = String.Empty;
+
                                                 if (item.UserName != User.Identity.Name)
                                                 {
                                                     mySender = item.UserName;
@@ -268,9 +268,10 @@
 
     @if (User.Identity.IsAuthenticated)
     {
-        <script>
+<script>
     const userName = "@ViewBag.CurrentUserName"
-        </script>
+    const receiverName = "dmitrydunayev@gmail.com"; // automate it
+</script>
     }
 
     @section scripts {
