@@ -235,6 +235,14 @@ namespace ILearnCoreV19.Controllers
             return notifs.Count;
         }
 
+        public IActionResult GetTotalNumOfNotifsAction()
+        {
+            var notifs = (from e in _context.Notif
+                          where e.UserName == User.Identity.Name && e.IsRead != true
+                          select e).ToList();
+
+            return Ok(new { notifsCount = notifs.Count });
+        }
         // Async to get messages asynchronously
         public async Task<IActionResult> OpenChat()
         {

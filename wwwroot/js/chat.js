@@ -8,7 +8,6 @@
 
 // userName is declared in razor page.
 const username = userName;
-const receivername = receiverName;
 const textInput = document.getElementById('messageText');
 const whenInput = document.getElementById('when');
 const chat = document.getElementById('chat');
@@ -76,17 +75,18 @@ function addMessageToChat(message) {
 // This part is SignalR
 function checkNotifications(message) {
 
-    alert("RECEIVER NAME: " + receivername);
-    let isCurrentUserMessage = username == receivername;
-    if (isCurrentUserMessage) {
-        let container_notif = document.createElement('span');
-        container_notif.className = "button__badge";
 
-        // create text of the container_notif
-        let container_notif_text = document.createTextNode('!');
-        container_notif.appendChild(container_notif_text);
+    $.post('/User/GetTotalNumOfNotifsAction', function (data) {
+        if (data.notifsCount > 0) {
+            let container_notif = document.createElement('span');
+            container_notif.className = "button__badge";
 
-        notiContainer.appendChild(container_notif);
-    }
+            // create text of the container_notif
+            let container_notif_text = document.createTextNode("" + data.notifsCount);
+            container_notif.appendChild(container_notif_text);
+
+            notiContainer.appendChild(container_notif);
+        }
+    });
     
 }

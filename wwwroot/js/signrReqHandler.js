@@ -3,7 +3,7 @@
     .build();
 
 connection.on('receiveMessage', addMessageToChat); // Sends messages in every frame to addMessageToChat
-connection.on('receiveMessage', checkNotifications); // Sends messages in every frame to addMessageToChat
+connection.on('receiveMessage', checkNotifications); // Checks notifs
 
 
 connection.start()
