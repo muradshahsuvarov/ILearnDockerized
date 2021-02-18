@@ -214,9 +214,13 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="About">About</a>
                             </li>
-                            <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="SubscriptionPage">Subscriptions</a>
-                            </li>
+                            @if (User.Identity.IsAuthenticated && user.Role == "Student")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="SubscriptionPage">Subscriptions</a>
+                                </li>
+                            }
+
 
                             <div class="wrap">
                                 <div class="search" style="margin-left:-30px">
@@ -266,6 +270,7 @@
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="Home" asp-action="Services">Biography</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentSchedule">Manage Schedule</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetNotifications">Notifications</a></li>
+                                                                <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetTotalNumOfSubscriptions">My subscriptions</a></li>
                                                                 <li><a class="nav-link text-dark" style="font-size: 10px;" asp-area="" asp-controller="User" asp-action="GetStudentNewsPrefs">News Feed Preferences</a></li>
                                                             }
                                                             else if (User.Identity.IsAuthenticated && user.Role == "Tutor")

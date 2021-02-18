@@ -113,6 +113,16 @@ namespace ILearnCoreV19.Controllers
                     if (charge.Status == "succeeded")
                     {
                         string BalanceTransactionId = charge.BalanceTransactionId;
+                        ApplicationSubscription subscription_0 = new ApplicationSubscription();
+                        subscription_0.Name = "Silver";
+                        subscription_0.Description = "Silver Subscription Purchased";
+                        subscription_0.IsActivated = false;
+                        subscription_0.Price = "25$";
+                        subscription_0.Cancelled = false;
+                        subscription_0.UserName = User.Identity.Name;
+
+                        _context.Subscriptions.Add(subscription_0);
+                        _context.SaveChanges();
                         Trace.WriteLine("Payment succeeded");
                     }
                     else
@@ -136,6 +146,16 @@ namespace ILearnCoreV19.Controllers
                     if (charge.Status == "succeeded")
                     {
                         string BalanceTransactionId = charge.BalanceTransactionId;
+                        ApplicationSubscription subscription_0 = new ApplicationSubscription();
+                        subscription_0.Name = "Platinum";
+                        subscription_0.Description = "Platinum Subscription Purchased";
+                        subscription_0.IsActivated = false;
+                        subscription_0.Price = "60$";
+                        subscription_0.Cancelled = false;
+                        subscription_0.UserName = User.Identity.Name;
+
+                        _context.Subscriptions.Add(subscription_0);
+                        _context.SaveChanges();
                         Trace.WriteLine("Payment succeeded");
                     }
                     else
@@ -159,6 +179,16 @@ namespace ILearnCoreV19.Controllers
                     if (charge.Status == "succeeded")
                     {
                         string BalanceTransactionId = charge.BalanceTransactionId;
+                        ApplicationSubscription subscription_0 = new ApplicationSubscription();
+                        subscription_0.Name = "Golden";
+                        subscription_0.Description = "Golden Subscription Purchased";
+                        subscription_0.IsActivated = false;
+                        subscription_0.Price = "100$";
+                        subscription_0.Cancelled = false;
+                        subscription_0.UserName = User.Identity.Name;
+
+                        _context.Subscriptions.Add(subscription_0);
+                        _context.SaveChanges();
                         Trace.WriteLine("Payment succeeded");
                     }
                     else
@@ -338,6 +368,7 @@ namespace ILearnCoreV19.Controllers
             return notifs.Count;
         }
 
+
         public IActionResult GetTotalNumOfNotifsAction()
         {
             var notifs = (from e in _context.Notif
@@ -345,6 +376,15 @@ namespace ILearnCoreV19.Controllers
                           select e).ToList();
 
             return Ok(new { notifsCount = notifs.Count });
+        }
+
+        public IActionResult GetTotalNumOfSubscriptions()
+        {
+            var subscriptions = (from e in _context.Subscriptions
+                          where e.UserName == User.Identity.Name
+                          select e).ToList();
+
+            return View(subscriptions);
         }
         // Async to get messages asynchronously
         public async Task<IActionResult> OpenChat()

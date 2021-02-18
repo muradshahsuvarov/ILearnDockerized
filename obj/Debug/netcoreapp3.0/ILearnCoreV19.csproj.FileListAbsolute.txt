@@ -654,3 +654,4 @@ C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.genrun
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Stripe.net.dll
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\SubscriptionPage.cshtml.g.cs
+C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetTotalNumOfSubscriptions.cshtml.g.cs
