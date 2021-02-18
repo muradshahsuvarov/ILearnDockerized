@@ -16,7 +16,7 @@ using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using ILearnCoreV19.Models;
 using Stripe;
-
+using System.Net.Mail;
 
 namespace ILearnCoreV19.Controllers
 {
@@ -81,6 +81,23 @@ namespace ILearnCoreV19.Controllers
             return View(events);
         }
 
+        public void SendEmail(string to, string from, string password, string subject, string body)
+        {
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.To.Add(to);
+            mailMessage.Subject = subject;
+            mailMessage.Body = body;
+            mailMessage.From = new MailAddress(from);
+            mailMessage.IsBodyHtml = false;
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = true;
+            smtp.EnableSsl = true;
+            smtp.Credentials = new System.Net.NetworkCredential(from, password);
+            smtp.Send(mailMessage);
+            Trace.WriteLine($"Message has been sent from {from} to {to}");
+        }
+
         public IActionResult Charge(string stripeEmail, string stripeToken, string subscription)
         {
             var customers = new CustomerService();
@@ -121,6 +138,9 @@ namespace ILearnCoreV19.Controllers
                         subscription_0.Cancelled = false;
                         subscription_0.UserName = User.Identity.Name;
 
+                        SendEmail(stripeEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Silver Subscription Purchased",
+                            "-$25 taken from your account.\nSilver Subscription Purchased by " + User.Identity.Name);
+
                         _context.Subscriptions.Add(subscription_0);
                         _context.SaveChanges();
                         Trace.WriteLine("Payment succeeded");
@@ -154,6 +174,9 @@ namespace ILearnCoreV19.Controllers
                         subscription_0.Cancelled = false;
                         subscription_0.UserName = User.Identity.Name;
 
+                        SendEmail(stripeEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Platinum Subscription Purchased",
+                            "-$60 taken from your account.\nPlatinum Subscription Purchased by " + User.Identity.Name);
+
                         _context.Subscriptions.Add(subscription_0);
                         _context.SaveChanges();
                         Trace.WriteLine("Payment succeeded");
@@ -186,6 +209,10 @@ namespace ILearnCoreV19.Controllers
                         subscription_0.Price = "100$";
                         subscription_0.Cancelled = false;
                         subscription_0.UserName = User.Identity.Name;
+
+                        SendEmail(stripeEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Golden Subscription Purchased", 
+                            "-$100 taken from your account.\nGolden Subscription Purchased by " + User.Identity.Name);
+
 
                         _context.Subscriptions.Add(subscription_0);
                         _context.SaveChanges();
