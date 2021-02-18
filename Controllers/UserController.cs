@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using ILearnCoreV19.Models;
+using Stripe;
+
 
 namespace ILearnCoreV19.Controllers
 {
@@ -37,6 +39,13 @@ namespace ILearnCoreV19.Controllers
         public IActionResult Index()
         {
             ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
+
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult SubscriptionPage()
+        {
 
             return View();
         }
@@ -71,6 +80,100 @@ namespace ILearnCoreV19.Controllers
 
             return View(events);
         }
+
+        public IActionResult Charge(string stripeEmail, string stripeToken, string subscription)
+        {
+            var customers = new CustomerService();
+            var charges = new ChargeService();
+
+            var customer = customers.Create(new CustomerCreateOptions
+            {
+                Email = stripeEmail,
+                Source = stripeToken
+            });
+
+            Stripe.Charge charge;
+            
+
+            switch (subscription)
+            {
+                case "Silver":
+                    // You can add a lot of data here. More data can be added to the MetaData
+                    charge = charges.Create(new ChargeCreateOptions
+                    {
+
+                        Amount = 2500,
+                        Description = "Silver Subscription Purchased",
+                        Currency = "usd",
+                        Customer = customer.Id,
+                        ReceiptEmail = stripeEmail
+
+                    });
+
+                    if (charge.Status == "succeeded")
+                    {
+                        string BalanceTransactionId = charge.BalanceTransactionId;
+                        Trace.WriteLine("Payment succeeded");
+                    }
+                    else
+                    {
+                        Trace.WriteLine("Payment not succeeded!");
+                    }
+                    break;
+                case "Platinum":
+                    // You can add a lot of data here. More data can be added to the MetaData
+                    charge = charges.Create(new ChargeCreateOptions
+                    {
+
+                        Amount = 6000,
+                        Description = "Platinum Subscription Purchased",
+                        Currency = "usd",
+                        Customer = customer.Id,
+                        ReceiptEmail = stripeEmail
+
+                    });
+
+                    if (charge.Status == "succeeded")
+                    {
+                        string BalanceTransactionId = charge.BalanceTransactionId;
+                        Trace.WriteLine("Payment succeeded");
+                    }
+                    else
+                    {
+                        Trace.WriteLine("Payment not succeeded!");
+                    }
+                    break;
+                case "Golden":
+                    // You can add a lot of data here. More data can be added to the MetaData
+                    charge = charges.Create(new ChargeCreateOptions
+                    {
+
+                        Amount = 10000,
+                        Description = "Golden Subscription Purchased",
+                        Currency = "usd",
+                        Customer = customer.Id,
+                        ReceiptEmail = stripeEmail
+
+                    });
+
+                    if (charge.Status == "succeeded")
+                    {
+                        string BalanceTransactionId = charge.BalanceTransactionId;
+                        Trace.WriteLine("Payment succeeded");
+                    }
+                    else
+                    {
+                        Trace.WriteLine("Payment not succeeded!");
+                    }
+                    break;
+                default:
+                    break;
+            }
+            
+
+            return Redirect("/");
+        }
+
 
         [HttpPost]
         [Authorize]

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5kwa1aw0XacuQGzWb516o+bAeSzLAq7lT6GUz5favW0jQfTbUHt+rrlBHG6+/R1GijEU5uE7RdCQ/zPmgpg10A==",
+  "dgSpecHash": "2uKqRFiWr/3Lz4LHw/lsRKA9gIPK9oqqxTCBopWIe/nlV18whRpxeHjVPBNOtLir7vRBktJ2OAFsCfdo5ECdSg==",
   "success": true,
   "projectFilePath": "C:\\University\\BSC Thesis\\ILearnCore\\ILearnCoreV19.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\Murad\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\3.0.0\\microsoft.aspnetcore.razor.language.3.0.0.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\microsoft.aspnetcore.razor.runtime\\2.2.0\\microsoft.aspnetcore.razor.runtime.2.2.0.nupkg.sha512",
+    "C:\\Users\\Murad\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\2.9.3\\microsoft.codeanalysis.analyzers.2.9.3.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\microsoft.codeanalysis.common\\3.3.0\\microsoft.codeanalysis.common.3.3.0.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\microsoft.codeanalysis.csharp\\3.3.0\\microsoft.codeanalysis.csharp.3.3.0.nupkg.sha512",
@@ -88,6 +89,7 @@
     "C:\\Users\\Murad\\.nuget\\packages\\sqlitepclraw.core\\2.0.0\\sqlitepclraw.core.2.0.0.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.0\\sqlitepclraw.lib.e_sqlite3.2.0.0.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\sqlitepclraw.provider.dynamic_cdecl\\2.0.0\\sqlitepclraw.provider.dynamic_cdecl.2.0.0.nupkg.sha512",
+    "C:\\Users\\Murad\\.nuget\\packages\\stripe.net\\39.37.0\\stripe.net.39.37.0.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\system.buffers\\4.3.0\\system.buffers.4.3.0.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
