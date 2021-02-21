@@ -448,7 +448,7 @@
                     var events = Model.Events.Where(r => r.subscriberEmail == user.Email && r.status == "ACCEPTED").ToList();
                     if (events.Count == 0)
                     {
-                        System.Diagnostics.Debug.WriteLine($"{user.UserName} - NULLLLLLLLLLLLLll");
+                        System.Diagnostics.Debug.WriteLine($"{user.UserName} - Event Count is 0");
                     }
                     <div class="ex3" style="margin-top:25px">
                         @{
@@ -516,8 +516,6 @@
                         }
                     }
                 }
-
-
             </ul>
             <span class="posts">See post events</span>
         </div>

@@ -234,6 +234,24 @@ namespace ILearnCoreV19.Controllers
 
         [HttpPost]
         [Authorize]
+        public IActionResult ActivateSubscription(string userName, int subscriptionID, int days)
+        {
+            var subscription = (from s in _context.Subscriptions
+                                 where s.UserName == userName && s.Id == subscriptionID
+                                 select s).Single();
+
+            subscription.IsActivated = true;
+            subscription.StartDate = DateTime.Now;
+            subscription.EndDate = DateTime.Now.AddDays(days);
+
+            _context.SaveChanges();
+            _context.Dispose();
+
+            return Redirect("/User/GetTotalNumOfSubscriptions");
+        }
+
+        [HttpPost]
+        [Authorize]
         public IActionResult Subscribe(string userName, int? eventId, string email, string returnUrl) // eventID - id of the event to which user with email wants to subscribe.  // Done by the student
         {
             System.Diagnostics.Debug.WriteLine("userName: " + userName);
@@ -241,29 +259,49 @@ namespace ILearnCoreV19.Controllers
             System.Diagnostics.Debug.WriteLine("SubscriberEmail: " + email);
             System.Diagnostics.Debug.WriteLine("ReturnUrl: " + returnUrl);
 
-            // For saving the changed event
+            var subscriptionsActivated = (from e in _context.Subscriptions
+                                 where e.UserName == User.Identity.Name && e.IsActivated
+                                 select e).ToList();
 
-            var targetEvent = (from e in _context.Events
-                               where e.EventId == eventId
-                               select e).Single();
+            if (subscriptionsActivated.Count > 0)
+            {
+                // For saving the changed event
+
+                var targetEvent = (from e in _context.Events
+                                   where e.EventId == eventId
+                                   select e).Single();
 
 
-            targetEvent.status = "PENDING";
-            targetEvent.subscriberEmail = email;
+                targetEvent.status = "PENDING";
+                targetEvent.subscriberEmail = email;
 
-            ApplicationNotif notif = new ApplicationNotif();
-            notif.UserName = userName;
-            notif.Header = "New subject request";
-            notif.Body = email + " sent a request for " + targetEvent.text;
-            notif.CreatedAt = DateTime.Now;
-            notif.IsRead = false;
+                ApplicationNotif notif = new ApplicationNotif();
+                notif.UserName = userName;
+                notif.Header = "New subject request";
+                notif.Body = email + " sent a request for " + targetEvent.text;
+                notif.CreatedAt = DateTime.Now;
+                notif.IsRead = false;
 
-            _context.Notif.Add(notif);
+                _context.Notif.Add(notif);
 
-            _context.SaveChanges();
-            _context.Dispose();
+                _context.SaveChanges();
+                _context.Dispose();
 
-            return Redirect(returnUrl);
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                var subscriptionUnActivated = (from s in _context.Subscriptions
+                                               where s.UserName == User.Identity.Name && !s.IsActivated
+                                               select s).ToList();
+                if (subscriptionUnActivated.Count > 0)
+                {
+                    return Redirect("/User/GetTotalNumOfSubscriptions");
+                }
+                return Redirect("/User/SubscriptionPage");
+            }
+
+            
         }
 
         [HttpPost]
@@ -279,6 +317,9 @@ namespace ILearnCoreV19.Controllers
 
             targetEvent.status = "ACCEPTED";
             _context.SaveChanges();
+
+            SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Accepted",
+                           $"Dear { targetEvent.subscriberEmail},\nRequest for \"{targetEvent.text}\" has been accepted by {User.Identity.Name}");
 
             return Redirect(returnUrl);
         }
@@ -298,6 +339,9 @@ namespace ILearnCoreV19.Controllers
             targetEvent.status = "AVAILABLE";
             targetEvent.subscriberEmail = String.Empty;
             _context.SaveChanges();
+
+            SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Accepted",
+                           $"Dear { targetEvent.userId},\nRequest for {targetEvent.text} has been rejected by {User.Identity.Name}");
 
             return Redirect(returnUrl);
         }
@@ -413,17 +457,53 @@ namespace ILearnCoreV19.Controllers
 
             return View(subscriptions);
         }
+
+
+
         // Async to get messages asynchronously
         public async Task<IActionResult> OpenChat()
         {
-            var currentUser = await _userManager.GetUserAsync(User); // Added by MS
-            if (User.Identity.IsAuthenticated)
+            var myUserRole = (from u in _context.Users
+                              where u.UserName == User.Identity.Name
+                              select u).Single();
+            if (myUserRole.Role == "Student")
             {
-                ViewBag.CurrentUserName = User.Identity.Name;
-                ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
+                var subscriptionsActivated = (from e in _context.Subscriptions
+                                              where e.UserName == User.Identity.Name && e.IsActivated
+                                              select e).ToList();
+
+                if (subscriptionsActivated.Count > 0)
+                {
+                    var currentUserNew = await _userManager.GetUserAsync(User); // Added by MS
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        ViewBag.CurrentUserName = User.Identity.Name;
+                        ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
+                    }
+                    var messagesNew = await _context.Messages.Where(r => r.UserName == User.Identity.Name || r.ReceiverName == User.Identity.Name).ToListAsync(); // Added by MS    
+                    return View(messagesNew);
+                }
+                else
+                {
+                    var subscriptionUnActivated = (from s in _context.Subscriptions
+                                                   where s.UserName == User.Identity.Name && !s.IsActivated
+                                                   select s).ToList();
+                    if (subscriptionUnActivated.Count > 0)
+                    {
+                        return Redirect("/User/GetTotalNumOfSubscriptions");
+                    }
+                    return Redirect("/User/SubscriptionPage");
+                }
             }
-            var messages = await _context.Messages.Where(r => r.UserName == User.Identity.Name || r.ReceiverName == User.Identity.Name).ToListAsync(); // Added by MS    
-            return View(messages);
+            
+                var currentUser = await _userManager.GetUserAsync(User); // Added by MS
+                if (User.Identity.IsAuthenticated)
+                {
+                    ViewBag.CurrentUserName = User.Identity.Name;
+                    ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
+                }
+                var messages = await _context.Messages.Where(r => r.UserName == User.Identity.Name || r.ReceiverName == User.Identity.Name).ToListAsync(); // Added by MS    
+                return View(messages);   
         }
 
         [HttpGet]

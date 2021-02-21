@@ -35,32 +35,61 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActivated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cancelled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StartDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EndDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsActivated)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cancelled)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserName)
+    </td>
+    <td>
+        @using (Html.BeginForm("ActivateSubscription", "User", FormMethod.Post))
+        {
+            <!-- form goes here -->
+            @Html.Hidden("userName", item.UserName)
+            @Html.Hidden("subscriptionID", item.Id)
+            if (item.Name == "Silver")
+            {
+                @Html.Hidden("days", 30)
+            }
+            else if (item.Name == "Platinum")
+            {
+                @Html.Hidden("days", 180)
+            }
+            else if (item.Name == "Golden")
+            {
+                @Html.Hidden("days", 360)
+            }
+
+            if (item.IsActivated)
+            {
+                <input value="Activated!" class="btn btn-dark" style="width:200px" />
+            }
+            else
+            {
+                <input type="submit" value="Activate" class="btn btn-success" style="width:200px" />
+            }
+        }
+    </td>
+</tr>
     }
 
 </table>
