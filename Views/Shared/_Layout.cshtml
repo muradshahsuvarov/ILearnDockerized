@@ -74,6 +74,57 @@
             .navbar .nav_right ul li.nr_li:hover {
                 color: #cefffc;
             }
+
+        /* Style the search field */
+        form.example input[type=text] {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #f1f1f1;
+        }
+
+        .search {
+            width: 100%;
+            position: relative;
+            display: flex;
+        }
+
+        .searchTerm {
+            width: 200px;
+            border: 3px solid #00B4CC;
+            border-right: none;
+            padding: 5px;
+            height: 20px;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+            color: #9DBFAF;
+        }
+
+            .searchTerm:focus {
+                color: #00B4CC;
+            }
+
+        .searchButton {
+            width: 40px;
+            height: 36px;
+            border: 1px solid #00B4CC;
+            background: #00B4CC;
+            text-align: center;
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        /*Resize the wrap to see the search bar change!*/
+        .wrap {
+            width: 30%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
 </head>
 <body>
@@ -137,6 +188,16 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="nav-item">
+                                    <div class="container">
+                                        <div class="search" style="left: -5%">
+                                            <input id="searchedSubject" type="text" class="searchTerm" placeholder="What are you looking for?" style="height:36px">
+                                            <button id="searchSubjectButton" type="submit" class="searchButton">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
                                 <li class="nr_li">
                                     <a href="@Url.Action("GetAllNotifs","User")">
                                         <div id="noti_Container" style="margin-top: 10px; margin-left: 20px;">
@@ -155,6 +216,7 @@
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -173,6 +235,13 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        $("#searchSubjectButton").click(function () {
+            var txtVal = $("#searchedSubject").val();
+            window.location = "@Url.Action("GetSearchedSubjects", "User")" +
+                              "?name=" + txtVal;
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

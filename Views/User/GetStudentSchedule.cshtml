@@ -7,11 +7,6 @@
 
 
 <style>
-    body {
-        margin: 100px auto;
-        background-color: lightgray;
-        font-family: 'Kanit', sans-serif;
-    }
 
     .calendar-base {
         width: 900px;
@@ -267,14 +262,12 @@
             color: #27e879 !important;
             border-color: #27e879 !important;
         }
-
     /* The grid */
     .day-of-week,
     .date-grid {
         display: grid;
         grid-template-columns: repeat(7, 7fr);
     }
-
         /* Positioning the first day on a Friday */
         .date-grid button:first-child {
             grid-column: 6;
@@ -309,7 +302,7 @@
     }
     }
 </style>
-<div class="container">
+<div class="container" style="margin-top: 4%">
 
     <div class="calendar-base" style="margin-top: -35px; margin-left:100px">
 
@@ -442,8 +435,8 @@
                 @{
 
                     var user = (from e in Model.Users
-                            where e.Email == User.Identity.Name
-                            select e).Single();
+                                where e.Email == User.Identity.Name
+                                select e).Single();
 
                     var events = Model.Events.Where(r => r.subscriberEmail == user.Email && r.status == "ACCEPTED").ToList();
                     if (events.Count == 0)
