@@ -241,86 +241,126 @@ img {
   width: 33px;
 }
 .messaging { padding: 0 0 50px 0;}
+
 .msg_history {
   height: 516px;
   overflow-y: auto;
 }
 
-/* AFTER THAT SIGNL COMPONENTS GOES*/
+.recentText {
+    margin-left: 0px;
+}
 
-/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+
+.myChatTextBox {
+    width: 20px;
+    margin-left: -10px;
+}
+
+@media (max-width:700px) {
+    
+    .msg_history {
+        margin-left: -20px;
+        width: 200px;
+        margin-top: -29px;
+    }
+    .inbox_msg{
+        height: 450px;
+    }
+
+    .recentText {
+        margin-left: -10px;
+    }
+
+    .form-control {
+        margin-left: 260px;
+        width: 40%;
+    }
+
+}
+
+@media (min-width:1000px) {
+    .socialmedia {
+        margin-right: 100px;
+    }
+
+    .msg_history {
+        height: 390px;
+    }
+
+    .inbox_msg{
+        height: 500px;
+    }
+
+
+
+    }
+
+
+
+    /* AFTER THAT SIGNL COMPONENTS GOES*/
+    /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap');
+    /* Chat containers */
+    #chat .container {
+        border: 2px solid #dedede;
+        background-color: #f1f1f1;
+        border-radius: 30px;
+        padding: 10px;
+        margin: 10px 0;
+        width: 100%;
+        font-family: "Open Sans", serif;
+    }
 
-
-
-/* Chat containers */
-#chat .container {
-    border: 2px solid #dedede;
-    background-color: #f1f1f1;
-    border-radius: 30px;
-    padding: 10px;
-    margin: 10px 0;
-    width: 100%;
-    font-family: "Open Sans", serif;
-}
-
-#chat .sender {
-    font-size: 0.8em;
-    font-weight: bold;
-    font-family: 'Shadows Into Light', cursive;
-
-}
-
-/* Darker chat container */
-#chat .darker {
-    border-color: #fff;
-    background-color: #007bff;
-}
-
-/* Clear floats */
-#chat .container::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-/* Style images */
-#chat .container img {
-    float: left;
-    max-width: 60px;
-    width: 100%;
-    margin-right: 20px;
-    border-radius: 50%;
-}
-
-    /* Style the right image */
-    #chat .container img.right {
+    #chat .sender {
+        font-size: 0.8em;
+        font-weight: bold;
+        font-family: 'Shadows Into Light', cursive;
+    }
+    /* Darker chat container */
+    #chat .darker {
+        border-color: #fff;
+        background-color: #007bff;
+    }
+    /* Clear floats */
+    #chat .container::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    /* Style images */
+    #chat .container img {
+        float: left;
+        max-width: 60px;
+        width: 100%;
+        margin-right: 20px;
+        border-radius: 50%;
+    }
+        /* Style the right image */
+        #chat .container img.right {
+            float: right;
+            margin-left: 20px;
+            margin-right: 0;
+        }
+    /* Style time text */
+    #chat .time-right {
         float: right;
-        margin-left: 20px;
-        margin-right: 0;
+        color: #aaa;
     }
-
-/* Style time text */
-#chat .time-right {
-    float: right;
-    color: #aaa;
-}
-
-/* Style time text */
-#chat .time-left {
-    float: left;
-    color: #999;
-}
-/* Blue */
-
-@media screen and (max-width: 600px) {
-    .topnav a:not(:first-child) {
-        display: none;
+    /* Style time text */
+    #chat .time-left {
+        float: left;
+        color: #999;
     }
+    /* Blue */
+    @media screen and (max-width: 600px) {
+        .topnav a:not(:first-child) {
+            display: none;
+        }
 
-    .topnav a.icon {
-        float: right;
-        display: block;
+        .topnav a.icon {
+            float: right;
+            display: block;
+        }
     }
-}
