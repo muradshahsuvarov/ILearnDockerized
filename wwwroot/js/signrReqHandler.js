@@ -3,7 +3,7 @@
     .build();
 
 connection.on('receiveMessage', addMessageToChat); // Sends messages in every frame to addMessageToChat
-connection.on('receiveMessage', checkNotifications); // Checks notifs
+connection.on('checkNotifs', checkNotifications); // Checks notifs
 
 
 connection.start()
@@ -13,4 +13,8 @@ connection.start()
 
 function sendMessageToHub(message) {
     connection.invoke('SendMessage', message) // SendMessage is a C# HUB Method in ChatHub.cs
+}
+
+function sendNotifToHub() {
+    connection.invoke('CheckNotification') // SendMessage is a C# HUB Method in ChatHub.cs
 }

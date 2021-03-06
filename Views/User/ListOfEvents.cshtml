@@ -40,17 +40,36 @@
                 @Html.DisplayFor(modelItem => item.end_date)
             </td>
             <td>
-                @using (Html.BeginForm("Subscribe", "User", FormMethod.Post))
-                {
-                    <!-- form goes here -->
-                    @Html.Hidden("userName", item.userId)
-                    @Html.Hidden("eventId", item.EventId)
-                    @Html.Hidden("email", User.Identity.Name)
-                    @Html.Hidden("returnUrl", "/User/ListOfEvents")
-                    <input type="submit" value="Subscribe" class="btn btn-success" style="width:200px" />
-                }
+                <form asp-controller="User"
+                      asp-action="Subscribe"
+                      data-ajax-complete=""
+                      data-ajax-failure="alert('Fail')"
+                      data-ajax-success="sendSubsNotif"
+                      data-ajax="true"
+                      data-ajax-method="POST">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Subscribe" class="btn btn-success" style="width:200px" />
+                    </div>
+
+
+                    <input type="hidden" name="userName" value=@item.userId />
+                    <input type="hidden" name="eventId" value=@item.EventId />
+                    <input type="hidden" name="email" value=@User.Identity.Name />
+                    <input type="hidden" name="returnUrl" value="/User/ListOfEvents" />
+
+                </form>
             </td>
         </tr>
     }
-
 </table>
+
+
+@section scripts {
+    <script src="~/signalr/signalr.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery-unobtrusive-ajax.min.js"></script>
+    <script src="~/js/chat.js"></script>
+    <script src="~/js/signrReqHandler.js"></script>
+}

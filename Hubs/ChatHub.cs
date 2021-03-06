@@ -11,7 +11,12 @@ namespace ILearnCoreV19.Hubs
         {
             await Clients.All.SendAsync("receiveMessage", message);
         }
-          
-        
+
+
+        public async Task CheckNotification()
+        {
+            await Clients.All.SendAsync("checkNotifs");
+        }
+
     }
 }

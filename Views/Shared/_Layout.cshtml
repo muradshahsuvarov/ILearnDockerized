@@ -125,6 +125,18 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
+        /* Make the badge float in the top right corner of the button */
+        .button__badge {
+            background-color: #fa3e3e;
+            border-radius: 2px;
+            color: white;
+            padding: 1px 3px;
+            font-size: 10px;
+            position: absolute; /* Position the badge within the relatively positioned button */
+            top: 15;
+            right: 55;
+        }
     </style>
 </head>
 <body>
@@ -201,7 +213,7 @@
                                 <li class="nr_li">
                                     <a href="@Url.Action("GetAllNotifs","User")">
                                         <div id="noti_Container" style="margin-top: 10px; margin-left: 20px;">
-                                            <i class="fa fa-globe" style="color: aqua"></i>
+                                            <i class="fa fa-globe" style="color: aqua; font-size: 1.2em;"></i>
                                             @if (@ViewBag.NumberOfNotifs > 0)
                                             {
                                                 <span class="button__badge">@ViewBag.NumberOfNotifs</span>

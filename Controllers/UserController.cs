@@ -83,6 +83,7 @@ namespace ILearnCoreV19.Controllers
 
         public void SendEmail(string to, string from, string password, string subject, string body)
         {
+
             MailMessage mailMessage = new MailMessage();
             mailMessage.To.Add(to);
             mailMessage.Subject = subject;
@@ -260,11 +261,9 @@ namespace ILearnCoreV19.Controllers
             System.Diagnostics.Debug.WriteLine("ReturnUrl: " + returnUrl);
 
             var subscriptionsActivated = (from e in _context.Subscriptions
-                                 where e.UserName == User.Identity.Name && e.IsActivated
+                                 where e.UserName == User.Identity.Name && e.IsActivated == true
                                  select e).ToList();
 
-            if (subscriptionsActivated.Count > 0)
-            {
                 // For saving the changed event
 
                 var targetEvent = (from e in _context.Events
@@ -285,23 +284,12 @@ namespace ILearnCoreV19.Controllers
                 _context.Notif.Add(notif);
 
                 _context.SaveChanges();
-                _context.Dispose();
+               
 
+                ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
+                Trace.WriteLine($"DJUGI: {returnUrl}");
                 return Redirect(returnUrl);
-            }
-            else
-            {
-                var subscriptionUnActivated = (from s in _context.Subscriptions
-                                               where s.UserName == User.Identity.Name && !s.IsActivated
-                                               select s).ToList();
-                if (subscriptionUnActivated.Count > 0)
-                {
-                    return Redirect("/User/GetTotalNumOfSubscriptions");
-                }
-                return Redirect("/User/SubscriptionPage");
-            }
-
-            
+             
         }
 
         [HttpPost]
@@ -316,11 +304,13 @@ namespace ILearnCoreV19.Controllers
                                select e).Single();
 
             targetEvent.status = "ACCEPTED";
-            _context.SaveChanges();
 
+            Trace.WriteLine("GAGASHH: " + targetEvent.subscriberEmail);
             SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Accepted",
                            $"Dear { targetEvent.subscriberEmail},\nRequest for \"{targetEvent.text}\" has been accepted by {User.Identity.Name}");
 
+
+               _context.SaveChanges();
             return Redirect(returnUrl);
         }
 
@@ -336,12 +326,15 @@ namespace ILearnCoreV19.Controllers
                                where e.EventId == eventId && e.status == "PENDING"
                                select e).Single();
 
+            
+
+            Trace.WriteLine("GAGASHH: " + targetEvent.subscriberEmail);
+            SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Rejected",
+                           $"Dear { targetEvent.userId},\nRequest for {targetEvent.text} has been rejected by {User.Identity.Name}");
+
             targetEvent.status = "AVAILABLE";
             targetEvent.subscriberEmail = String.Empty;
             _context.SaveChanges();
-
-            SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Accepted",
-                           $"Dear { targetEvent.userId},\nRequest for {targetEvent.text} has been rejected by {User.Identity.Name}");
 
             return Redirect(returnUrl);
         }
@@ -446,6 +439,8 @@ namespace ILearnCoreV19.Controllers
                           where e.UserName == User.Identity.Name && e.IsRead != true
                           select e).ToList();
 
+            Trace.WriteLine("GIDJDILLAG");
+
             return Ok(new { notifsCount = notifs.Count });
         }
 
@@ -468,12 +463,6 @@ namespace ILearnCoreV19.Controllers
                               select u).Single();
             if (myUserRole.Role == "Student")
             {
-                var subscriptionsActivated = (from e in _context.Subscriptions
-                                              where e.UserName == User.Identity.Name && e.IsActivated
-                                              select e).ToList();
-
-                if (subscriptionsActivated.Count > 0)
-                {
                     var currentUserNew = await _userManager.GetUserAsync(User); // Added by MS
                     if (User.Identity.IsAuthenticated)
                     {
@@ -482,18 +471,6 @@ namespace ILearnCoreV19.Controllers
                     }
                     var messagesNew = await _context.Messages.Where(r => r.UserName == User.Identity.Name || r.ReceiverName == User.Identity.Name).ToListAsync(); // Added by MS    
                     return View(messagesNew);
-                }
-                else
-                {
-                    var subscriptionUnActivated = (from s in _context.Subscriptions
-                                                   where s.UserName == User.Identity.Name && !s.IsActivated
-                                                   select s).ToList();
-                    if (subscriptionUnActivated.Count > 0)
-                    {
-                        return Redirect("/User/GetTotalNumOfSubscriptions");
-                    }
-                    return Redirect("/User/SubscriptionPage");
-                }
             }
             
                 var currentUser = await _userManager.GetUserAsync(User); // Added by MS
@@ -549,8 +526,9 @@ namespace ILearnCoreV19.Controllers
                 await _context.Notif.AddAsync(notif);
                 await _context.Messages.AddAsync(message);
                 await _context.SaveChangesAsync();
-                Trace.WriteLine("Data is saved into the database");
+                ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
 
+                Trace.WriteLine("Data is saved into the database");
                 Trace.WriteLine($"Sender is {message.UserName}, Receiver is {message.ReceiverName}");
                 return Ok();
             }

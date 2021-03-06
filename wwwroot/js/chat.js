@@ -66,14 +66,20 @@ function addMessageToChat(message) {
     container.appendChild(text);
     container.appendChild(when);
 
-
+    checkNotifications();
 
 
     chat.appendChild(container);
 }
 
+
+function sendSubsNotif() {
+    sendNotifToHub();
+    window.location.href = '/User/ListOfEvents'; //relative to domain
+}
+
 // This part is SignalR
-function checkNotifications(message) {
+function checkNotifications() {
 
 
     $.post('/User/GetTotalNumOfNotifsAction', function (data) {
@@ -88,5 +94,5 @@ function checkNotifications(message) {
             notiContainer.appendChild(container_notif);
         }
     });
-    
+
 }
