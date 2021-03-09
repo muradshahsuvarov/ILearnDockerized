@@ -77,7 +77,6 @@ namespace ILearnCoreV19.Controllers
         public IActionResult ListOfEvents(string id)
         {
             var events = _context.Events.Where(r => r.userId == id && r.status == "AVAILABLE" && r.start_date >= DateTime.Now).ToList();
-
             return View(events);
         }
 
@@ -89,7 +88,7 @@ namespace ILearnCoreV19.Controllers
             mailMessage.Subject = subject;
             mailMessage.Body = body;
             mailMessage.From = new MailAddress(from);
-            mailMessage.IsBodyHtml = false;
+            mailMessage.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient("smtp.gmail.com");
             smtp.Port = 587;
             smtp.UseDefaultCredentials = true;
@@ -260,10 +259,6 @@ namespace ILearnCoreV19.Controllers
             System.Diagnostics.Debug.WriteLine("SubscriberEmail: " + email);
             System.Diagnostics.Debug.WriteLine("ReturnUrl: " + returnUrl);
 
-            var subscriptionsActivated = (from e in _context.Subscriptions
-                                 where e.UserName == User.Identity.Name && e.IsActivated == true
-                                 select e).ToList();
-
                 // For saving the changed event
 
                 var targetEvent = (from e in _context.Events
@@ -306,8 +301,15 @@ namespace ILearnCoreV19.Controllers
             targetEvent.status = "ACCEPTED";
 
             Trace.WriteLine("GAGASHH: " + targetEvent.subscriberEmail);
+            var myUser = _context.Users.Where(e => e.Email == targetEvent.subscriberEmail).Single();
+            var sent_event = _context.Events.Where(e => e.EventId == eventId).Single();
+            var subjectName = sent_event.text;
+            subjectName = subjectName.Replace(" ", "_");
+            var creatorName = _context.Users.Where(t => t.UserName == sent_event.userId).Single();
+            var paymentLink = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + sent_event.Price + "&business=sb-kt439k5300224@business.example.com&item_name=" + subjectName;
             SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Accepted",
-                           $"Dear { targetEvent.subscriberEmail},\nRequest for \"{targetEvent.text}\" has been accepted by {User.Identity.Name}");
+                           $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
+                           $"\n\n<a href=\"{paymentLink}\">Pay here</a>");
 
 
                _context.SaveChanges();
@@ -329,8 +331,9 @@ namespace ILearnCoreV19.Controllers
             
 
             Trace.WriteLine("GAGASHH: " + targetEvent.subscriberEmail);
+            var myUser = _context.Users.Where(e => e.Email == targetEvent.subscriberEmail).Single();
             SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Rejected",
-                           $"Dear { targetEvent.userId},\nRequest for {targetEvent.text} has been rejected by {User.Identity.Name}");
+                           $"Dear {myUser.FirstName},\nRequest for {targetEvent.text} has been rejected by {User.Identity.Name}");
 
             targetEvent.status = "AVAILABLE";
             targetEvent.subscriberEmail = String.Empty;

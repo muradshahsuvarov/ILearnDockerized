@@ -53,6 +53,10 @@ namespace ILearnCoreV19.Areas.Identity.Data
         [Column(TypeName = "BIT")]
         public Boolean isFullDay { get; set; }
 
+        [PersonalData]
+        [Column(TypeName = "NVARCHAR(50) DEFAULT ('0')")]
+        public string Price { get; set; }
+
 
     }
 }

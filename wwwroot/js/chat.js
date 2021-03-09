@@ -75,7 +75,7 @@ function addMessageToChat(message) {
 
 function sendSubsNotif() {
     sendNotifToHub();
-    window.location.href = '/User/ListOfEvents'; //relative to domain
+    window.location.href = '/User/ListOfEvents';
 }
 
 // This part is SignalR

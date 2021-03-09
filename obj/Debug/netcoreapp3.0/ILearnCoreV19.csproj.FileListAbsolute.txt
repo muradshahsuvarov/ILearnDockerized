@@ -489,6 +489,7 @@ C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.UI.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Razor.Language.dll
+C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Microsoft.CodeAnalysis.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Microsoft.CodeAnalysis.CSharp.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
@@ -519,6 +520,7 @@ C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\SQLitePCLRaw.batteri
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\SQLitePCLRaw.nativelibrary.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\SQLitePCLRaw.core.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\SQLitePCLRaw.provider.dynamic_cdecl.dll
+C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Stripe.net.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\System.Composition.AttributedModel.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\System.Composition.Convention.dll
 C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\System.Composition.Hosting.dll
@@ -640,6 +642,7 @@ C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\Lis
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\ListOfTutorEvents.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\MyProfile.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\OpenChat.cshtml.g.cs
+C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\SubscriptionPage.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\Teachers.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\_ViewStart.cshtml.g.cs
@@ -650,8 +653,3 @@ C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csproj
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.dll
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.pdb
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.genruntimeconfig.cache
-C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Microsoft.Bcl.AsyncInterfaces.dll
-C:\University\BSC Thesis\ILearnCore\bin\Debug\netcoreapp3.0\Stripe.net.dll
-C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\SubscriptionPage.cshtml.g.cs
-C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetTotalNumOfSubscriptions.cshtml.g.cs
-C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csprojAssemblyReference.cache

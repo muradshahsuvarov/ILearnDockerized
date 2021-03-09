@@ -9,62 +9,71 @@
 @using Microsoft.AspNetCore.Http;
 
 
-@{
 
-}
-
-<table class="table">
-    <tr>
-        <th>
-            text
-        </th>
-        <th>
-            start_date
-        </th>
-        <th>
-            end_date
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div style="height: 500px; overflow: auto;">
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.text)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.start_date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.end_date)
-            </td>
-            <td>
-                <form asp-controller="User"
-                      asp-action="Subscribe"
-                      data-ajax-complete=""
-                      data-ajax-failure="alert('Fail')"
-                      data-ajax-success="sendSubsNotif"
-                      data-ajax="true"
-                      data-ajax-method="POST">
-
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                    <div class="form-group">
-                        <input type="submit" value="Subscribe" class="btn btn-success" style="width:200px" />
-                    </div>
-
-
-                    <input type="hidden" name="userName" value=@item.userId />
-                    <input type="hidden" name="eventId" value=@item.EventId />
-                    <input type="hidden" name="email" value=@User.Identity.Name />
-                    <input type="hidden" name="returnUrl" value="/User/ListOfEvents" />
-
-                </form>
-            </td>
+            <th>
+                Class
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+                Price
+            </th>
+            <th></th>
         </tr>
-    }
-</table>
+
+        @foreach (var item in Model)
+        {
+            <tr style="overflow:scroll">
+                <td>
+                    @Html.DisplayFor(modelItem => item.text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.start_date)
+                    @Html.DisplayFor(modelItem => item.start_date.Hour):@Html.DisplayFor(modelItem => item.start_date.Minute)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.end_date)
+                    @Html.DisplayFor(modelItem => item.end_date.Value.Hour):@Html.DisplayFor(modelItem => item.end_date.Value.Minute)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)$
+                </td>
+                <td>
+                    <form asp-controller="User"
+                          asp-action="Subscribe"
+                          data-ajax-complete=""
+                          data-ajax-failure="alert('Fail')"
+                          data-ajax-success="sendSubsNotif"
+                          data-ajax="true"
+                          data-ajax-method="POST">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Subscribe" class="btn btn-success" style="width:200px" />
+                        </div>
+
+
+                        <input type="hidden" name="userName" value=@item.userId />
+                        <input type="hidden" name="eventId" value=@item.EventId />
+                        <input type="hidden" name="email" value=@User.Identity.Name />
+                        <input type="hidden" name="returnUrl" value="/User/ListOfEvents" />
+
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+
 
 
 @section scripts {

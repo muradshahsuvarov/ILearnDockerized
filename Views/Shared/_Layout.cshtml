@@ -178,7 +178,6 @@
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="Home" asp-action="Services">Biography</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetStudentSchedule">Manage Schedule</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetNotifications">Notifications</a></li>
-                                            <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetTotalNumOfSubscriptions">My subscriptions</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetStudentNewsPrefs">News Feed Preferences</a></li>
                                         }
                                         else if (User.Identity.IsAuthenticated && user.Role == "Tutor")
