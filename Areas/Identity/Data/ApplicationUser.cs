@@ -32,6 +32,11 @@ namespace ILearnCoreV19.Areas.Identity.Data
         [Column(TypeName = "datetime")]
         public DateTime DateOfBirth { get; set; }
 
+        [PersonalData]
+        [Column(TypeName = "nvarchar(50)")]
+        public string Paypal { get; set; }
+
+
 
         public virtual ICollection<ApplicationMessage> Messages { get; set; }
     }

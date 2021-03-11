@@ -80,6 +80,27 @@ namespace ILearnCoreV19.Controllers
             return View(events);
         }
 
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult AddPaypal()
+        {
+            var myUser = _context.Users.Where(e => e.Email == User.Identity.Name).Single();
+            return View(myUser);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult AddPaypalAccount(string paypal_email) // Email has to be business paypall mail
+        {
+            var myUser = (from e in _context.Users
+                          where e.Email == User.Identity.Name
+                          select e).Single();
+            myUser.Paypal = paypal_email;
+            _context.SaveChanges();
+            Trace.WriteLine($"Paypal: {myUser.Paypal} added");
+            return Redirect("/User/AddPaypal");
+        }
         public void SendEmail(string to, string from, string password, string subject, string body)
         {
 
@@ -306,7 +327,10 @@ namespace ILearnCoreV19.Controllers
             var subjectName = sent_event.text;
             subjectName = subjectName.Replace(" ", "_");
             var creatorName = _context.Users.Where(t => t.UserName == sent_event.userId).Single();
-            var paymentLink = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + sent_event.Price + "&business=sb-kt439k5300224@business.example.com&item_name=" + subjectName;
+            var sentUser = (from e in _context.Users
+                          where e.Email == sent_event.userId
+                          select e).Single();
+            var paymentLink = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + sent_event.Price + "&business=" + sentUser.Paypal + "&item_name=" + subjectName;
             SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Accepted",
                            $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
                            $"\n\n<a href=\"{paymentLink}\">Pay here</a>");
@@ -332,8 +356,11 @@ namespace ILearnCoreV19.Controllers
 
             Trace.WriteLine("GAGASHH: " + targetEvent.subscriberEmail);
             var myUser = _context.Users.Where(e => e.Email == targetEvent.subscriberEmail).Single();
+            var sent_event = _context.Events.Where(e => e.EventId == eventId).Single();
+            var creatorName = _context.Users.Where(t => t.UserName == sent_event.userId).Single();
+
             SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Rejected",
-                           $"Dear {myUser.FirstName},\nRequest for {targetEvent.text} has been rejected by {User.Identity.Name}");
+                           $"Dear {myUser.FirstName},\nRequest for {targetEvent.text} has been rejected by {creatorName.FirstName} {creatorName.LastName}");
 
             targetEvent.status = "AVAILABLE";
             targetEvent.subscriberEmail = String.Empty;
@@ -618,11 +645,18 @@ namespace ILearnCoreV19.Controllers
         [Authorize]
         public IActionResult GetTutorSchedule()
         {
-            var user = (from e in _context.Users
+            var myUser = (from e in _context.Users
                         where e.Email == User.Identity.Name
                         select e).Single();
-
-            return View(user);
+            Trace.WriteLine($"TUTOR PAYPAL: {myUser.Paypal}");
+            if (myUser.Paypal == null)
+            {
+                return Redirect("/User/AddPaypal");
+            }
+            else
+            {
+                return View(myUser);
+            }
         }
 
         [HttpGet]

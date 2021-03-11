@@ -302,225 +302,228 @@
     }
     }
 </style>
-<div class="container" style="margin-top: 4%">
 
-    <div class="calendar-base" style="margin-top: -35px; margin-left:100px">
+<div style="height: 500px; overflow: auto;">
+    <div class="container" style="margin-top: 10%">
 
-        <div class="year">@DateTime.Now.Year</div>
-        <!-- year -->
+        <div class="calendar-base" style="margin-top: -35px; margin-left:100px">
 
-        <div class="triangle-left"></div>
-        <!--triangle -->
-        <div class="triangle-right"></div>
-        <!--  triangle -->
+            <div class="year">@DateTime.Now.Year</div>
+            <!-- year -->
 
-        <div class="months">
-            @{
+            <div class="triangle-left"></div>
+            <!--triangle -->
+            <div class="triangle-right"></div>
+            <!--  triangle -->
 
-
-                if (DateTime.Now.Month == 1)
-                {
-                    <strong class="month-color">Jan</strong>
-                }
-                else
-                {
-                    <span class="month-hover">Jan</span>
-                }
-
-                if (DateTime.Now.Month == 2)
-                {
-                    <strong class="month-color">Feb</strong>
-                }
-                else
-                {
-                    <span class="month-hover">Feb</span>
-                }
-
-                if (DateTime.Now.Month == 3)
-                {
-                    <strong class="month-color">Mar</strong>
-                }
-                else
-                {
-                    <span class="month-hover">Mar</span>
-                }
-
-                if (DateTime.Now.Month == 4)
-                {
-                    <strong class="month-color">Apr</strong>
-                }
-                else
-                {
-                    <span class="month-hover">Apr</span>
-                }
-
-                if (DateTime.Now.Month == 5)
-                {
-                    <strong class="month-hover">May</strong>
-                }
-                else
-                {
-                    <span class="month-hover">May</span>
-                }
-
-                if (DateTime.Now.Month == 6)
-                {
-                    <strong class="month-color">Jun</strong>
-                }
-                else
-                {
-                    <span class="month-hover">Jun</span>
-                }
-
-                if (DateTime.Now.Month == 7)
-                {
-                    <strong class="month-color">Jul</strong>
-                }
-                else
-                {
-                    <span class="month-hover">Jul</span>
-                }
-
-                if (DateTime.Now.Month == 8)
-                {
-                    <strong class="month-color">Aug</strong>
-                }
-                else
-                {
-                    <span class="month-hover">Aug</span>
-                }
-
-                if (DateTime.Now.Month == 9)
-                {
-                    <strong class="month-color">Sep</strong>
-                }
-                else
-                {
-                    <span class="month-hover">Sep</span>
-                }
-
-                if (DateTime.Now.Month == 10)
-                {
-                    <strong class="month-color">Oct</strong>
-                }
-                else
-                {
-                    <span class="month-hover">Oct</span>
-                }
-
-                if (DateTime.Now.Month == 11)
-                {
-                    <strong class="month-color">Nov</strong>
-                }
-                else
-                {
-                    <span class="month-hover">Nov</span>
-                }
-
-                if (DateTime.Now.Month == 12)
-                {
-                    <strong class="month-color">Dec</strong>
-                }
-                else
-                {
-                    <span class="month-hover">Dec</span>
-                }
-
-            }
-        </div><!-- months -->
-        <hr class="month-line" />
-        <div class="container" style="width:100%">
-            <h2>.</h2>
-            <div class="list-group" style="margin-left:300px">
+            <div class="months">
                 @{
 
-                    var user = (from e in Model.Users
-                                where e.Email == User.Identity.Name
-                                select e).Single();
 
-                    var events = Model.Events.Where(r => r.subscriberEmail == user.Email && r.status == "ACCEPTED").ToList();
-                    if (events.Count == 0)
+                    if (DateTime.Now.Month == 1)
                     {
-                        System.Diagnostics.Debug.WriteLine($"{user.UserName} - Event Count is 0");
+                        <strong class="month-color">Jan</strong>
                     }
-                    <div class="ex3" style="margin-top:25px">
-                        @{
-                            foreach (var item in events)
-                            {
-                                if (item.start_date >= DateTime.Now)
-                                {
-                                    var authorID = item.userId;
-                                    var author = (from e in Model.Users
-                                                  where e.UserName == authorID
-                                                  select e).Single();
-                                    var authorFullName = $"{author.FirstName} {author.LastName}";
-                                    var authorEmailAddr = $"{author.Email}";
-                                    <a href="#" class="list-group-item list-group-item-action" style="margin-top: 50px">Name: @item.text<br>Date:@item.start_date - @item.end_date<br>Author Name:@authorFullName<br>Author Email:@authorEmailAddr <img src="~/images/img_avatar.png" class="w3-left w3-circle w3-margin-right" style="width:55px; position:relative; left:150px; margin-top:-65px;"></a>
-                                }
+                    else
+                    {
+                        <span class="month-hover">Jan</span>
+                    }
 
+                    if (DateTime.Now.Month == 2)
+                    {
+                        <strong class="month-color">Feb</strong>
+                    }
+                    else
+                    {
+                        <span class="month-hover">Feb</span>
+                    }
+
+                    if (DateTime.Now.Month == 3)
+                    {
+                        <strong class="month-color">Mar</strong>
+                    }
+                    else
+                    {
+                        <span class="month-hover">Mar</span>
+                    }
+
+                    if (DateTime.Now.Month == 4)
+                    {
+                        <strong class="month-color">Apr</strong>
+                    }
+                    else
+                    {
+                        <span class="month-hover">Apr</span>
+                    }
+
+                    if (DateTime.Now.Month == 5)
+                    {
+                        <strong class="month-hover">May</strong>
+                    }
+                    else
+                    {
+                        <span class="month-hover">May</span>
+                    }
+
+                    if (DateTime.Now.Month == 6)
+                    {
+                        <strong class="month-color">Jun</strong>
+                    }
+                    else
+                    {
+                        <span class="month-hover">Jun</span>
+                    }
+
+                    if (DateTime.Now.Month == 7)
+                    {
+                        <strong class="month-color">Jul</strong>
+                    }
+                    else
+                    {
+                        <span class="month-hover">Jul</span>
+                    }
+
+                    if (DateTime.Now.Month == 8)
+                    {
+                        <strong class="month-color">Aug</strong>
+                    }
+                    else
+                    {
+                        <span class="month-hover">Aug</span>
+                    }
+
+                    if (DateTime.Now.Month == 9)
+                    {
+                        <strong class="month-color">Sep</strong>
+                    }
+                    else
+                    {
+                        <span class="month-hover">Sep</span>
+                    }
+
+                    if (DateTime.Now.Month == 10)
+                    {
+                        <strong class="month-color">Oct</strong>
+                    }
+                    else
+                    {
+                        <span class="month-hover">Oct</span>
+                    }
+
+                    if (DateTime.Now.Month == 11)
+                    {
+                        <strong class="month-color">Nov</strong>
+                    }
+                    else
+                    {
+                        <span class="month-hover">Nov</span>
+                    }
+
+                    if (DateTime.Now.Month == 12)
+                    {
+                        <strong class="month-color">Dec</strong>
+                    }
+                    else
+                    {
+                        <span class="month-hover">Dec</span>
+                    }
+
+                }
+            </div><!-- months -->
+            <hr class="month-line" />
+            <div class="container" style="width:100%">
+                <h2>.</h2>
+                <div class="list-group" style="margin-left:300px">
+                    @{
+
+                        var user = (from e in Model.Users
+                                    where e.Email == User.Identity.Name
+                                    select e).Single();
+
+                        var events = Model.Events.Where(r => r.subscriberEmail == user.Email && r.status == "ACCEPTED").ToList();
+                        if (events.Count == 0)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"{user.UserName} - Event Count is 0");
+                        }
+                        <div class="ex3" style="margin-top:25px">
+                            @{
+                                foreach (var item in events)
+                                {
+                                    if (item.start_date >= DateTime.Now)
+                                    {
+                                        var authorID = item.userId;
+                                        var author = (from e in Model.Users
+                                                      where e.UserName == authorID
+                                                      select e).Single();
+                                        var authorFullName = $"{author.FirstName} {author.LastName}";
+                                        var authorEmailAddr = $"{author.Email}";
+                                        <a href="#" class="list-group-item list-group-item-action" style="margin-top: 50px">Name: @item.text<br>Date:@item.start_date - @item.end_date<br>Author Name:@authorFullName<br>Author Email:@authorEmailAddr <img src="~/images/img_avatar.png" class="w3-left w3-circle w3-margin-right" style="width:55px; position:relative; left:150px; margin-top:-65px;"></a>
+                                    }
+
+                                }
+                            }
+                        </div>
+
+
+                    }
+
+                </div>
+            </div>
+
+            <!-- num-dates -->
+            <!--<div class="event-indicator"></div>-->
+            <!-- event-indicator -->
+            <!--<div class="active-day"></div>-->
+            <!-- active-day -->
+            <!-- event-indicator -->
+
+        </div>
+        <!-- calendar-base -->
+        <div class="calendar-left">
+            <div class="hamburger" style="width:25px">
+                <div class="burger-line"></div>
+                <!-- burger-line -->
+                <div class="burger-line"></div>
+                <!-- burger-line -->
+                <div class="burger-line"></div>
+                <!-- burger-line -->
+            </div>
+            <!-- hamburger -->
+
+
+            <div class="num-date">@DateTime.Now.Day</div>
+            <!--num-date -->
+            <div class="day">@DateTime.Now.DayOfWeek</div>
+            <!--day -->
+            <div class="current-events">
+                Today's Classes
+                <br />
+                <ul>
+
+
+                    @{
+                        var eventDays = Model.Events.Where(r => r.subscriberEmail == user.Email && r.status == "ACCEPTED").ToList();
+                        foreach (var item in eventDays)
+                        {
+                            if (item.start_date >= DateTime.Now && item.start_date.Day == DateTime.Now.Day)
+                            {
+                                <li>Subject: @item.text</li>
                             }
                         }
-                    </div>
-
-
-                }
-
-            </div>
-        </div>
-
-        <!-- num-dates -->
-        <!--<div class="event-indicator"></div>-->
-        <!-- event-indicator -->
-        <!--<div class="active-day"></div>-->
-        <!-- active-day -->
-        <!-- event-indicator -->
-
-    </div>
-    <!-- calendar-base -->
-    <div class="calendar-left">
-        <div class="hamburger" style="width:25px">
-            <div class="burger-line"></div>
-            <!-- burger-line -->
-            <div class="burger-line"></div>
-            <!-- burger-line -->
-            <div class="burger-line"></div>
-            <!-- burger-line -->
-        </div>
-        <!-- hamburger -->
-
-
-        <div class="num-date">@DateTime.Now.Day</div>
-        <!--num-date -->
-        <div class="day">@DateTime.Now.DayOfWeek</div>
-        <!--day -->
-        <div class="current-events">
-            Today's Classes
-            <br />
-            <ul>
-
-
-                @{
-                    var eventDays = Model.Events.Where(r => r.subscriberEmail == user.Email && r.status == "ACCEPTED").ToList();
-                    foreach (var item in eventDays)
-                    {
-                        if (item.start_date >= DateTime.Now && item.start_date.Day == DateTime.Now.Day)
-                        {
-                            <li>Subject: @item.text</li>
-                        }
                     }
-                }
-            </ul>
-            <span class="posts">See post events</span>
+                </ul>
+                <span class="posts">See post events</span>
+            </div>
+            <!--current-events -->
+            <!--<div class="create-event">Create an Event</div>-->
+            <!-- create-event -->
+            <!--<hr class="event-line" />-->
+            <!--<div class="add-event"><span class="add">+</span></div>-->
+            <!-- add-event -->
+
         </div>
-        <!--current-events -->
-        <!--<div class="create-event">Create an Event</div>-->
-        <!-- create-event -->
-        <!--<hr class="event-line" />-->
-        <!--<div class="add-event"><span class="add">+</span></div>-->
-        <!-- add-event -->
+        <!-- calendar-left -->
 
     </div>
-    <!-- calendar-left -->
-
-</div>
-<!-- container -->
+    <!-- container -->
+    </div>
