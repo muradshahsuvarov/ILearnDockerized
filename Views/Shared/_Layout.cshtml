@@ -175,7 +175,7 @@
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="MyProfile">Profile</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="Teachers">Teachers</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetStudentSettings">Settings</a></li>
-                                            <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="Home" asp-action="Services">Biography</a></li>
+                                            <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="StudentSubjects">Subjects</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetStudentSchedule">Manage Schedule</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetNotifications">Notifications</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetStudentNewsPrefs">News Feed Preferences</a></li>
@@ -183,7 +183,6 @@
                                         else if (User.Identity.IsAuthenticated && user.Role == "Tutor")
                                         {
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="MyProfile">Profile</a></li>
-                                            <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetApplications">Subjects</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="AddPaypal">Add Paypal</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="ListOfTutorEvents">Requests</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetTutorSchedule">Manage Schedule</a></li>

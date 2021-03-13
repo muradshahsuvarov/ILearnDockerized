@@ -1,0 +1,77 @@
+﻿@model List<ILearnCoreV19.Areas.Identity.Data.ApplicationEvent>
+
+@{
+    ViewData["Title"] = "Student Requests";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System;
+
+<div style="height: 500px; overflow: auto;">
+    <table class="table">
+        <tr>
+            <th>
+                Class
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Paid
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.text)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.start_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.end_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)$
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsPaid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.subscriberEmail)
+        </td>
+        <td>
+            @using (Html.BeginForm("StudentRejectSubscription", "User", FormMethod.Post))
+            {
+                <!-- form goes here -->
+                @Html.Hidden("eventId", item.EventId)
+                @Html.Hidden("returnUrl", $"http://localhost:59000/User/StudentSubjects")
+                <input type="submit" value="Reject" class="btn btn-danger" style="width:200px" />
+            }
+        </td>
+    </tr>
+        }
+
+    </table>
+</div>

@@ -63,7 +63,7 @@ namespace ILearnCoreV19.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult ListOfUsers()
+        public IActionResult SUsers()
         {
             var users = from e in _context.Users
                         orderby e.Email
@@ -719,6 +719,35 @@ namespace ILearnCoreV19.Controllers
             return new JsonResult(events);
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult StudentSubjects()
+        {
+            var events = _context.Events.Where(r => r.subscriberEmail == User.Identity.Name  && r.start_date >= DateTime.Now && (r.status == "PENDING" || r.status == "ACCEPTED") && r.IsPaid == false).ToList();
+            return View(events);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult StudentRejectSubscription(int? eventId, string returnUrl) //  // Done by the student
+        {
+            System.Diagnostics.Debug.WriteLine("EventId: " + eventId);
+            System.Diagnostics.Debug.WriteLine("ReturnUrl: " + returnUrl);
+
+
+            var targetEvent = (from e in _context.Events
+                               where e.EventId == eventId
+                               select e).Single();
+
+            var sent_event = _context.Events.Where(e => e.EventId == eventId).Single();
+
+            targetEvent.status = "AVAILABLE";
+            targetEvent.subscriberEmail = String.Empty;
+            _context.SaveChanges();
+
+            return Redirect(returnUrl);
+        }
+
         public IActionResult PayForSubject([FromQuery(Name = "token")] string token)
         {
             var targetEvent = (from e in _context.Events
@@ -735,7 +764,7 @@ namespace ILearnCoreV19.Controllers
             notif.UserName = subjectOwner.Email;
             notif.Header = "Payment Notification";
             var SubjectName = targetEvent.text;
-            var bodyText = $"Dear {subjectOwner.FirstName} {subjectOwner.LastName}, \n {targetEvent.Price} was paid for \"{targetEvent.text}\" by {subjectSubscriber.FirstName} {subjectSubscriber.LastName}." +
+            var bodyText = $"Dear {subjectOwner.FirstName} {subjectOwner.LastName}, \n {targetEvent.Price}$ was paid for \"{targetEvent.text}\" by {subjectSubscriber.FirstName} {subjectSubscriber.LastName}." +
                 $"\n<div style=\"color: green; font - weight: bold;\">Please contact with {subjectSubscriber.FirstName} {subjectSubscriber.LastName} to start the lesson. Email: {subjectSubscriber.Email}</div>" +
                 $"\nThank you for using ILearn!";
             notif.Body = bodyText;
