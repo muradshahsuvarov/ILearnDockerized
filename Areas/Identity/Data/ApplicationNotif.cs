@@ -24,7 +24,7 @@ namespace ILearnCoreV19.Areas.Identity.Data
         public string Header { get; set; }
 
         [PersonalData]
-        [Column(TypeName = "nvarchar(256)")]
+        [Column(TypeName = "nvarchar(2000)")]
         public string? Body { get; set; }
 
 

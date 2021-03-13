@@ -330,13 +330,33 @@ namespace ILearnCoreV19.Controllers
             var sentUser = (from e in _context.Users
                           where e.Email == sent_event.userId
                           select e).Single();
-            var paymentLink = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + sent_event.Price + "&business=" + sentUser.Paypal + "&item_name=" + subjectName;
+            var paymentLink = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + sent_event.Price + "&business=" + sentUser.Paypal + "&item_name=" + subjectName + "&return=http://localhost:59000/User/PayForSubject?token=" + sent_event.Token + "&eventid=" + targetEvent.EventId;
             SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Accepted",
                            $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
-                           $"\n\n<a href=\"{paymentLink}\">Pay here</a>");
+                           $"\n\n<a href=\"{paymentLink}\">Pay here</a>" +
+                           $"\n\n<div style=\"color: red; font - weight: bold;\">Please at the end of payment press <h2>Return to Merchant<h2> button, so that tutor gets notified about your transaction." +
+                           $"\n\n In case you did not press the button, please contact: " + targetEvent.userId + "</div>");
 
+            ApplicationNotif notif = new ApplicationNotif();
+            notif.UserName = myUser.Email;
+            notif.Header = "Request was accepted";
+            var FirstName = myUser.FirstName;
+            var LastName = myUser.LastName;
+            var SubjectName = targetEvent.text;
+            var creatorFName = creatorName.FirstName;
+            var creatorLName = creatorName.LastName;
+            var bodyText = $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
+                           $"\n\n<a href=\"{paymentLink}\">Pay here</a>" +
+                           $"\n\n<div style=\"color: red; font - weight: bold;\"> Please at the end of payment press \"Return to Merchant\" button, so that tutor gets notified about your transaction." +
+                           $"\n\nIn case you did not press the button, please contact: " + targetEvent.userId + "</div>";
+            notif.Body = bodyText;
+            notif.CreatedAt = DateTime.Now;
+            notif.IsRead = false;
 
-               _context.SaveChanges();
+            _context.Notif.Add(notif);
+
+            ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
+            _context.SaveChanges();
             return Redirect(returnUrl);
         }
 
@@ -699,8 +719,38 @@ namespace ILearnCoreV19.Controllers
             return new JsonResult(events);
         }
 
+        public IActionResult PayForSubject([FromQuery(Name = "token")] string token)
+        {
+            var targetEvent = (from e in _context.Events
+                               where e.Token == token
+                               select e).Single();
+            targetEvent.IsPaid = true;
+
+            targetEvent.status = "ACCEPTED";
+
+            var subjectOwner = _context.Users.Where(e => e.Email == targetEvent.userId).Single();
+            var subjectSubscriber = _context.Users.Where(e => e.Email == targetEvent.subscriberEmail).Single();
+
+            ApplicationNotif notif = new ApplicationNotif();
+            notif.UserName = subjectOwner.Email;
+            notif.Header = "Payment Notification";
+            var SubjectName = targetEvent.text;
+            var bodyText = $"Dear {subjectOwner.FirstName} {subjectOwner.LastName}, \n {targetEvent.Price} was paid for \"{targetEvent.text}\" by {subjectSubscriber.FirstName} {subjectSubscriber.LastName}." +
+                $"\n<div style=\"color: green; font - weight: bold;\">Please contact with {subjectSubscriber.FirstName} {subjectSubscriber.LastName} to start the lesson. Email: {subjectSubscriber.Email}</div>" +
+                $"\nThank you for using ILearn!";
+            notif.Body = bodyText;
+            notif.CreatedAt = DateTime.Now;
+            notif.IsRead = false;
+
+            _context.Notif.Add(notif);
+
+            _context.SaveChanges();
+            return Redirect("/Home/Index");
+        }
+        
         // SaveEvent
         [HttpPost]
+        [Authorize]
         public JsonResult SaveEvent(ApplicationEvent e)
         {
 
@@ -717,6 +767,9 @@ namespace ILearnCoreV19.Controllers
                     v.description = e.description;
                     v.ThemeColor = e.ThemeColor;
                     v.isFullDay = e.isFullDay;
+                    v.Price = e.Price;
+                    v.Token = e.Token;
+                    v.IsPaid = e.IsPaid;
 
 
                     Debug.WriteLine("here 1");

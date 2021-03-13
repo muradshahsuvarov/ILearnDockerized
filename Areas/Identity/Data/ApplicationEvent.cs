@@ -57,6 +57,12 @@ namespace ILearnCoreV19.Areas.Identity.Data
         [Column(TypeName = "NVARCHAR(50) DEFAULT ('0')")]
         public string Price { get; set; }
 
+        [PersonalData]
+        [Column(TypeName = "NVARCHAR(450)")]
+        public string Token { get; set; }
 
+        [PersonalData]
+        [Column(TypeName = "BIT")]
+        public Boolean IsPaid { get; set; }
     }
 }

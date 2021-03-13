@@ -246,6 +246,16 @@
                 $('#myModalSave').modal();
             }
 
+            function generateToken(size) {
+                var origin = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
+                var generated = [];
+                for (var i = 0; i < size; i++) {
+                    var j = (Math.random() * (origin.length - 1)).toFixed(0);
+                    generated[i] = origin[j];
+                }
+                return generated.join("");
+            }
+
             $('#btnSave').click(function () {
                 //Validation/
                 if ($('#txtSubject').val().trim() == "") {
@@ -282,7 +292,8 @@
                     description: $('#txtDescription').val(),
                     themeColor: $('#ddThemeColor').val(),
                     isFullDay: $('#chkIsFullDay').is(':checked'),
-                    price: $('#txtPrice').val().trim()
+                    price: $('#txtPrice').val().trim(),
+                    token: generateToken(100)
                 }
                 SaveEvent(data);
                 // call function for submit data to the server
