@@ -137,9 +137,95 @@
             top: 15;
             right: 55;
         }
+
+        .openBtn {
+            background: #f1f1f1;
+            border: none;
+            padding: 10px 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+            .openBtn:hover {
+                background: #bbb;
+            }
+
+        .overlay {
+            height: 100%;
+            width: 100%;
+            display: none;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0, 0.9);
+        }
+
+        .overlay-content {
+            position: relative;
+            top: 46%;
+            width: 80%;
+            text-align: center;
+            margin-top: 30px;
+            margin: auto;
+        }
+
+        .overlay .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 45px;
+            font-size: 60px;
+            cursor: pointer;
+            color: white;
+        }
+
+            .overlay .closebtn:hover {
+                color: #ccc;
+            }
+
+        .overlay input[type=text] {
+            padding: 15px;
+            font-size: 17px;
+            border: none;
+            float: left;
+            width: 80%;
+            background: white;
+        }
+
+            .overlay input[type=text]:hover {
+                background: #f1f1f1;
+            }
+
+        .overlay button {
+            float: left;
+            width: 20%;
+            padding: 15px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+
+            .overlay button:hover {
+                background: #bbb;
+            }
+
+
     </style>
 </head>
 <body>
+
+    <div id="myOverlay" class="overlay">
+        <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
+        <div class="overlay-content">
+            <form action="/User/GetAllContacts">
+                <input type="text" placeholder="Search.." name="name">
+                <input type="submit" style="height: 56px"><i class="fa fa-search"></i></input>
+            </form>
+        </div>
+    </div>
+
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
             <div class="container">
@@ -178,7 +264,6 @@
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="StudentSubjects">Subjects</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetStudentSchedule">Manage Schedule</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetNotifications">Notifications</a></li>
-                                            <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetStudentNewsPrefs">News Feed Preferences</a></li>
                                         }
                                         else if (User.Identity.IsAuthenticated && user.Role == "Tutor")
                                         {
@@ -187,8 +272,8 @@
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="ListOfTutorEvents">Requests</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetTutorSchedule">Manage Schedule</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetNotifications">Notifications</a></li>
-                                            <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetTutorNewsPrefs">News Feed Preferences</a></li>
                                         }
+                                        <li><button class="openBtn" onclick="openSearch()">Find Contacts</button></li>
                                         <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="OpenChat">Open Chat</a></li>
                                         <li>
                                             @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
@@ -251,6 +336,15 @@
             window.location = "@Url.Action("GetSearchedSubjects", "User")" +
                               "?name=" + txtVal;
         });
+    </script>
+    <script>
+        function openSearch() {
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function closeSearch() {
+            document.getElementById("myOverlay").style.display = "none";
+        }
     </script>
     @RenderSection("Scripts", required: false)
 </body>

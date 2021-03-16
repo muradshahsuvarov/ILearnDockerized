@@ -656,3 +656,4 @@ C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.genrun
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\AddPaypal.cshtml.g.cs
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csprojAssemblyReference.cache
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\StudentSubjects.cshtml.g.cs
+C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetAllContacts.cshtml.g.cs

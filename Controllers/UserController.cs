@@ -559,6 +559,7 @@ namespace ILearnCoreV19.Controllers
 
         public async Task<IActionResult> CreateMessage(ApplicationMessage message, String selectedUser)
         {
+            Trace.WriteLine($"Message {message.Text} created for {selectedUser}");
             if (ModelState.IsValid)
             {
                 message.UserName = User.Identity.Name;
@@ -777,6 +778,28 @@ namespace ILearnCoreV19.Controllers
             return Redirect("/Home/Index");
         }
         
+        [HttpGet]
+        [Authorize]
+        public IActionResult GetAllContacts([FromQuery(Name = "name")] string name)
+        {
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                var allUsers = (from u in _context.Users
+                                select u).ToList();
+
+                return View(allUsers);
+            }
+            else
+            {
+                var allUsers = (from u in _context.Users
+                                where u.FirstName == name || u.LastName == name
+                                || (u.FirstName + " " + u.LastName) == name || u.Email == name
+                                select u).ToList();
+
+                return View(allUsers);
+            }
+        }
+
         // SaveEvent
         [HttpPost]
         [Authorize]
