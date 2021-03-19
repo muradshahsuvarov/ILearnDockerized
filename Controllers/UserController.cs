@@ -289,6 +289,9 @@ namespace ILearnCoreV19.Controllers
 
                 targetEvent.status = "PENDING";
                 targetEvent.subscriberEmail = email;
+                var subscriber = _context.Users.Where(u => u.Email == email).Single();
+                targetEvent.subscriberFirstName = subscriber.FirstName;
+                targetEvent.subscriberLastName = subscriber.LastName;
 
                 ApplicationNotif notif = new ApplicationNotif();
                 notif.UserName = userName;
@@ -420,14 +423,12 @@ namespace ILearnCoreV19.Controllers
         public IActionResult GetTutorClasses()
         {
 
-            List<ApplicationEvent> targetEvents = new List<ApplicationEvent>();
-
             var user = (from e in _context.Users
                         where e.Email == User.Identity.Name
                         select e).Single();
 
-            targetEvents = (from e in _context.Events
-                            where e.userId == user.Id && e.start_date >= DateTime.Now && e.status == "ACCEPTED"
+            var targetEvents = (from e in _context.Events
+                            where e.userId == user.Email && e.start_date >= DateTime.Now && e.status == "ACCEPTED"
                             select e).ToList();
 
             return View(targetEvents);
@@ -555,8 +556,8 @@ namespace ILearnCoreV19.Controllers
 
             return View(notifs);
         }
-        // Is assigned once you clicked on him on the right panel. Get From query param
 
+        // Is assigned once you clicked on him on the right panel. Get From query param
         public async Task<IActionResult> CreateMessage(ApplicationMessage message, String selectedUser)
         {
             Trace.WriteLine($"Message {message.Text} created for {selectedUser}");

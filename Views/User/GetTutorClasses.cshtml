@@ -1,7 +1,7 @@
 ﻿@model List<ILearnCoreV19.Areas.Identity.Data.ApplicationEvent>
 
 @{
-    ViewData["Title"] = "Student Requests";
+    ViewData["Title"] = "Subjects";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -34,6 +34,12 @@
             <th>
                 Subscriber Email
             </th>
+            <th>
+                Subscriber First Name
+            </th>
+            <th>
+                Subscriber Last Name
+            </th>
             <th></th>
         </tr>
 
@@ -65,13 +71,10 @@
             @Html.DisplayFor(modelItem => item.subscriberEmail)
         </td>
         <td>
-            @using (Html.BeginForm("StudentRejectSubscription", "User", FormMethod.Post))
-            {
-                <!-- form goes here -->
-                @Html.Hidden("eventId", item.EventId)
-                @Html.Hidden("returnUrl", $"http://localhost:59000/User/StudentSubjects")
-                <input type="submit" value="Reject" class="btn btn-danger" style="width:200px" />
-            }
+            @Html.DisplayFor(modelItem => item.subscriberFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.subscriberLastName)
         </td>
     </tr>
         }

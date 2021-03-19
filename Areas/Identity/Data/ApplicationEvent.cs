@@ -64,5 +64,13 @@ namespace ILearnCoreV19.Areas.Identity.Data
         [PersonalData]
         [Column(TypeName = "BIT")]
         public Boolean IsPaid { get; set; }
+
+        [PersonalData]
+        [Column(TypeName = "NVARCHAR(450)")]
+        public string? subscriberFirstName { get; set; }
+
+        [PersonalData]
+        [Column(TypeName = "NVARCHAR(450)")]
+        public string? subscriberLastName { get; set; }
     }
 }
