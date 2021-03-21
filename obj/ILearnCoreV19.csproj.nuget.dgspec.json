@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\University\\BSC Thesis\\ILearnCore\\ILearnCoreV19.csproj": {}
+    "C:\\Users\\Murad\\Desktop\\ILearnCore\\ILearnCoreV19.csproj": {}
   },
   "projects": {
-    "C:\\University\\BSC Thesis\\ILearnCore\\ILearnCoreV19.csproj": {
+    "C:\\Users\\Murad\\Desktop\\ILearnCore\\ILearnCoreV19.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\University\\BSC Thesis\\ILearnCore\\ILearnCoreV19.csproj",
+        "projectUniqueName": "C:\\Users\\Murad\\Desktop\\ILearnCore\\ILearnCoreV19.csproj",
         "projectName": "ILearnCoreV19",
-        "projectPath": "C:\\University\\BSC Thesis\\ILearnCore\\ILearnCoreV19.csproj",
+        "projectPath": "C:\\Users\\Murad\\Desktop\\ILearnCore\\ILearnCoreV19.csproj",
         "packagesPath": "C:\\Users\\Murad\\.nuget\\packages\\",
-        "outputPath": "C:\\University\\BSC Thesis\\ILearnCore\\obj\\",
+        "outputPath": "C:\\Users\\Murad\\Desktop\\ILearnCore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -52,23 +52,31 @@
               "target": "Package",
               "version": "[3.0.0, )"
             },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[5.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[5.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[5.0.4, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
               "version": "[3.0.0, )"
+            },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.10.9, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",

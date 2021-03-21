@@ -538,7 +538,7 @@ namespace ILearnCoreV19.Controllers
         public ActionResult ReloadOpenChat([FromQuery(Name = "selectedUser")] string selectedUser)
         {
 
-            return Redirect("http://localhost:59000?selectedUser=" + selectedUser);
+            return Redirect("http://localhost:58910?selectedUser=" + selectedUser);
         }
 
         public IActionResult GetAllNotifs()
@@ -807,6 +807,16 @@ namespace ILearnCoreV19.Controllers
         public JsonResult SaveEvent(ApplicationEvent e)
         {
 
+            Debug.WriteLine($"EventId: {e.EventId}");
+            Debug.WriteLine($"Text: {e.text}");
+            Debug.WriteLine($"Status: {e.status}");
+            Debug.WriteLine($"Start: {e.start_date}");
+            Debug.WriteLine($"End: {e.end_date}");
+            Debug.WriteLine($"ThemeColor: {e.ThemeColor}");
+            Debug.WriteLine($"Description: {e.description}");
+            Debug.WriteLine($"IsFullDay: {e.isFullDay}");
+            Debug.WriteLine($"Price: {e.Price}");
+
             if (e.EventId > 0)
             {
                 //Update the event
@@ -841,15 +851,6 @@ namespace ILearnCoreV19.Controllers
 
                 _context.Events.Add(e);
             }
-
-            Debug.WriteLine($"EventId: {e.EventId}");
-            Debug.WriteLine($"Text: {e.text}");
-            Debug.WriteLine($"Status: {e.status}");
-            Debug.WriteLine($"Start: {e.start_date}");
-            Debug.WriteLine($"End: {e.end_date}");
-            Debug.WriteLine($"ThemeColor: {e.ThemeColor}");
-            Debug.WriteLine($"Description: {e.description}");
-            Debug.WriteLine($"IsFullDay: {e.isFullDay}");
 
             _context.SaveChanges();
 

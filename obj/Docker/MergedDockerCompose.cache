@@ -1,0 +1,22 @@
+services:
+  db:
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: 1Secure*Password1
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    ports:
+    - published: 1443
+      target: 1443
+  ilearncorev19:
+    build:
+      context: C:\Users\Murad\Desktop\ILearnCore
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: ilearncorev19
+    ports:
+    - target: 80
+version: '3.4'

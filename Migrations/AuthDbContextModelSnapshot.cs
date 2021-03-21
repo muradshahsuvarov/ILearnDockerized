@@ -15,8 +15,8 @@ namespace ILearnCoreV19.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ILearnCoreV19.Areas.Identity.Data.ApplicationEvent", b =>
@@ -26,8 +26,17 @@ namespace ILearnCoreV19.Migrations
                         .HasColumnType("INT")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("BIT");
+
+                    b.Property<string>("Price")
+                        .HasColumnType("NVARCHAR(50)");
+
                     b.Property<string>("ThemeColor")
                         .HasColumnType("NVARCHAR(10)");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("NVARCHAR(450)");
 
                     b.Property<string>("description")
                         .HasColumnType("NVARCHAR(300)");
@@ -42,10 +51,16 @@ namespace ILearnCoreV19.Migrations
                         .HasColumnType("DATETIME NOT NULL");
 
                     b.Property<string>("status")
-                        .HasColumnType("NVARCHAR(50)  DEFAULT('AVAILABLE')");
+                        .HasColumnType("NVARCHAR(50)");
 
                     b.Property<string>("subscriberEmail")
                         .HasColumnType("NVARCHAR(50)");
+
+                    b.Property<string>("subscriberFirstName")
+                        .HasColumnType("NVARCHAR(450)");
+
+                    b.Property<string>("subscriberLastName")
+                        .HasColumnType("NVARCHAR(450)");
 
                     b.Property<string>("text")
                         .HasColumnType("nvarchar(100)");
@@ -89,6 +104,69 @@ namespace ILearnCoreV19.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("ILearnCoreV19.Areas.Identity.Data.ApplicationNotif", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INT")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("DATETIME");
+
+                    b.Property<string>("Header")
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("BIT");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notif");
+                });
+
+            modelBuilder.Entity("ILearnCoreV19.Areas.Identity.Data.ApplicationSubscription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INT")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Cancelled")
+                        .HasColumnType("BIT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("DATETIME");
+
+                    b.Property<bool>("IsActivated")
+                        .HasColumnType("BIT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Price")
+                        .HasColumnType("NVARCHAR(250)");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("DATETIME");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subscriptions");
+                });
+
             modelBuilder.Entity("ILearnCoreV19.Areas.Identity.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -105,8 +183,8 @@ namespace ILearnCoreV19.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -124,15 +202,18 @@ namespace ILearnCoreV19.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Paypal")
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -150,17 +231,17 @@ namespace ILearnCoreV19.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
@@ -176,18 +257,18 @@ namespace ILearnCoreV19.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
@@ -244,12 +325,12 @@ namespace ILearnCoreV19.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -286,12 +367,12 @@ namespace ILearnCoreV19.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -306,6 +387,8 @@ namespace ILearnCoreV19.Migrations
                     b.HasOne("ILearnCoreV19.Areas.Identity.Data.ApplicationUser", "Sender")
                         .WithMany("Messages")
                         .HasForeignKey("UserID");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -357,6 +440,11 @@ namespace ILearnCoreV19.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ILearnCoreV19.Areas.Identity.Data.ApplicationUser", b =>
+                {
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }
