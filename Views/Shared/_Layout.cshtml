@@ -263,7 +263,7 @@
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetStudentSettings">Settings</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="StudentSubjects">Subjects</a></li>
                                             <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetStudentSchedule">Manage Schedule</a></li>
-                                            <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetNotifications">Notifications</a></li>
+                                            <li><a class="nav-link text-dark" style="font-size: 15px; margin-left:15px" asp-area="" asp-controller="User" asp-action="GetAllNotifs">Notifications</a></li>
                                         }
                                         else if (User.Identity.IsAuthenticated && user.Role == "Tutor")
                                         {

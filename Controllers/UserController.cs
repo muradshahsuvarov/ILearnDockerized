@@ -17,6 +17,9 @@ using Microsoft.EntityFrameworkCore;
 using ILearnCoreV19.Models;
 using Stripe;
 using System.Net.Mail;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace ILearnCoreV19.Controllers
 {
@@ -101,6 +104,8 @@ namespace ILearnCoreV19.Controllers
             Trace.WriteLine($"Paypal: {myUser.Paypal} added");
             return Redirect("/User/AddPaypal");
         }
+
+
         public void SendEmail(string to, string from, string password, string subject, string body)
         {
 
@@ -114,7 +119,16 @@ namespace ILearnCoreV19.Controllers
             smtp.Port = 587;
             smtp.UseDefaultCredentials = true;
             smtp.EnableSsl = true;
-            smtp.Credentials = new System.Net.NetworkCredential(from, password);
+            smtp.Credentials = new NetworkCredential(from, password);
+            ServicePointManager.ServerCertificateValidationCallback =
+                delegate (
+                    object s,
+                    X509Certificate certificate,
+                    X509Chain chain,
+                    SslPolicyErrors sslPolicyErrors
+                ) {
+                    return true;
+                };
             smtp.Send(mailMessage);
             Trace.WriteLine($"Message has been sent from {from} to {to}");
         }
@@ -333,7 +347,7 @@ namespace ILearnCoreV19.Controllers
             var sentUser = (from e in _context.Users
                           where e.Email == sent_event.userId
                           select e).Single();
-            var paymentLink = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + sent_event.Price + "&business=" + sentUser.Paypal + "&item_name=" + subjectName + "&return=http://localhost:59000/User/PayForSubject?token=" + sent_event.Token + "&eventid=" + targetEvent.EventId;
+            var paymentLink = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + sent_event.Price + "&business=" + sentUser.Paypal + "&item_name=" + subjectName + "&return=" + "http://localhost:52362" + "/User/PayForSubject?token=" + sent_event.Token + "&eventid=" + targetEvent.EventId;
             SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Accepted",
                            $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
                            $"\n\n<a href=\"{paymentLink}\">Pay here</a>" +
@@ -538,7 +552,7 @@ namespace ILearnCoreV19.Controllers
         public ActionResult ReloadOpenChat([FromQuery(Name = "selectedUser")] string selectedUser)
         {
 
-            return Redirect("http://localhost:58910?selectedUser=" + selectedUser);
+            return Redirect("~/?selectedUser=" + selectedUser);
         }
 
         public IActionResult GetAllNotifs()
@@ -766,7 +780,7 @@ namespace ILearnCoreV19.Controllers
             notif.UserName = subjectOwner.Email;
             notif.Header = "Payment Notification";
             var SubjectName = targetEvent.text;
-            var bodyText = $"Dear {subjectOwner.FirstName} {subjectOwner.LastName}, \n {targetEvent.Price}$ was paid for \"{targetEvent.text}\" by {subjectSubscriber.FirstName} {subjectSubscriber.LastName}." +
+            var bodyText = $"Dear {subjectOwner.FirstName} {subjectOwner.LastName}, \n {targetEvent.Price}€s was paid for \"{targetEvent.text}\" by {subjectSubscriber.FirstName} {subjectSubscriber.LastName}." +
                 $"\n<div style=\"color: green; font - weight: bold;\">Please contact with {subjectSubscriber.FirstName} {subjectSubscriber.LastName} to start the lesson. Email: {subjectSubscriber.Email}</div>" +
                 $"\nThank you for using ILearn!";
             notif.Body = bodyText;
@@ -809,7 +823,6 @@ namespace ILearnCoreV19.Controllers
 
             Debug.WriteLine($"EventId: {e.EventId}");
             Debug.WriteLine($"Text: {e.text}");
-            Debug.WriteLine($"Status: {e.status}");
             Debug.WriteLine($"Start: {e.start_date}");
             Debug.WriteLine($"End: {e.end_date}");
             Debug.WriteLine($"ThemeColor: {e.ThemeColor}");
