@@ -24,6 +24,9 @@
             <th>
                 Price
             </th>
+            <th>
+                Payment Method
+            </th>
             <th></th>
         </tr>
 
@@ -35,15 +38,36 @@
                     @Html.DisplayFor(modelItem => item.text)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.start_date)
-                    @Html.DisplayFor(modelItem => item.start_date.Hour):@Html.DisplayFor(modelItem => item.start_date.Minute)
+                    <div style="text-align: center">
+                        @Html.DisplayFor(modelItem => item.start_date)
+                        @if (item.start_date.Hour == 0)
+                        {<h7>00</h7>}
+                        else
+                        {@Html.DisplayFor(modelItem => item.start_date.Hour)}:
+                        @if (item.start_date.Minute == 0)
+                        {<h7>00</h7>}
+                        else
+                        {@Html.DisplayFor(modelItem => item.start_date.Minute)}
+                    </div>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.end_date)
-                    @Html.DisplayFor(modelItem => item.end_date.Value.Hour):@Html.DisplayFor(modelItem => item.end_date.Value.Minute)
+                    <div style="text-align: center">
+                        @Html.DisplayFor(modelItem => item.end_date)
+                        @if (item.end_date.Value.Hour == 0)
+                        {<h7>00</h7>}
+                        else
+                        {@Html.DisplayFor(modelItem => item.end_date.Value.Hour)}:
+                        @if (item.end_date.Value.Minute == 0)
+                        {<h7>00</h7>}
+                        else
+                        {@Html.DisplayFor(modelItem => item.end_date.Value.Minute)}
+                    </div>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)$
+                    @Html.DisplayFor(modelItem => item.Price)€
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.payment)
                 </td>
                 <td>
                     <form asp-controller="User"

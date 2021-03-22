@@ -40,6 +40,9 @@
             <th>
                 Subscriber Last Name
             </th>
+            <th>
+                Payment Method
+            </th>
             <th></th>
         </tr>
 
@@ -53,10 +56,18 @@
             @Html.DisplayFor(modelItem => item.description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.start_date)
+            <div style="text-align: center">
+                @Html.DisplayFor(modelItem => item.start_date)
+                @if (item.start_date.Hour == 0){<h7>00</h7>}else{@Html.DisplayFor(modelItem => item.start_date.Hour)}:
+                @if (item.start_date.Minute == 0){<h7>00</h7>}else{@Html.DisplayFor(modelItem => item.start_date.Minute)}
+            </div>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.end_date)
+            <div style="text-align: center">
+                @Html.DisplayFor(modelItem => item.end_date)
+                @if (item.end_date.Value.Hour == 0){<h7>00</h7>}else{@Html.DisplayFor(modelItem => item.end_date.Value.Hour)}:
+                @if (item.end_date.Value.Minute == 0){<h7>00</h7>}else{@Html.DisplayFor(modelItem => item.end_date.Value.Minute)}
+            </div>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.status)
@@ -75,6 +86,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.subscriberLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.payment)
         </td>
     </tr>
         }

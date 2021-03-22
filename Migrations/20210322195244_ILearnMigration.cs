@@ -70,7 +70,8 @@ namespace ILearnCoreV19.Migrations
                     Token = table.Column<string>(type: "NVARCHAR(450)", nullable: true),
                     IsPaid = table.Column<bool>(type: "BIT", nullable: false),
                     subscriberFirstName = table.Column<string>(type: "NVARCHAR(450)", nullable: true),
-                    subscriberLastName = table.Column<string>(type: "NVARCHAR(450)", nullable: true)
+                    subscriberLastName = table.Column<string>(type: "NVARCHAR(450)", nullable: true),
+                    payment = table.Column<string>(type: "NVARCHAR(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -102,7 +103,7 @@ namespace ILearnCoreV19.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(500)", nullable: true),
-                    StartDate = table.Column<DateTime>(type: "DATETIME", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "DATETIME", nullable: true),
                     EndDate = table.Column<DateTime>(type: "DATETIME", nullable: true),
                     IsActivated = table.Column<bool>(type: "BIT", nullable: false),
                     Price = table.Column<string>(type: "NVARCHAR(250)", nullable: true),

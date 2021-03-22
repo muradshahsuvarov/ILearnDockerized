@@ -1,37 +1,13 @@
 ﻿@model List<ILearnCoreV19.Areas.Identity.Data.ApplicationEvent>
 
 @{
-    ViewData["Title"] = "ListOfEvents";
+    ViewData["Title"] = "Subjects";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 @using Microsoft.AspNetCore.Http;
 
-
-@{
-    @using Microsoft.AspNetCore.Identity
-}
-
-@inject SignInManager<ILearnCoreV19.Areas.Identity.Data.ApplicationUser> SignInManager
-@inject UserManager<ILearnCoreV19.Areas.Identity.Data.ApplicationUser> UserManager
-
-@{
-    ILearnCoreV19.Areas.Identity.Data.ApplicationUser? user = null;
-    string? firstName = String.Empty;
-    string? lastName = String.Empty;
-
-    if (SignInManager.IsSignedIn(User))
-    {
-        // Get the current logged in user
-        Task<ILearnCoreV19.Areas.Identity.Data.ApplicationUser> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
-
-        user = await GetCurrentUserAsync();
-        firstName = user.FirstName;
-        lastName = user.LastName;
-
-    }
-}
 
 <div style="height: 500px; overflow: auto;">
     <table class="table">
@@ -48,25 +24,50 @@
             <th>
                 Price
             </th>
+            <th>
+                Payment Method
+            </th>
             <th></th>
         </tr>
 
         @foreach (var item in Model)
         {
+
             <tr style="overflow:scroll">
                 <td>
                     @Html.DisplayFor(modelItem => item.text)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.start_date)
-                    @Html.DisplayFor(modelItem => item.start_date.Hour):@Html.DisplayFor(modelItem => item.start_date.Minute)
+                    <div style="text-align: center">
+                        @Html.DisplayFor(modelItem => item.start_date)
+                        @if (item.start_date.Hour == 0)
+                        {<h7>00</h7>}
+                        else
+                        {@Html.DisplayFor(modelItem => item.start_date.Hour)}:
+                        @if (item.start_date.Minute == 0)
+                        {<h7>00</h7>}
+                        else
+                        {@Html.DisplayFor(modelItem => item.start_date.Minute)}
+                    </div>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.end_date)
-                    @Html.DisplayFor(modelItem => item.end_date.Value.Hour):@Html.DisplayFor(modelItem => item.end_date.Value.Minute)
+                    <div style="text-align: center">
+                        @Html.DisplayFor(modelItem => item.end_date)
+                        @if (item.end_date.Value.Hour == 0)
+                        {<h7>00</h7>}
+                        else
+                        {@Html.DisplayFor(modelItem => item.end_date.Value.Hour)}:
+                        @if (item.end_date.Value.Minute == 0)
+                        {<h7>00</h7>}
+                        else
+                        {@Html.DisplayFor(modelItem => item.end_date.Value.Minute)}
+                    </div>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)$
+                    @Html.DisplayFor(modelItem => item.Price)€
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.payment)
                 </td>
                 <td>
                     <form asp-controller="User"

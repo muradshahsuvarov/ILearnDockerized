@@ -285,6 +285,7 @@ namespace ILearnCoreV19.Controllers
             return Redirect("/User/GetTotalNumOfSubscriptions");
         }
 
+
         [HttpPost]
         [Authorize]
         public IActionResult Subscribe(string userName, int? eventId, string email, string returnUrl) // eventID - id of the event to which user with email wants to subscribe.  // Done by the student
@@ -310,7 +311,7 @@ namespace ILearnCoreV19.Controllers
                 ApplicationNotif notif = new ApplicationNotif();
                 notif.UserName = userName;
                 notif.Header = "New subject request";
-                notif.Body = email + " sent a request for " + targetEvent.text;
+                notif.Body = targetEvent.subscriberFirstName + " " + targetEvent.subscriberLastName + " sent a request for " + targetEvent.text + ".\nContact details: " + email;
                 notif.CreatedAt = DateTime.Now;
                 notif.IsRead = false;
 
@@ -338,7 +339,6 @@ namespace ILearnCoreV19.Controllers
 
             targetEvent.status = "ACCEPTED";
 
-            Trace.WriteLine("GAGASHH: " + targetEvent.subscriberEmail);
             var myUser = _context.Users.Where(e => e.Email == targetEvent.subscriberEmail).Single();
             var sent_event = _context.Events.Where(e => e.EventId == eventId).Single();
             var subjectName = sent_event.text;
@@ -347,7 +347,7 @@ namespace ILearnCoreV19.Controllers
             var sentUser = (from e in _context.Users
                           where e.Email == sent_event.userId
                           select e).Single();
-            var paymentLink = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + sent_event.Price + "&business=" + sentUser.Paypal + "&item_name=" + subjectName + "&return=" + "http://localhost:52362" + "/User/PayForSubject?token=" + sent_event.Token + "&eventid=" + targetEvent.EventId;
+            var paymentLink = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + sent_event.Price + "&business=" + sentUser.Paypal + "&item_name=" + subjectName + "&return=" +  this.Request.Scheme+ ":" + this.Request.Host + "/User/PayForSubject?token=" + sent_event.Token + "&eventid=" + targetEvent.EventId;
             SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Accepted",
                            $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
                            $"\n\n<a href=\"{paymentLink}\">Pay here</a>" +
@@ -442,7 +442,7 @@ namespace ILearnCoreV19.Controllers
                         select e).Single();
 
             var targetEvents = (from e in _context.Events
-                            where e.userId == user.Email && e.start_date >= DateTime.Now && e.status == "ACCEPTED"
+                            where e.userId == user.Email && e.start_date >= DateTime.Now
                             select e).ToList();
 
             return View(targetEvents);
