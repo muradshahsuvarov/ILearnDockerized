@@ -932,3 +932,4 @@ C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csproj.C
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.dll
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.pdb
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.genruntimeconfig.cache
+C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\ManageSubscription.cshtml.g.cs

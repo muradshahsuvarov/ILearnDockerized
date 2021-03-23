@@ -296,7 +296,6 @@ namespace ILearnCoreV19.Controllers
             System.Diagnostics.Debug.WriteLine("ReturnUrl: " + returnUrl);
 
                 // For saving the changed event
-
                 var targetEvent = (from e in _context.Events
                                    where e.EventId == eventId
                                    select e).Single();
@@ -311,7 +310,7 @@ namespace ILearnCoreV19.Controllers
                 ApplicationNotif notif = new ApplicationNotif();
                 notif.UserName = userName;
                 notif.Header = "New subject request";
-                notif.Body = targetEvent.subscriberFirstName + " " + targetEvent.subscriberLastName + " sent a request for " + targetEvent.text + ".\nContact details: " + email;
+                notif.Body = targetEvent.subscriberFirstName + " " + targetEvent.subscriberLastName + " sent a request for " + targetEvent.text + ". Start time: " + targetEvent.start_date + " , End time: " + targetEvent.end_date + " .\nContact details: " + email + ".\nPayment method: " + targetEvent.payment;
                 notif.CreatedAt = DateTime.Now;
                 notif.IsRead = false;
 
@@ -321,7 +320,6 @@ namespace ILearnCoreV19.Controllers
                
 
                 ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
-                Trace.WriteLine($"DJUGI: {returnUrl}");
                 return Redirect(returnUrl);
              
         }
@@ -337,45 +335,101 @@ namespace ILearnCoreV19.Controllers
                                where e.EventId == eventId && e.status == "PENDING"
                                select e).Single();
 
-            targetEvent.status = "ACCEPTED";
+            if (targetEvent.payment == "Paypal")
+            {
+                targetEvent.status = "ACCEPTED";
 
-            var myUser = _context.Users.Where(e => e.Email == targetEvent.subscriberEmail).Single();
-            var sent_event = _context.Events.Where(e => e.EventId == eventId).Single();
-            var subjectName = sent_event.text;
-            subjectName = subjectName.Replace(" ", "_");
-            var creatorName = _context.Users.Where(t => t.UserName == sent_event.userId).Single();
-            var sentUser = (from e in _context.Users
-                          where e.Email == sent_event.userId
-                          select e).Single();
-            var paymentLink = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + sent_event.Price + "&business=" + sentUser.Paypal + "&item_name=" + subjectName + "&return=" +  this.Request.Scheme+ ":" + this.Request.Host + "/User/PayForSubject?token=" + sent_event.Token + "&eventid=" + targetEvent.EventId;
-            SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Accepted",
-                           $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
-                           $"\n\n<a href=\"{paymentLink}\">Pay here</a>" +
-                           $"\n\n<div style=\"color: red; font - weight: bold;\">Please at the end of payment press <h2>Return to Merchant<h2> button, so that tutor gets notified about your transaction." +
-                           $"\n\n In case you did not press the button, please contact: " + targetEvent.userId + "</div>");
+                var myUser = _context.Users.Where(e => e.Email == targetEvent.subscriberEmail).Single();
+                var sent_event = _context.Events.Where(e => e.EventId == eventId).Single();
+                var subjectName = sent_event.text;
+                subjectName = subjectName.Replace(" ", "_");
+                var creatorName = _context.Users.Where(t => t.UserName == sent_event.userId).Single();
+                var sentUser = (from e in _context.Users
+                                where e.Email == sent_event.userId
+                                select e).Single();
+                var paymentLink = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + sent_event.Price + "&business=" + sentUser.Paypal + "&item_name=" + subjectName + "&return=" + this.Request.Scheme + ":" + this.Request.Host + "/User/PayForSubject?token=" + sent_event.Token + "&eventid=" + targetEvent.EventId;
+                SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Accepted",
+                               $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
+                               $"\n\n<a href=\"{paymentLink}\">Pay here</a>" +
+                               $"\n\n<div style=\"color: red; font - weight: bold;\">Please at the end of payment press <h2>Return to Merchant<h2> button, so that tutor gets notified about your transaction." +
+                               $"\n\n In case you did not press the button, please contact: " + targetEvent.userId + "</div>");
 
-            ApplicationNotif notif = new ApplicationNotif();
-            notif.UserName = myUser.Email;
-            notif.Header = "Request was accepted";
-            var FirstName = myUser.FirstName;
-            var LastName = myUser.LastName;
-            var SubjectName = targetEvent.text;
-            var creatorFName = creatorName.FirstName;
-            var creatorLName = creatorName.LastName;
-            var bodyText = $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
-                           $"\n\n<a href=\"{paymentLink}\">Pay here</a>" +
-                           $"\n\n<div style=\"color: red; font - weight: bold;\"> Please at the end of payment press \"Return to Merchant\" button, so that tutor gets notified about your transaction." +
-                           $"\n\nIn case you did not press the button, please contact: " + targetEvent.userId + "</div>";
-            notif.Body = bodyText;
-            notif.CreatedAt = DateTime.Now;
-            notif.IsRead = false;
+                ApplicationNotif notif = new ApplicationNotif();
+                notif.UserName = myUser.Email;
+                notif.Header = "Request was accepted";
+                var FirstName = myUser.FirstName;
+                var LastName = myUser.LastName;
+                var SubjectName = targetEvent.text;
+                var creatorFName = creatorName.FirstName;
+                var creatorLName = creatorName.LastName;
+                var bodyText = $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
+                               $"\n\n<a href=\"{paymentLink}\">Pay here</a>" +
+                               $"\n\n<div style=\"color: red; font - weight: bold;\"> Please at the end of payment press \"Return to Merchant\" button, so that tutor gets notified about your transaction." +
+                               $"\n\nIn case you did not press the button, please contact: " + targetEvent.userId + "</div>";
+                notif.Body = bodyText;
+                notif.CreatedAt = DateTime.Now;
+                notif.IsRead = false;
 
-            _context.Notif.Add(notif);
+                _context.Notif.Add(notif);
 
-            ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
-            _context.SaveChanges();
-            return Redirect(returnUrl);
+                ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
+                _context.SaveChanges();
+                return Redirect(returnUrl);
+            }
+            else if(targetEvent.payment == "Cash")
+            {
+                targetEvent.status = "ACCEPTED";
+
+                var myUser = _context.Users.Where(e => e.Email == targetEvent.subscriberEmail).Single();
+                var sent_event = _context.Events.Where(e => e.EventId == eventId).Single();
+                var creatorName = _context.Users.Where(t => t.UserName == sent_event.userId).Single();
+                SendEmail(targetEvent.subscriberEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Subject Request Accepted",
+                               $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" at " + targetEvent.start_date + " - " + targetEvent.end_date + $" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
+                               $"\n\n<div style=\"color: red; font - weight: bold;\">Please pay with cash.</div>");
+
+                ApplicationNotif notif = new ApplicationNotif();
+                notif.UserName = myUser.Email;
+                notif.Header = "Request was accepted";
+                var FirstName = myUser.FirstName;
+                var LastName = myUser.LastName;
+                var SubjectName = targetEvent.text;
+                var creatorFName = creatorName.FirstName;
+                var creatorLName = creatorName.LastName;
+                var bodyText = $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" at " + targetEvent.start_date + " - " + targetEvent.end_date + $" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
+                               $"\n\n<div style=\"color: red; font - weight: bold;\">Please pay with cash.</div>";
+                notif.Body = bodyText;
+                notif.CreatedAt = DateTime.Now;
+                notif.IsRead = false;
+
+                _context.Notif.Add(notif);
+
+                ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
+                _context.SaveChanges();
+                return Redirect(returnUrl);
+            }
+
+            return Redirect("/User/PaymentError");
         }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult ManageSubscription()
+        {
+            return View(_context);
+        }
+        
+        [HttpPost]
+        [Authorize]
+        public IActionResult CheckCoursePayment([FromQuery(Name = "eventId")] int? eventId)
+        {
+            Trace.WriteLine("EVENT ID GO: " + eventId);
+            var targetEvent = _context.Events.Where(e => e.EventId == eventId).Single();
+            if (!targetEvent.IsPaid) { targetEvent.IsPaid = true; } else { targetEvent.IsPaid = false; }
+            _context.SaveChanges();
+            return Redirect("~/User/ManageSubscription");
+        }
+
+
 
         [HttpPost]
         [Authorize]
@@ -833,7 +887,8 @@ namespace ILearnCoreV19.Controllers
             if (e.EventId > 0)
             {
                 //Update the event
-                var v = _context.Events.Where(a => a.EventId == e.EventId).FirstOrDefault();
+                var v = _context.Events.Where(a => a.EventId == e.EventId).Single();
+                Debug.WriteLine("EV ID: " + v.EventId);
 
                 if (v != null)
                 {
@@ -846,9 +901,11 @@ namespace ILearnCoreV19.Controllers
                     v.Price = e.Price;
                     v.Token = e.Token;
                     v.IsPaid = e.IsPaid;
+                    v.payment = e.payment;
 
+                    _context.SaveChanges();
 
-                    Debug.WriteLine("here 1");
+                    Debug.WriteLine("Payment: " + v.payment);
                 }
             }
             else

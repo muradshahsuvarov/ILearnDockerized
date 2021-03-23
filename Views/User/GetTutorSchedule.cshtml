@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<div id="myModalSave" class="modal fade" role="dialog">
+<div id="myModalSave" class="modal fade" role="dialog" style="overflow: auto;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -86,7 +86,7 @@
                     <div class="form-group">
                         <input type="radio" id="cashPayment" name="payment" value="Cash">
                         <label for="male">Cash</label><br>
-                        <input type="radio" id="paypalPayment" name="payment" checked="checked" value="Paypal">
+                        <input type="radio" id="paypalPayment" name="payment" value="Paypal">
                         <label for="female">Paypal</label><br>
                     </div>
                     <button type="button" id="btnSave" class="btn btn-success">Save</button>
@@ -125,7 +125,8 @@
                                 end: v.end_date != null ? moment(v.end_date) : null,
                                 color: v.ThemeColor,
                                 allDay: v.IsFullDay,
-                                price: v.price
+                                price: v.price,
+                                payment: v.payment
                             });
                         })
 
@@ -140,7 +141,7 @@
             function GenerateCalender(events) {
                 $('#calender').fullCalendar('destroy');
                 $('#calender').fullCalendar({
-                    contentHeight: 400,
+                    contentHeight: 350,
                     defaultDate: new Date(),
                     timeFormat: 'h(:mm)a',
                     header: {
@@ -155,11 +156,11 @@
                         selectedEvent = calEvent;
                         $('#myModal #eventTitle').text(calEvent.title);
                         var $description = $('<div/>');
-                        $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+                        $description.append($('<p/>').html('<b>Start: </b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
                         if (calEvent.end != null) {
-                            $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
+                            $description.append($('<p/>').html('<b>End: </b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
                         }
-                        $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
+                        $description.append($('<p/>').html('<b>Description: </b>' + calEvent.description));
                         $('#myModal #pDetails').empty().html($description);
 
                         $('#myModal').modal();
@@ -205,7 +206,7 @@
             })
             $('#btnDelete').click(function () {
                 if (selectedEvent != null && confirm('Are you sure?')) {
-                    alert(selectedEvent.eventID);
+                    alert('Course deleted!');
                     $.ajax({
                         type: "POST",
                         url: '/User/DeleteEvent',
@@ -237,6 +238,7 @@
                 }
             });
 
+
             function openAddEditForm() {
                 if (selectedEvent != null) {
                     $('#hdEventID').val(selectedEvent.eventID);
@@ -248,7 +250,8 @@
                     $('#txtDescription').val(selectedEvent.description);
                     $('#ddThemeColor').val(selectedEvent.color);
                     $('#txtPrice').val(selectedEvent.price);
-                    $('#payment').val(selectedEvent.payment);
+                    if (selectedEvent.payment == "Paypal") { $("#paypalPayment").prop("checked", true); }
+                    else if (selectedEvent.payment == "Cash") { $("#cashPayment").prop("checked", true); }
                 }
                 $('#myModal').modal('hide');
                 $('#myModalSave').modal();
@@ -318,7 +321,7 @@
             })
 
             function SaveEvent(data) {
-                alert('START DATE IS: ' + data.start_date);
+                alert('Course successfully saved!');
 
                 $.ajax({
                     type: "POST",
