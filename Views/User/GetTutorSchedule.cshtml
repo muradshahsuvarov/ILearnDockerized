@@ -99,14 +99,26 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Price in Paypal currency</label>
+                        <label id="paymentLabel">Price in Paypal currency</label>
                         <input type="text" id="txtPrice" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <input type="radio" id="cashPayment" name="payment" value="Cash">
+                        <input type="radio" id="cashPayment" onclick="ChangePaymentText()" name="payment" value="Cash">
                         <label for="male">Cash</label><br>
-                        <input type="radio" id="paypalPayment" name="payment" value="Paypal">
+                        <input type="radio" id="paypalPayment" onclick="ChangePaymentText()" name="payment" checked="checked" value="Paypal">
                         <label for="female">Paypal</label><br>
+
+                        <script>
+                            function ChangePaymentText() {
+                                var cashPayCheck = document.getElementById("cashPayment");
+                                var paypalPayCheck = document.getElementById("paypalPayment");
+                                if (cashPayCheck.checked && !paypalPayCheck.checked ) {
+                                    document.getElementById('paymentLabel').innerHTML = "Price with currency";
+                                } else if (!cashPayCheck.checked && paypalPayCheck.checked) {
+                                    document.getElementById('paymentLabel').innerHTML = "Price in Paypal currency";
+                                }
+                            }
+                        </script>
                     </div>
                     <button type="button" id="btnSave" class="btn btn-success">Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -265,6 +277,12 @@
                 $('#myModal').modal('hide');
                 $('#myModalSave').modal();
             }
+
+            function isInt(str) {
+                return !isNaN(str) && Number.isInteger(parseFloat(str));
+            }
+
+
             function generateToken(size) {
                 var origin = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
                 var generated = [];
@@ -298,10 +316,7 @@
                         return;
                     }
                 }
-                if ($('#txtPrice').val().trim() == "") {
-                    alert('Price required');
-                    return;
-                }
+
                 var radiosPayment = document.getElementsByName('payment');
                 var myPayment = "";
                 for (var i = 0, length = radiosPayment.length; i < length; i++) {
@@ -310,6 +325,19 @@
                         break;
                     }
                 }
+
+                if (document.getElementById("paypalPayment").checked) {
+                    if (!isInt($('#txtPrice').val())) {
+                        alert("Specify number only!")
+                        return;
+                    } else {
+                        if ($('#txtPrice').val().trim() == "") {
+                            alert('Price required');
+                            return;
+                        }
+                    }
+                }
+
                 var data = {
                     EventId: $('#hdEventID').val(),
                     text: $('#txtSubject').val().trim(),
