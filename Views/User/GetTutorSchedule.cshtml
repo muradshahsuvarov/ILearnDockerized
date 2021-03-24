@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+<head>
+    <link rel="stylesheet" href="~/lib/jquery/dist/jquery.datetimepicker.min.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.datetimepicker.full.js"></script>
+</head>
+
 <div id="calender"></div>
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -45,7 +52,13 @@
                     <div class="form-group">
                         <label>Start</label>
                         <div class="input-group date" id="dtp1">
-                            <input type="text" id="txtStart" class="form-control" />
+                            <input type="text" id="txtStart" class="form-control">
+                            <script>
+                                $("#txtStart").datetimepicker({
+                                    step: 5,
+                                    format: 'Y-m-d H:i A'
+                                });
+                            </script>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -60,6 +73,12 @@
                         <label>End</label>
                         <div class="input-group date" id="dtp2">
                             <input type="text" id="txtEnd" class="form-control" />
+                            <script>
+                                $("#txtEnd").datetimepicker({
+                                    step: 5,
+                                    format: 'Y-m-d H:i A'
+                                });
+                            </script>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -116,7 +135,6 @@
                     url: "/User/GetEvents",
                     success: function (data) {
                         $.each(data, function (i, v) {
-
                             events.push({
                                 eventID: v.eventId,
                                 title: v.text,
@@ -129,7 +147,6 @@
                                 payment: v.payment
                             });
                         })
-
                         GenerateCalender(events);
                     },
                     error: function (error) {
@@ -137,7 +154,6 @@
                     }
                 })
             }
-
             function GenerateCalender(events) {
                 $('#calender').fullCalendar('destroy');
                 $('#calender').fullCalendar({
@@ -162,7 +178,6 @@
                         }
                         $description.append($('<p/>').html('<b>Description: </b>' + calEvent.description));
                         $('#myModal #pDetails').empty().html($description);
-
                         $('#myModal').modal();
                     },
                     selectable: true,
@@ -196,10 +211,8 @@
                         };
                         SaveEvent(data);
                     }
-
                 })
             }
-
             $('#btnEdit').click(function () {
                 //Open modal dialog for edit event
                 openAddEditForm();
@@ -210,7 +223,7 @@
                     $.ajax({
                         type: "POST",
                         url: '/User/DeleteEvent',
-                        data: {'eventID': selectedEvent.eventID},
+                        data: { 'eventID': selectedEvent.eventID },
                         success: function (data) {
                             if (data.status) {
                                 //Refresh the calender
@@ -224,11 +237,9 @@
                     })
                 }
             })
-
             $('#dtp1,#dtp2').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm A'
             });
-
             $('#chkIsFullDay').change(function () {
                 if ($(this).is(':checked')) {
                     $('#divEndDate').hide();
@@ -237,8 +248,6 @@
                     $('#divEndDate').show();
                 }
             });
-
-
             function openAddEditForm() {
                 if (selectedEvent != null) {
                     $('#hdEventID').val(selectedEvent.eventID);
@@ -256,7 +265,6 @@
                 $('#myModal').modal('hide');
                 $('#myModalSave').modal();
             }
-
             function generateToken(size) {
                 var origin = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
                 var generated = [];
@@ -266,17 +274,18 @@
                 }
                 return generated.join("");
             }
-
             $('#btnSave').click(function () {
                 //Validation/
                 if ($('#txtSubject').val().trim() == "") {
                     alert('Subject required');
                     return;
                 }
+
                 if ($('#txtStart').val().trim() == "") {
                     alert('Start date required');
                     return;
                 }
+
                 if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
                     alert('End date required');
                     return;
@@ -293,7 +302,6 @@
                     alert('Price required');
                     return;
                 }
-
                 var radiosPayment = document.getElementsByName('payment');
                 var myPayment = "";
                 for (var i = 0, length = radiosPayment.length; i < length; i++) {
@@ -302,7 +310,6 @@
                         break;
                     }
                 }
-
                 var data = {
                     EventId: $('#hdEventID').val(),
                     text: $('#txtSubject').val().trim(),
@@ -315,14 +322,11 @@
                     payment: myPayment,
                     token: generateToken(100)
                 }
-
                 SaveEvent(data);
                 // call function for submit data to the server
             })
-
             function SaveEvent(data) {
                 alert('Course successfully saved!');
-
                 $.ajax({
                     type: "POST",
                     url: '/User/SaveEvent',
@@ -342,5 +346,4 @@
         })
     </script>
 }
-
 
