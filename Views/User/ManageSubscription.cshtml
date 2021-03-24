@@ -5,7 +5,7 @@
 }
 @{
     var _context = Model;
-    var myEvents = _context.Events.Where(e => e.userId == User.Identity.Name && e.start_date >= DateTime.Now);
+    var myEvents = _context.Events.Where(e => e.userId == User.Identity.Name && e.status == "ACCEPTED" && e.start_date >= DateTime.Now);
 }
 <head>
     <style>
@@ -276,14 +276,16 @@
                 <div class="course-preview">
                     <h6>Course</h6>
                     <h2>@item.text</h2>
-                        <a>Paid: @item.IsPaid<i class="fas fa-chevron-right"></i></a>
-                        <br />
-                        <a>Payment: @item.payment<i class="fas fa-chevron-right"></i></a>
-                        <a>Start: @item.start_date<i class="fas fa-chevron-right"></i></a>
-                        <a>End: @item.end_date<i class="fas fa-chevron-right"></i></a>
-                        <a>Subscriber Email: @item.subscriberEmail<i class="fas fa-chevron-right"></i></a>
-                        <a>Subscriber First Name: @item.subscriberFirstName<i class="fas fa-chevron-right"></i></a>
-                        <a>Subscriber Last Name: @item.subscriberLastName<i class="fas fa-chevron-right"></i></a>
+                    <a>Paid: @item.IsPaid<i class="fas fa-chevron-right"></i></a>
+                    <br />
+                    <a>Payment: @item.payment<i class="fas fa-chevron-right"></i></a>
+                    <br />
+                    <a>Price: @item.Price<i class="fas fa-chevron-right"></i></a>
+                    <a>Start: @item.start_date<i class="fas fa-chevron-right"></i></a>
+                    <a>End: @item.end_date<i class="fas fa-chevron-right"></i></a>
+                    <a>Subscriber Email: @item.subscriberEmail<i class="fas fa-chevron-right"></i></a>
+                    <a>Subscriber First Name: @item.subscriberFirstName<i class="fas fa-chevron-right"></i></a>
+                    <a>Subscriber Last Name: @item.subscriberLastName<i class="fas fa-chevron-right"></i></a>
                 </div>
                 <div class="course-info">
                     <h6>Description</h6>
@@ -291,8 +293,16 @@
 
                     <form asp-action="CheckCoursePayment"
                           asp-controller="User"
-                          asp-route-eventId="@item.EventId">
-                        <input class="btn" type="submit" value="Switch" />
+                          asp-route-eventId="@item.EventId"
+                          onsubmit="return confirm('Are you sure?');">
+                        @if (!item.IsPaid)
+                        {
+                            <input class="btn" type="submit" value="Switch" />
+                        }
+                        else
+                        {
+                            <input class="btn" type="submit" disabled = "disabled" value="Switch" /> 
+                                }
                     </form>
                 </div>
             </div>

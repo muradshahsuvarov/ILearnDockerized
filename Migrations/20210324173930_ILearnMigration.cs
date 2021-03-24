@@ -71,7 +71,9 @@ namespace ILearnCoreV19.Migrations
                     IsPaid = table.Column<bool>(type: "BIT", nullable: false),
                     subscriberFirstName = table.Column<string>(type: "NVARCHAR(450)", nullable: true),
                     subscriberLastName = table.Column<string>(type: "NVARCHAR(450)", nullable: true),
-                    payment = table.Column<string>(type: "NVARCHAR(450)", nullable: true)
+                    payment = table.Column<string>(type: "NVARCHAR(450)", nullable: true),
+                    ownerFirstName = table.Column<string>(type: "NVARCHAR(450)", nullable: true),
+                    ownerLastName = table.Column<string>(type: "NVARCHAR(450)", nullable: true)
                 },
                 constraints: table =>
                 {

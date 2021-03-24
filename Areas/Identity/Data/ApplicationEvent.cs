@@ -76,5 +76,13 @@ namespace ILearnCoreV19.Areas.Identity.Data
         [PersonalData]
         [Column(TypeName = "NVARCHAR(450)")]
         public string payment { get; set; }
+
+        [PersonalData]
+        [Column(TypeName = "NVARCHAR(450)")]
+        public string ownerFirstName { get; set; }
+
+        [PersonalData]
+        [Column(TypeName = "NVARCHAR(450)")]
+        public string ownerLastName { get; set; }
     }
 }

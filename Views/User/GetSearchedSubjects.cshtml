@@ -27,6 +27,12 @@
             <th>
                 Payment Method
             </th>
+            <th>
+                Class Owner
+            </th>
+            <th>
+                Class Owner's Email'
+            </th>
             <th></th>
         </tr>
 
@@ -68,6 +74,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.payment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ownerFirstName) @Html.DisplayFor(modelItem => item.ownerFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userId)
                 </td>
                 <td>
                     <form asp-controller="User"

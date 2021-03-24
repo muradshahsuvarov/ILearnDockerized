@@ -921,7 +921,6 @@ C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\ListO
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\MyProfile.cshtml.g.cs
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\OpenChat.cshtml.g.cs
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\StudentSubjects.cshtml.g.cs
-C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\SubscriptionPage.cshtml.g.cs
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\Teachers.cshtml.g.cs
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\_ViewStart.cshtml.g.cs

@@ -133,139 +133,6 @@ namespace ILearnCoreV19.Controllers
             Trace.WriteLine($"Message has been sent from {from} to {to}");
         }
 
-        public IActionResult Charge(string stripeEmail, string stripeToken, string subscription)
-        {
-            var customers = new CustomerService();
-            var charges = new ChargeService();
-
-            var customer = customers.Create(new CustomerCreateOptions
-            {
-                Email = stripeEmail,
-                Source = stripeToken
-            });
-
-            Stripe.Charge charge;
-            
-
-            switch (subscription)
-            {
-                case "Silver":
-                    // You can add a lot of data here. More data can be added to the MetaData
-                    charge = charges.Create(new ChargeCreateOptions
-                    {
-
-                        Amount = 2500,
-                        Description = "Silver Subscription Purchased",
-                        Currency = "usd",
-                        Customer = customer.Id,
-                        ReceiptEmail = stripeEmail
-
-                    });
-
-                    if (charge.Status == "succeeded")
-                    {
-                        string BalanceTransactionId = charge.BalanceTransactionId;
-                        ApplicationSubscription subscription_0 = new ApplicationSubscription();
-                        subscription_0.Name = "Silver";
-                        subscription_0.Description = "Silver Subscription Purchased";
-                        subscription_0.IsActivated = false;
-                        subscription_0.Price = "25$";
-                        subscription_0.Cancelled = false;
-                        subscription_0.UserName = User.Identity.Name;
-
-                        SendEmail(stripeEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Silver Subscription Purchased",
-                            "-$25 taken from your account.\nSilver Subscription Purchased by " + User.Identity.Name);
-
-                        _context.Subscriptions.Add(subscription_0);
-                        _context.SaveChanges();
-                        Trace.WriteLine("Payment succeeded");
-                    }
-                    else
-                    {
-                        Trace.WriteLine("Payment not succeeded!");
-                    }
-                    break;
-                case "Platinum":
-                    // You can add a lot of data here. More data can be added to the MetaData
-                    charge = charges.Create(new ChargeCreateOptions
-                    {
-
-                        Amount = 6000,
-                        Description = "Platinum Subscription Purchased",
-                        Currency = "usd",
-                        Customer = customer.Id,
-                        ReceiptEmail = stripeEmail
-
-                    });
-
-                    if (charge.Status == "succeeded")
-                    {
-                        string BalanceTransactionId = charge.BalanceTransactionId;
-                        ApplicationSubscription subscription_0 = new ApplicationSubscription();
-                        subscription_0.Name = "Platinum";
-                        subscription_0.Description = "Platinum Subscription Purchased";
-                        subscription_0.IsActivated = false;
-                        subscription_0.Price = "60$";
-                        subscription_0.Cancelled = false;
-                        subscription_0.UserName = User.Identity.Name;
-
-                        SendEmail(stripeEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Platinum Subscription Purchased",
-                            "-$60 taken from your account.\nPlatinum Subscription Purchased by " + User.Identity.Name);
-
-                        _context.Subscriptions.Add(subscription_0);
-                        _context.SaveChanges();
-                        Trace.WriteLine("Payment succeeded");
-                    }
-                    else
-                    {
-                        Trace.WriteLine("Payment not succeeded!");
-                    }
-                    break;
-                case "Golden":
-                    // You can add a lot of data here. More data can be added to the MetaData
-                    charge = charges.Create(new ChargeCreateOptions
-                    {
-
-                        Amount = 10000,
-                        Description = "Golden Subscription Purchased",
-                        Currency = "usd",
-                        Customer = customer.Id,
-                        ReceiptEmail = stripeEmail
-
-                    });
-
-                    if (charge.Status == "succeeded")
-                    {
-                        string BalanceTransactionId = charge.BalanceTransactionId;
-                        ApplicationSubscription subscription_0 = new ApplicationSubscription();
-                        subscription_0.Name = "Golden";
-                        subscription_0.Description = "Golden Subscription Purchased";
-                        subscription_0.IsActivated = false;
-                        subscription_0.Price = "100$";
-                        subscription_0.Cancelled = false;
-                        subscription_0.UserName = User.Identity.Name;
-
-                        SendEmail(stripeEmail, "ilearnchannel6@gmail.com", "Muradikov_21", "Golden Subscription Purchased", 
-                            "-$100 taken from your account.\nGolden Subscription Purchased by " + User.Identity.Name);
-
-
-                        _context.Subscriptions.Add(subscription_0);
-                        _context.SaveChanges();
-                        Trace.WriteLine("Payment succeeded");
-                    }
-                    else
-                    {
-                        Trace.WriteLine("Payment not succeeded!");
-                    }
-                    break;
-                default:
-                    break;
-            }
-            
-
-            return Redirect("/");
-        }
-
 
         [HttpPost]
         [Authorize]
@@ -362,7 +229,7 @@ namespace ILearnCoreV19.Controllers
                 var SubjectName = targetEvent.text;
                 var creatorFName = creatorName.FirstName;
                 var creatorLName = creatorName.LastName;
-                var bodyText = $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
+                var bodyText = $"Dear { myUser.FirstName },\nRequest for \"{targetEvent.text}\" at " + targetEvent.start_date + " - " + targetEvent.end_date + $" has been accepted by {creatorName.FirstName} {creatorName.LastName}." +
                                $"\n\n<a href=\"{paymentLink}\">Pay here</a>" +
                                $"\n\n<div style=\"color: red; font - weight: bold;\"> Please at the end of payment press \"Return to Merchant\" button, so that tutor gets notified about your transaction." +
                                $"\n\nIn case you did not press the button, please contact: " + targetEvent.userId + "</div>";
@@ -834,7 +701,7 @@ namespace ILearnCoreV19.Controllers
             notif.UserName = subjectOwner.Email;
             notif.Header = "Payment Notification";
             var SubjectName = targetEvent.text;
-            var bodyText = $"Dear {subjectOwner.FirstName} {subjectOwner.LastName}, \n {targetEvent.Price}€s was paid for \"{targetEvent.text}\" by {subjectSubscriber.FirstName} {subjectSubscriber.LastName}." +
+            var bodyText = $"Dear {subjectOwner.FirstName} {subjectOwner.LastName}, \n {targetEvent.Price}€ was paid for \"{targetEvent.text}\" by {subjectSubscriber.FirstName} {subjectSubscriber.LastName}." +
                 $"\n<div style=\"color: green; font - weight: bold;\">Please contact with {subjectSubscriber.FirstName} {subjectSubscriber.LastName} to start the lesson. Email: {subjectSubscriber.Email}</div>" +
                 $"\nThank you for using ILearn!";
             notif.Body = bodyText;
@@ -917,6 +784,10 @@ namespace ILearnCoreV19.Controllers
                 {
                     e.end_date = null;
                 }
+
+                e.ownerFirstName = getAuthenticatedUser().FirstName;
+                e.ownerFirstName = getAuthenticatedUser().LastName;
+
                 e.status = "AVAILABLE";
 
                 _context.Events.Add(e);

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ILearnCoreV19.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20210322195244_ILearnMigration")]
+    [Migration("20210324173930_ILearnMigration")]
     partial class ILearnMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,6 +48,12 @@ namespace ILearnCoreV19.Migrations
 
                     b.Property<bool>("isFullDay")
                         .HasColumnType("BIT");
+
+                    b.Property<string>("ownerFirstName")
+                        .HasColumnType("NVARCHAR(450)");
+
+                    b.Property<string>("ownerLastName")
+                        .HasColumnType("NVARCHAR(450)");
 
                     b.Property<string>("payment")
                         .HasColumnType("NVARCHAR(450)");

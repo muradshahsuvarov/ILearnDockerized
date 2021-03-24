@@ -13,7 +13,6 @@ C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.Extensions.Logging.Abstrac
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.EntityFrameworkCore.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Stripe.net.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\System.ComponentModel.Annotations.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.EntityFrameworkCore.SqlServer.dll
@@ -28,7 +27,6 @@ C:\Users\Murad\Desktop\ILearnCore\bin\Debug\System.Collections.Immutable.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.Extensions.Logging.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.Extensions.Caching.Memory.dll
-C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.Data.SqlClient.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\ILearnCoreV19.pdb
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\docker-compose.dcprojAssemblyReference.cache
