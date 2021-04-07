@@ -8,6 +8,10 @@
     var myEvents = _context.Events.Where(e => e.userId == User.Identity.Name && e.status == "ACCEPTED" && e.start_date >= DateTime.Now);
 }
 <head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         @@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
@@ -255,7 +259,7 @@
                 text-decoration: none;
             }
 
-        @@media screen and (max-width: 480px) {
+        @@media screen and (max-width: 700px) {
 
             .social-panel-container.visible {
                 transform: translateX(0px);
@@ -264,48 +268,54 @@
             .floating-btn {
                 right: 10px;
             }
+
+            .ilearnCourseContainer {
+                width: 900px;
+            }
         }
     </style>
 </head>
 
 <div class="courses-container">
     <div style="height: 500px; overflow: auto;">
-        @foreach (var item in myEvents)
-        {
-            <div class="course" style="resize: vertical; height: 167px; min-height: 167px; max-height: 560px; width: 90%">
-                <div class="course-preview">
-                    <h6>Course</h6>
-                    <h2>@item.text</h2>
-                    <a>Paid: @item.IsPaid<i class="fas fa-chevron-right"></i></a>
-                    <br />
-                    <a>Payment: @item.payment<i class="fas fa-chevron-right"></i></a>
-                    <br />
-                    <a>Price: @item.Price<i class="fas fa-chevron-right"></i></a>
-                    <a>Start: @item.start_date<i class="fas fa-chevron-right"></i></a>
-                    <a>End: @item.end_date<i class="fas fa-chevron-right"></i></a>
-                    <a>Subscriber Email: @item.subscriberEmail<i class="fas fa-chevron-right"></i></a>
-                    <a>Subscriber First Name: @item.subscriberFirstName<i class="fas fa-chevron-right"></i></a>
-                    <a>Subscriber Last Name: @item.subscriberLastName<i class="fas fa-chevron-right"></i></a>
-                </div>
-                <div class="course-info">
-                    <h6>Description</h6>
-                    <h2>@item.description</h2>
+        <div class="ilearnCourseContainer" style="height: 500px; overflow: auto;">
+            @foreach (var item in myEvents)
+            {
+                <div class="course" style="resize: vertical; height: 167px; min-height: 167px; max-height: 560px; width: 90%">
+                    <div class="course-preview">
+                        <h6>Course</h6>
+                        <h2>@item.text</h2>
+                        <a>Paid: @item.IsPaid</a>
+                        <br />
+                        <a>Payment: @item.payment</a>
+                        <br />
+                        <a>Price: @item.Price</a>
+                        <a>Start: @item.start_date</a>
+                        <a>End: @item.end_date</a>
+                        <a>Subscriber Email: @item.subscriberEmail</a>
+                        <a>Subscriber First Name: @item.subscriberFirstName</a>
+                        <a>Subscriber Last Name: @item.subscriberLastName</a>
+                    </div>
+                    <div class="course-info">
+                        <h6>Description</h6>
+                        <h2>@item.description</h2>
 
-                    <form asp-action="CheckCoursePayment"
-                          asp-controller="User"
-                          asp-route-eventId="@item.EventId"
-                          onsubmit="return confirm('Are you sure?');">
-                        @if (!item.IsPaid)
-                        {
-                            <input class="btn" type="submit" value="Switch" />
-                        }
-                        else
-                        {
-                            <input class="btn" type="submit" disabled = "disabled" value="Switch" /> 
-                                }
-                    </form>
+                        <form asp-action="CheckCoursePayment"
+                              asp-controller="User"
+                              asp-route-eventId="@item.EventId"
+                              onsubmit="return confirm('Are you sure?');">
+                            @if (!item.IsPaid)
+                            {
+                                <input class="btn" type="submit" value="Switch" />
+                            }
+                            else
+                            {
+                                <input class="btn" type="submit" disabled="disabled" value="Switch" />
+                            }
+                        </form>
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
+    </div>

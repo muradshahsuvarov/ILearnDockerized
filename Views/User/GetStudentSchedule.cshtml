@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
 <style>
 
@@ -457,7 +462,7 @@
                                                       select e).Single();
                                         var authorFullName = $"{author.FirstName} {author.LastName}";
                                         var authorEmailAddr = $"{author.Email}";
-                                        <a href="#" class="list-group-item list-group-item-action" style="margin-top: 50px">Name: @item.text<br>Date:@item.start_date - @item.end_date<br>Author Name:@authorFullName<br>Author Email:@authorEmailAddr <img src="~/images/img_avatar.png" class="w3-left w3-circle w3-margin-right" style="width:55px; position:relative; left:150px; margin-top:-65px;"></a>
+                                        <a href="#" class="list-group-item list-group-item-action" style="margin-top: 50px">Name: @item.text<br>Date:@item.start_date - @item.end_date<br>Author Name:@authorFullName<br>Author Email:@authorEmailAddr <img src="~/images/img_avatar.png" class="w3-left w3-circle w3-margin-right" style="width:55px; position:relative; left:450px; margin-top:-65px;"></a>
                                     }
 
                                 }

@@ -9,6 +9,9 @@
 
     var userName = User.Identity.Name;
     String mySender = String.Empty;
+    String mySenderFirstName = String.Empty;
+    String mySenderLastName = String.Empty;
+
 }
 
 
@@ -168,7 +171,7 @@
                         @{
                             // Sorted List By DateTime
                             var sortedMessages = Model.Where(
-                            r => (r.UserName == User.Identity.Name || r.ReceiverName == User.Identity.Name)).ToList(); // Added by MS
+                                            r => (r.UserName == User.Identity.Name || r.ReceiverName == User.Identity.Name)).ToList(); // Added by MS
 
                             sortedMessages.Sort((x, y) => DateTime.Compare(x.When, y.When));
                             sortedMessages.Reverse(); // We need to have list of messages the user has in the descending order for algorithm to work properly
@@ -243,16 +246,20 @@
                                         <div class="chat_ib">
                                             @{
 
-                                                if (item.UserName != User.Identity.Name)
+                                                if (item.UserName != User.Identity.Name) // I am not a sender, but receiver
                                                 {
                                                     mySender = item.UserName;
+                                                    mySenderFirstName = item.UserFirstName;
+                                                    mySenderLastName = item.UserLastName;
                                                 }
-                                                else if (item.ReceiverName != User.Identity.Name)
+                                                else if (item.ReceiverName != User.Identity.Name) // I am not a receiver, but sender
                                                 {
                                                     mySender = item.ReceiverName;
+                                                    mySenderFirstName = item.ReceiverFirstName;
+                                                    mySenderLastName = item.ReceiverLastName;
                                                 }
                                             }
-                                            <h5>@mySender<span class="chat_date" style="margin-top: 50px">@item.When</span></h5>
+                                            <h5>@mySenderFirstName @mySenderLastName<span class="chat_date" style="margin-top: 50px">@item.When</span></h5>
                                             <p>
                                                 @item.Text
                                             </p>
@@ -314,7 +321,7 @@
                                         <div class="@containerClass @contcolor">
 
 
-                                            <p class="sender @textAlign">@message.UserName</p>
+                                            <p class="sender @textAlign">@message.UserFirstName @message.UserLastName</p>
                                             <p class="@textAlign">@message.Text</p>
                                             <span class="@timePosition">@message.When.ToString()</span>
 
@@ -359,12 +366,33 @@
         </div>
     </div>
 
+    @{
+        string curUserFirstName = String.Empty, curUserLastName = String.Empty;
+        foreach (var item in Model)
+        {
+            if (item.UserName == User.Identity.Name)
+            {
+                curUserFirstName = item.UserFirstName;
+                curUserLastName = item.UserLastName;
+                break;
+            }else if(item.ReceiverName == User.Identity.Name)
+            {
+                curUserFirstName = item.ReceiverFirstName;
+                curUserLastName = item.ReceiverLastName;
+                break;
+            }
+        }
+
+
+    }
 
     @if (User.Identity.IsAuthenticated)
     {
         <script>
-              const userName = "@ViewBag.CurrentUserName"
-              const receiverName = "@Context.Request.Query["selectedUser"]"; // automate it
+            const userName = "@ViewBag.CurrentUserName"
+            const userFistName = "@curUserFirstName"
+            const userLastName = "@curUserLastName"
+            const receiverName = "@Context.Request.Query["selectedUser"]"; // automate it
         </script>
     }
 

@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ILearnCoreV19", "ILearnCore
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6776A914-126B-4044-A4EA-49D62F00CF60}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendTest", "..\BackendTest\BackendTest.csproj", "{55977830-CE1F-4453-A045-67706E487A17}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedTest", "..\AutomatedTest\AutomatedTest.csproj", "{FB5E01F7-751E-4C8D-AF0A-4A536024B106}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{6776A914-126B-4044-A4EA-49D62F00CF60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6776A914-126B-4044-A4EA-49D62F00CF60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6776A914-126B-4044-A4EA-49D62F00CF60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55977830-CE1F-4453-A045-67706E487A17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55977830-CE1F-4453-A045-67706E487A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55977830-CE1F-4453-A045-67706E487A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55977830-CE1F-4453-A045-67706E487A17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB5E01F7-751E-4C8D-AF0A-4A536024B106}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB5E01F7-751E-4C8D-AF0A-4A536024B106}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB5E01F7-751E-4C8D-AF0A-4A536024B106}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB5E01F7-751E-4C8D-AF0A-4A536024B106}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

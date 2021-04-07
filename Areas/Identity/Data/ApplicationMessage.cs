@@ -22,6 +22,15 @@ namespace ILearnCoreV19.Areas.Identity.Data
         public DateTime When { get; set; }
 
         public string UserID { get; set; }
+
+        public string UserFirstName { get; set; }
+
+        public string UserLastName { get; set; }
+
+        public string ReceiverFirstName { get; set; }
+
+        public string ReceiverLastName { get; set; }
+
         public virtual ApplicationUser Sender { get; set; } // Problem can occur here
 
         public ApplicationMessage()

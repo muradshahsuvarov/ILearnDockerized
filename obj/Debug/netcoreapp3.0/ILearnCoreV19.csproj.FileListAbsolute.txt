@@ -702,10 +702,10 @@ C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csproj
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.dll
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.pdb
 C:\University\BSC Thesis\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.genruntimeconfig.cache
-C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\libman.json
-C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\ILearnCoreV19.StaticWebAssets.xml
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\appsettings.Development.json
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\appsettings.json
+C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\libman.json
+C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\ILearnCoreV19.StaticWebAssets.xml
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\ILearnCoreV19.exe
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\ILearnCoreV19.deps.json
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\ILearnCoreV19.runtimeconfig.json
@@ -875,7 +875,6 @@ C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netc
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csprojAssemblyReference.cache
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.AssemblyInfoInputs.cache
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.AssemblyInfo.cs
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csproj.CoreCompileInputs.cache
@@ -918,6 +917,7 @@ C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetTu
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\GetTutorSchedule.cshtml.g.cs
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\ListOfEvents.cshtml.g.cs
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\ListOfTutorEvents.cshtml.g.cs
+C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\ManageSubscription.cshtml.g.cs
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\MyProfile.cshtml.g.cs
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\OpenChat.cshtml.g.cs
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\StudentSubjects.cshtml.g.cs
@@ -931,4 +931,5 @@ C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csproj.C
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.dll
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.pdb
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.genruntimeconfig.cache
-C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\ManageSubscription.cshtml.g.cs
+C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csprojAssemblyReference.cache
+C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Authentication.Google.dll

@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "DcBqpYK3uPedgiTHC9NuTmEjrXreqSkPHNbcYVYk1r8W+lRhToKWeQXXmAdOKYKGazbM4HDE9bwcxGg9+Qm4fQ==",
+  "dgSpecHash": "LiE2HV6Nj5YKK/HWHgROdBb7cecoOhw9r89sUKysRr6Ijmp86ouVmZeW+e3QAS+RlVQcl1BpY372rFJL5owhNg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Murad\\Desktop\\ILearnCore\\ILearnCoreV19.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Murad\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Murad\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\3.0.0\\microsoft.aspnetcore.authentication.google.3.0.0.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.0.0\\microsoft.aspnetcore.cryptography.internal.3.0.0.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.0.0\\microsoft.aspnetcore.cryptography.keyderivation.3.0.0.nupkg.sha512",
     "C:\\Users\\Murad\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

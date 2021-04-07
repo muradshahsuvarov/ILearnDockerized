@@ -46,6 +46,24 @@ namespace ILearnCoreV19.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Home", new { ReturnUrl = returnUrl });
+
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+
+            return new ChallengeResult(provider, properties);
+        }
+
+        /* // Complete after documentation
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+        {
+ 
+        } */
+
         [Authorize]
         public IActionResult SubscriptionPage()
         {
@@ -499,7 +517,12 @@ namespace ILearnCoreV19.Controllers
             if (ModelState.IsValid)
             {
                 message.UserName = User.Identity.Name;
+                message.UserFirstName = _context.Users.Where(m => m.Email == message.UserName).Single().FirstName.ToString();
+                message.UserLastName = _context.Users.Where(m => m.Email == message.UserName).Single().LastName.ToString();
                 message.ReceiverName = selectedUser;
+                message.ReceiverFirstName = _context.Users.Where(m => m.Email == message.ReceiverName).Single().FirstName.ToString();
+                message.ReceiverLastName = _context.Users.Where(m => m.Email == message.ReceiverName).Single().LastName.ToString();
+
                 var sender = await _userManager.GetUserAsync(User);
                 message.UserID = sender.Id;
 
@@ -637,6 +660,32 @@ namespace ILearnCoreV19.Controllers
 
             return authenticatedUser;
         }
+
+        // For API Documentation
+        [HttpGet]
+        public JsonResult GetAllCoursesJSON()
+        {
+            var events = _context.Events.Where(u => u.status == "AVAILABLE").Select(u => new { u.text, u.description, u.start_date, u.end_date, u.ownerFirstName, u.ownerLastName, u.userId, u.status }).ToList();
+
+            return new JsonResult(events);
+        }
+
+        [HttpGet]
+        public JsonResult GetTutorCoursesJSON([FromQuery(Name = "email")] string email)
+        {
+            var courses = _context.Events.Where(u => u.status == "AVAILABLE" && u.userId == email).Select(u => new { u.text, u.description, u.start_date, u.end_date, u.ownerFirstName, u.ownerLastName, u.userId, u.status }).ToList();
+
+            return new JsonResult(courses);
+        }
+
+        [HttpGet]
+        public JsonResult GetAllUsersJSON()
+        {
+            var courses = _context.Users.Select(u => new { u.FirstName, u.LastName, u.Email, u.Role }).ToList();
+
+            return new JsonResult(courses);
+        }
+        // For API Documentation
 
 
         // --------------IMPLEMENT CALENDAR METHODS AGAIN--------------------------------

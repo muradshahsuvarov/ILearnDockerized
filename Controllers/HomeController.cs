@@ -54,6 +54,7 @@ namespace ILearnCoreV19.Controllers
 
         }
 
+
         public IActionResult GetLoginForm()
         {
             string url = "~/Identity/Account/Login";

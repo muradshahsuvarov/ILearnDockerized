@@ -1,5 +1,4 @@
 C:\University\BSC Thesis\ILearnCore\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
-C:\Users\Murad\Desktop\ILearnCore\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\ILearnCoreV19.Views.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\ILearnCoreV19.Views.pdb
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\appsettings.Development.json
@@ -30,4 +29,6 @@ C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.Extensions.Caching.Memory.
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.Data.SqlClient.dll
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\ILearnCoreV19.pdb
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\docker-compose.dcprojAssemblyReference.cache
+C:\Users\Murad\Desktop\ILearnCore\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\docker-compose.dcproj.CopyComplete
+C:\Users\Murad\Desktop\ILearnCore\bin\Debug\Microsoft.AspNetCore.Authentication.Google.dll

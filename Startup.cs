@@ -33,6 +33,13 @@ namespace ILearnCoreV19
             services.AddDbContext<AuthDbContext>(options => options
            .UseSqlServer(Configuration.GetConnectionString("AuthDbContextConnection")));
 
+            services.AddAuthentication()
+        .AddGoogle(options =>
+        {
+            options.ClientId = "1011928050405-oeobl3vfte967nuauk2pjvplkkoi2bic.apps.googleusercontent.com";
+            options.ClientSecret = "NsXC6x_Aky4N0416qYsfFxUd";
+        });
+
             services.AddSignalR();
         }
 

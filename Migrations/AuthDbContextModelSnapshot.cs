@@ -89,6 +89,12 @@ namespace ILearnCoreV19.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ReceiverFirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiverLastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ReceiverName")
                         .HasColumnType("nvarchar(max)");
 
@@ -96,8 +102,14 @@ namespace ILearnCoreV19.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserFirstName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserLastName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
