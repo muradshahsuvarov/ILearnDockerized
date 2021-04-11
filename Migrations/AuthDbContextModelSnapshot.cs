@@ -200,7 +200,7 @@ namespace ILearnCoreV19.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime");
 
                     b.Property<string>("Email")

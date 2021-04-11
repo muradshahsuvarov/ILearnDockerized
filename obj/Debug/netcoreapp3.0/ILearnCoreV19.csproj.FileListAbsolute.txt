@@ -933,3 +933,4 @@ C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.pdb
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.genruntimeconfig.cache
 C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\ILearnCoreV19.csprojAssemblyReference.cache
 C:\Users\Murad\Desktop\ILearnCore\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\Murad\Desktop\ILearnCore\obj\Debug\netcoreapp3.0\Razor\Views\User\ModifyProfile.cshtml.g.cs

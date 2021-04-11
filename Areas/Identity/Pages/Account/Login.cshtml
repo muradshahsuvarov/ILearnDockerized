@@ -60,15 +60,15 @@
         <h1>External Login</h1>
         <hr />
         @{ 
-            if(Model.ExternalLogins.Count == 0)
+            if(Model.Input.ExternalLogins.Count == 0)
             {
                 <div>No external logins available</div>
             }
             else
             {
-                <form method="post" asp-action="ExternalLogin" asp-controller="User" asp-route-returnurl="@Model.ReturnUrl">
+                <form method="post" asp-action="ExternalLogin" asp-controller="User" asp-route-returnurl="/User/Index">
                     <div>
-                        @foreach (var provider in Model.ExternalLogins)
+                        @foreach (var provider in Model.Input.ExternalLogins)
                         {
                             <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Authentication using your @provider.DisplayName account">
                                 @provider.DisplayName

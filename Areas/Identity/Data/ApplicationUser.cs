@@ -18,23 +18,23 @@ namespace ILearnCoreV19.Areas.Identity.Data
 
         [PersonalData]
         [Column(TypeName = "nvarchar(100)")]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [PersonalData]
         [Column(TypeName = "nvarchar(100)")]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         [PersonalData]
         [Column(TypeName = "nvarchar(50)")]
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
         [PersonalData]
         [Column(TypeName = "datetime")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         [PersonalData]
         [Column(TypeName = "nvarchar(50)")]
-        public string Paypal { get; set; }
+        public string? Paypal { get; set; }
 
 
 

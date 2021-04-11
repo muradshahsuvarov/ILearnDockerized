@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ILearnCoreV19.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20210407064527_ILearnMigration")]
+    [Migration("20210411122700_ILearnMigration")]
     partial class ILearnMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -202,7 +202,7 @@ namespace ILearnCoreV19.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime");
 
                     b.Property<string>("Email")

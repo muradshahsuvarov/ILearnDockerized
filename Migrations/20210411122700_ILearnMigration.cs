@@ -29,7 +29,7 @@ namespace ILearnCoreV19.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Role = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime", nullable: true),
                     Paypal = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

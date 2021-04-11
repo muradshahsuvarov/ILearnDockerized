@@ -1,0 +1,48 @@
+﻿@model ILearnCoreV19.Areas.Identity.Data.ApplicationUser
+
+@{
+    ViewData["Title"] = "Modify Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<head>
+    <style>
+        @@media (max-width: 700px) {
+            .form-control {
+                margin-left: 0px;
+                width: 350px
+            }
+        }
+    </style>
+</head>
+
+<div style="height: 800px; overflow: auto;">
+    <form action="ModifyAccount" method="POST" style="margin-top:100px">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="text" value="@Model.Role" name="user_role" style="
+                           width: 100%;
+                           padding: 12px 20px;
+                           margin: 8px 0;
+                           display: inline-block;
+                           border: 1px solid #ccc;
+                           border-radius: 4px;
+                           box-sizing: border-box;
+                           placeholder="Your Paypal account..." ; />
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"></partial>
+}

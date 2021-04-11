@@ -32,14 +32,12 @@ namespace ILearnCoreV19.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            Input = new InputModel();
         }
 
         [BindProperty]
         public InputModel Input { get; set; }
 
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
-        public string ReturnUrl { get; set; }
 
         [TempData]
         public string ErrorMessage { get; set; }
@@ -56,6 +54,10 @@ namespace ILearnCoreV19.Areas.Identity.Pages.Account
 
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
+
+            public IList<AuthenticationScheme> ExternalLogins { get; set; }
+
+            public string ReturnUrl { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -75,9 +77,9 @@ namespace ILearnCoreV19.Areas.Identity.Pages.Account
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            Input.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            ReturnUrl = returnUrl;
+            Input.ReturnUrl = returnUrl;
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
