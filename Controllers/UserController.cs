@@ -44,11 +44,6 @@ namespace ILearnCoreV19.Controllers
         public IActionResult Index()
         {
             ViewBag.NumberOfNotifs = GetTotalNumOfNotifs();
-            var myProfile = _context.Users.Where(u => u.Email == User.Identity.Name).Single();
-            if (myProfile.Role == null)
-            {
-                return RedirectToAction("ModifyProfile","User");
-            }
             return View();
         }
 
